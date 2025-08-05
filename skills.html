@@ -5,13 +5,13 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
 ---
 
 <style>
-#skills {
+  #skills {
     width: 100%;
     display: flex;
     justify-content: center;
-}
+  }
 
-.skills-container {
+  .skills-container {
     display: flex;
     width: 80%;
     height: calc(100vh - var(--nav-height) - 60px);
@@ -19,11 +19,11 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     align-items: center;
     padding: 20px 40px;
     gap: 30px;
-}
+  }
 
-/* PDF Container - partie gauche (60%) */
-#pdf-container {
-    width: 60%;
+  /* PDF Container - partie gauche (65%) */
+  #pdf-container {
+    width: 65%;
     height: 100%;
     background: rgba(2, 12, 27, 0.7);
     border-radius: 12px;
@@ -35,10 +35,10 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     position: relative;
     margin-right: 20px;
     max-width: 500px;
-}
+  }
 
-/* Skills Visual - partie droite (40%) */
-.skills-visual {
+  /* Skills Visual - partie droite (40%) */
+  .skills-visual {
     display: flex;
     flex-direction: column;
     padding-right: 15px;
@@ -48,28 +48,28 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     scrollbar-color: var(--highlight-color) rgba(2, 12, 27, 0.7);
     width: 40%;
     justify-content: center;
-}
+  }
 
-.skills-visual > div {
+  .skills-visual > div {
     background: rgba(2, 12, 27, 0.7);
     border-radius: 12px;
     padding: 20px;
     border: 1px solid rgba(100, 255, 218, 0.1);
     margin-bottom: 15px;
-}
+  }
 
-/* Styles des titres de section */
-.skills-visual h3 {
+  /* Styles des titres de section */
+  .skills-visual h3 {
     color: var(--highlight-color);
     margin-bottom: 15px;
     font-size: 1.1em;
     letter-spacing: 0.5px;
     position: relative;
     padding-left: 12px;
-}
+  }
 
-.skills-visual h3::before {
-    content: '';
+  .skills-visual h3::before {
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -78,100 +78,116 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     height: 18px;
     background-color: var(--highlight-color);
     border-radius: 4px;
-}
+  }
 
-/* Styles pour les barres de compétences */
-.skills-section {
+  /* Styles pour les barres de compétences */
+  .skills-section {
     max-height: 180px;
     flex: 1;
-}
+  }
 
-.skill-progress {
+  .skill-progress {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
     position: relative;
-}
+  }
 
-.skill-label {
+  .skill-label {
     width: 120px;
     font-size: 0.9rem;
-}
+  }
 
-.progress-bar {
+  .progress-bar {
     flex: 1;
     height: 6px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
-}
+  }
 
-.progress {
+  .progress {
     height: 100%;
     background: linear-gradient(to right, var(--highlight-color), #2dd4bf);
     border-radius: 4px;
     width: 0;
-}
+  }
 
-/* Animation spécifique pour chaque barre */
-.skill-progress:nth-child(2) .progress {
+  /* Animation spécifique pour chaque barre */
+  .skill-progress:nth-child(2) .progress {
     animation: progress85 1.5s ease-out forwards;
-}
+  }
 
-.skill-progress:nth-child(3) .progress {
+  .skill-progress:nth-child(3) .progress {
     animation: progress70 1.5s ease-out forwards;
-}
+  }
 
-.skill-progress:nth-child(4) .progress {
+  .skill-progress:nth-child(4) .progress {
     animation: progress75 1.5s ease-out forwards;
-}
+  }
 
-.skill-progress:nth-child(5) .progress {
+  .skill-progress:nth-child(5) .progress {
     animation: progress65 1.5s ease-out forwards;
-}
+  }
 
-@keyframes progress85 {
-    0% { width: 0; }
-    100% { width: 85%; }
-}
+  @keyframes progress85 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 85%;
+    }
+  }
 
-@keyframes progress70 {
-    0% { width: 0; }
-    100% { width: 70%; }
-}
+  @keyframes progress70 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 70%;
+    }
+  }
 
-@keyframes progress75 {
-    0% { width: 0; }
-    100% { width: 75%; }
-}
+  @keyframes progress75 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 75%;
+    }
+  }
 
-@keyframes progress65 {
-    0% { width: 0; }
-    100% { width: 65%; }
-}
+  @keyframes progress65 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 65%;
+    }
+  }
 
-.skill-percent {
+  .skill-percent {
     width: 40px;
     text-align: right;
     font-size: 0.8rem;
     color: var(--highlight-color);
-}
+  }
 
-/* Timeline revisitée */
-.timeline-section {
+  /* Timeline revisitée */
+  .timeline-section {
     position: relative;
     flex: 1;
     max-height: 380px;
-}
+  }
 
-.timeline-item {
+  .timeline-item {
     padding: 0 0 0 30px;
     border-left: none;
     margin-bottom: 25px;
     position: relative;
-}
+  }
 
-.timeline-dot {
+  .timeline-dot {
     position: absolute;
     left: 0;
     top: 10px;
@@ -181,113 +197,113 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     background: var(--highlight-color);
     border: 3px solid rgba(2, 12, 27, 0.7);
     z-index: 2;
-}
+  }
 
-.timeline-item:not(:last-child):after {
-    content: '';
+  .timeline-item:not(:last-child):after {
+    content: "";
     position: absolute;
     left: 6px;
     top: 18px;
     width: 2px;
     height: calc(100% + 15px);
     background: rgba(100, 255, 218, 0.3);
-}
+  }
 
-.timeline-content {
+  .timeline-content {
     background: rgba(255, 255, 255, 0.03);
     padding: 15px;
     border-radius: 8px;
     position: relative;
-}
+  }
 
-.date {
+  .date {
     color: var(--highlight-color);
     font-size: 0.9em;
-}
+  }
 
-.title {
+  .title {
     color: var(--text-color);
     margin: 5px 0;
     font-weight: bold;
-}
+  }
 
-.subtitle {
+  .subtitle {
     font-size: 0.9em;
     color: var(--text-color);
     opacity: 0.8;
-}
+  }
 
-.timeline-description {
+  .timeline-description {
     font-size: 0.85em;
     margin-top: 8px;
     opacity: 0.8;
-}
+  }
 
-/* Langues et certifications */
-.languages-section {
+  /* Langues et certifications */
+  .languages-section {
     flex: 0.8;
     max-height: 180px;
-}
+  }
 
-.language-item {
+  .language-item {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-}
+  }
 
-.language-name {
+  .language-name {
     width: 100px;
     font-size: 0.9rem;
-}
+  }
 
-.language-level {
+  .language-level {
     display: flex;
     gap: 5px;
     flex: 1;
-}
+  }
 
-.level-dot {
+  .level-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
-}
+  }
 
-.level-dot.active {
+  .level-dot.active {
     background: var(--highlight-color);
-}
+  }
 
-.language-text {
+  .language-text {
     font-size: 0.8rem;
     color: var(--text-color);
     width: 120px;
     text-align: right;
-}
+  }
 
-.certifications {
+  .certifications {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
-}
+  }
 
-.certification-badge {
+  .certification-badge {
     background: rgba(100, 255, 218, 0.1);
     color: var(--highlight-color);
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 0.8em;
     border: 1px solid rgba(100, 255, 218, 0.3);
-}
+  }
 
-/* Liens rapides */
-.quick-links {
+  /* Liens rapides */
+  .quick-links {
     display: flex;
     justify-content: space-between;
     padding: 12px 15px;
-}
+  }
 
-.quick-link {
+  .quick-link {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -299,54 +315,54 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     transition: all 0.2s ease;
     background: rgba(255, 255, 255, 0.02);
     cursor: pointer;
-}
+  }
 
-.quick-link:hover {
+  .quick-link:hover {
     background: rgba(100, 255, 218, 0.1);
     color: var(--highlight-color);
     transform: translateY(-2px);
-}
+  }
 
-/* Styles de scrollbar */
-.skills-visual::-webkit-scrollbar {
+  /* Styles de scrollbar */
+  .skills-visual::-webkit-scrollbar {
     width: 4px;
-}
+  }
 
-.skills-visual::-webkit-scrollbar-track {
+  .skills-visual::-webkit-scrollbar-track {
     background: rgba(2, 12, 27, 0.7);
     border-radius: 4px;
-}
+  }
 
-.skills-visual::-webkit-scrollbar-thumb {
+  .skills-visual::-webkit-scrollbar-thumb {
     background-color: var(--highlight-color);
     border-radius: 4px;
     height: 50px;
-}
+  }
 
-.skills-visual::-webkit-scrollbar-button {
+  .skills-visual::-webkit-scrollbar-button {
     display: none;
-}
+  }
 
-/* PDF Embed Styles */
-.pdf-fallback {
+  /* PDF Embed Styles */
+  .pdf-fallback {
     color: var(--text-color);
     text-align: center;
     padding: 40px;
-}
+  }
 
-.pdf-fallback h3 {
+  .pdf-fallback h3 {
     color: var(--highlight-color);
     margin-bottom: 20px;
     font-size: 1.5rem;
-}
+  }
 
-.pdf-fallback p {
+  .pdf-fallback p {
     margin-bottom: 30px;
     font-size: 1.1rem;
     line-height: 1.6;
-}
+  }
 
-.pdf-download-btn {
+  .pdf-download-btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -359,322 +375,384 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
-}
+  }
 
-.pdf-download-btn:hover {
+  .pdf-download-btn:hover {
     background: rgba(100, 255, 218, 0.1);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
-}
+  }
 
-/* Responsive Design */
-@media (max-width: 1400px) {
+  /* Responsive Design */
+  @media (max-width: 1400px) {
     .skills-container {
-        width: 100%;
+      width: 100%;
     }
 
-    html, body {
-        overflow-y: auto;
-        height: auto;
+    html,
+    body {
+      overflow-y: auto;
+      height: auto;
     }
-    
-    html::-webkit-scrollbar, 
+
+    html::-webkit-scrollbar,
     body::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-        display: none;
+      width: 0;
+      height: 0;
+      display: none;
     }
-    
-    header, footer {
-        background-color: rgba(10, 25, 47, 0.85);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        position: sticky;
-        z-index: 100;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        border-bottom: 1px solid rgba(100, 255, 218, 0.1);
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-}
 
-@media (max-width: 1200px) {
-    .skills-visual {
-        width: 45%;
+    header,
+    footer {
+      background-color: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    
+  }
+
+  @media (max-width: 1200px) {
+    .skills-visual {
+      width: 45%;
+    }
+
     .skill-label {
-        width: 100px;
+      width: 100px;
     }
-    
-    #pdf-container {
-        width: 55%;
-        max-width: 450px;
-    }
-}
 
-@media (max-width: 1070px) {
-    .skills-container {
-        flex-direction: column;
-        height: auto;
-        gap: 20px;
-    }
-    
-    .skills-visual {
-        height: auto;
-        overflow-y: visible;
-        padding-right: 0;
-        width: 80%;
-    }
-    
     #pdf-container {
-        width: 80%;
-        min-height: 500px;
-        margin-right: 0;
+      width: 55%;
+      max-width: 450px;
     }
-    
+  }
+
+  @media (max-width: 1070px) {
+    .skills-container {
+      flex-direction: column;
+      height: auto;
+      gap: 20px;
+    }
+
+    .skills-visual {
+      height: auto;
+      overflow-y: visible;
+      padding-right: 0;
+      width: 80%;
+    }
+
+    #pdf-container {
+      width: 80%;
+      min-height: 500px;
+      margin-right: 0;
+    }
+
     .skills-visual > div {
-        margin-bottom: 15px;
+      margin-bottom: 15px;
     }
-    
-    .quick-links {
-        justify-content: space-around;
-    }
-}
 
-@media (max-width: 600px) {
+    .quick-links {
+      justify-content: space-around;
+    }
+  }
+
+  @media (max-width: 600px) {
     .skills-container {
-        padding: 10px;
+      padding: 10px;
     }
-    
+
     .skills-visual {
-        width: 100%;
+      width: 100%;
     }
-    
+
     #pdf-container {
-        width: 100%;
-        min-height: 400px;
+      width: 100%;
+      min-height: 400px;
     }
-    
+
     .skill-progress {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        margin-bottom: 15px;
-        position: relative;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 15px;
+      position: relative;
     }
-    
+
     .skills-section {
-        max-height: 300px;
+      max-height: 300px;
     }
 
     .skill-label {
-        width: 40%;
-        margin-bottom: 5px;
+      width: 40%;
+      margin-bottom: 5px;
     }
-    
+
     .progress-bar {
-        width: 40%;
-        height: 6px; 
-        margin-bottom: 5px;
-        display: block !important;
-        z-index: 10;
-        position: relative;
+      width: 40%;
+      height: 6px;
+      margin-bottom: 5px;
+      display: block !important;
+      z-index: 10;
+      position: relative;
     }
-    
+
     .skill-percent {
-        width: 15%;
-        text-align: right;
-        margin-top: 0;
+      width: 15%;
+      text-align: right;
+      margin-top: 0;
     }
-    
+
     .timeline-item {
-        padding-left: 20px;
+      padding-left: 20px;
     }
-    
+
     .timeline-dot {
-        width: 10px;
-        height: 10px;
-        left: 2px;
+      width: 10px;
+      height: 10px;
+      left: 2px;
     }
-    
+
     .timeline-item:not(:last-child):after {
-        left: 5px;
+      left: 5px;
     }
 
     .languages-section {
-        max-height: 250px;
+      max-height: 250px;
     }
-    
-    .language-item {
-        flex-wrap: wrap;
-    }
-    
-    .language-name {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-    
-    .language-text {
-        width: auto;
-        text-align: left;
-        margin-top: 5px;
-    }
-    
-    .certifications {
-        justify-content: center;
-    }
-    
-    .quick-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .quick-link {
-        width: 100%;
-        justify-content: center;
-    }
-}
 
-@media (max-width: 400px) {
+    .language-item {
+      flex-wrap: wrap;
+    }
+
+    .language-name {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    .language-text {
+      width: auto;
+      text-align: left;
+      margin-top: 5px;
+    }
+
+    .certifications {
+      justify-content: center;
+    }
+
+    .quick-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quick-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 400px) {
     .skills-visual > div {
-        padding: 12px;
+      padding: 12px;
     }
-    
+
     .skills-visual h3 {
-        font-size: 1em;
-        margin-bottom: 10px;
+      font-size: 1em;
+      margin-bottom: 10px;
     }
-    
+
     .timeline-content {
-        padding: 10px;
+      padding: 10px;
     }
-    
+
     .timeline-description {
-        font-size: 0.8em;
+      font-size: 0.8em;
     }
-    
+
     .certification-badge {
-        font-size: 0.75em;
-        padding: 3px 6px;
+      font-size: 0.75em;
+      padding: 3px 6px;
     }
-}
+  }
 </style>
 
 <main>
-    <section id="skills">
-        <div class="skills-container">
-            <!-- Partie gauche (65%) - PDF Container -->
-            <div id="pdf-container">
-                <!-- Le PDF sera chargé ici par JavaScript -->
+  <section id="skills">
+    <div class="skills-container">
+      <!-- Partie gauche (65%) - PDF Container -->
+      <div id="pdf-container">
+        <!-- Le PDF sera chargé ici par JavaScript -->
+      </div>
+
+      <!-- Partie droite (35%) - Skills Visual -->
+      <div class="skills-visual">
+        <!-- Soft Skills avec barres de progression -->
+        <div class="skills-section">
+          <h3>Soft Skills</h3>
+          <div class="skill-progress">
+            <div class="skill-label">Curieux</div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 85%"></div>
             </div>
-
-            <!-- Partie droite (35%) - Skills Visual -->
-            <div class="skills-visual">
-                <!-- Soft Skills avec barres de progression -->
-                <div class="skills-section">
-                    <h3>Soft Skills</h3>
-                    <div class="skill-progress">
-                        <div class="skill-label">Curieux</div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 85%"></div>
-                        </div>
-                        <span class="skill-percent">85%</span>
-                    </div>
-                    <div class="skill-progress">
-                        <div class="skill-label">Persévérant</div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 70%"></div>
-                        </div>
-                        <span class="skill-percent">70%</span>
-                    </div>
-                    <div class="skill-progress">
-                        <div class="skill-label">Rigoureux</div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 75%"></div>
-                        </div>
-                        <span class="skill-percent">75%</span>
-                    </div>
-                    <div class="skill-progress">
-                        <div class="skill-label">Patient</div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 65%"></div>
-                        </div>
-                        <span class="skill-percent">65%</span>
-                    </div>
-                </div>
-
-                <!-- Timeline éducation -->
-                <div class="timeline-section">
-                    <h3>Parcours</h3>
-                    <div class="timeline-item active">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="date">2023-2026</span>
-                            <div class="title">BUT Informatique</div>
-                            <div class="subtitle">IUT Clermont Auvergne</div>
-                            <div class="timeline-description">Spécialité en développement d'applications</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <span class="date">2022</span>
-                            <div class="title">BAC STI2D</div>
-                            <div class="subtitle">Pôle La Chartreuse Paradies</div>
-                            <div class="timeline-description">Option SIN - Systèmes d'Information et Numérique</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Langues et certifications -->
-                <div class="languages-section">
-                    <h3>Langues & Certifications</h3>
-                    <div class="language-item">
-                        <span class="language-name">Français</span>
-                        <div class="language-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                        </div>
-                        <span class="language-text">Natif</span>
-                    </div>
-                    <div class="language-item">
-                        <span class="language-name">Anglais</span>
-                        <div class="language-level">
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot active"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                        <span class="language-text">B2 - Avancé</span>
-                    </div>
-                    <div class="certifications">
-                        <div class="certification-badge">PIX</div>
-                    </div>
-                </div>
-
-                <!-- Liens rapides -->
-                <div class="quick-links">
-                    <a class="quick-link" href="{{ '/assets/images/skills/CV.pdf' | relative_url }}" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                        Télécharger CV
-                    </a>
-                    <a href="{{ site.author.github }}" class="quick-link" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        GitHub
-                    </a>
-                    <a href="{{ site.author.linkedin }}" class="quick-link" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        LinkedIn
-                    </a>
-                </div>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-label">Persévérant</div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 70%"></div>
             </div>
+            <span class="skill-percent">70%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-label">Rigoureux</div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 75%"></div>
+            </div>
+            <span class="skill-percent">75%</span>
+          </div>
+          <div class="skill-progress">
+            <div class="skill-label">Patient</div>
+            <div class="progress-bar">
+              <div class="progress" style="width: 65%"></div>
+            </div>
+            <span class="skill-percent">65%</span>
+          </div>
         </div>
-    </section>        
+
+        <!-- Timeline éducation -->
+        <div class="timeline-section">
+          <h3>Parcours</h3>
+          <div class="timeline-item active">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="date">2023-2026</span>
+              <div class="title">BUT Informatique</div>
+              <div class="subtitle">IUT Clermont Auvergne</div>
+              <div class="timeline-description">
+                Spécialité en développement d'applications
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="date">2022</span>
+              <div class="title">BAC STI2D</div>
+              <div class="subtitle">Pôle La Chartreuse Paradies</div>
+              <div class="timeline-description">
+                Option SIN - Systèmes d'Information et Numérique
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Langues et certifications -->
+        <div class="languages-section">
+          <h3>Langues & Certifications</h3>
+          <div class="language-item">
+            <span class="language-name">Français</span>
+            <div class="language-level">
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+            </div>
+            <span class="language-text">Natif</span>
+          </div>
+          <div class="language-item">
+            <span class="language-name">Anglais</span>
+            <div class="language-level">
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+              <span class="level-dot active"></span>
+              <span class="level-dot"></span>
+            </div>
+            <span class="language-text">B2 - Avancé</span>
+          </div>
+          <div class="certifications">
+            <div class="certification-badge">PIX</div>
+          </div>
+        </div>
+
+        <!-- Liens rapides -->
+        <div class="quick-links">
+          <a
+            class="quick-link"
+            href="{{ '/assets/images/skills/CV.pdf' | relative_url }}"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+              ></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            Télécharger CV
+          </a>
+          <a href="{{ site.author.github }}" class="quick-link" target="_blank">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              ></path>
+            </svg>
+            GitHub
+          </a>
+          <a
+            href="{{ site.author.linkedin }}"
+            class="quick-link"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              ></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>

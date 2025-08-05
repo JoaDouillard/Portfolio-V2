@@ -105,87 +105,149 @@ description: Contactez Joachim Douillard pour vos projets de développement web 
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  background: var(--section-bg);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-light);
-  height: fit-content;
-}
-
-.form-title {
-  color: var(--highlight-color);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
+  height: auto;
+  align-self: center;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-.form-label {
+.form-group label {
+  display: block;
   color: var(--text-color);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.form-input,
-.form-textarea {
-  padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-light);
-  border-radius: 8px;
-  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  font-family: "Consolas", monospace;
   font-size: 1rem;
-  font-family: inherit;
+}
+
+.terminal-input {
+  width: 100%;
+  max-width: 100%;
+  background: rgba(2, 12, 27, 0.8);
+  border: 1px solid var(--border-hover);
+  color: var(--text-color);
+  padding: 1rem 1.2rem;
+  font-family: "Consolas", monospace;
+  font-size: 1rem;
+  border-radius: 6px;
   transition: all 0.3s ease;
-  resize: none;
 }
 
-.form-input:focus,
-.form-textarea:focus {
-  outline: none;
-  border-color: var(--highlight-color);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
-}
-
-.form-textarea {
-  min-height: 120px;
+textarea.terminal-input {
   max-height: var(--message-max-height);
+  min-height: 120px;
   resize: vertical;
 }
 
-.form-button {
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--highlight-color), var(--bleu-color));
-  border: none;
-  border-radius: 8px;
-  color: var(--bg-color);
+.terminal-input:focus {
+  outline: none;
+  border-color: var(--highlight-color);
+  box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
+}
+
+.terminal-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-submit-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+/*=========================== BUTTON STYLES ==========================*/
+.submit-button {
+  position: relative;
+  background: transparent;
+  color: var(--highlight-color);
+  border: 1px solid var(--highlight-color);
+  padding: 14px 32px;
+  font-family: "Consolas", monospace;
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
+  border-radius: 6px;
   transition: all 0.3s ease;
-  align-self: center;
-  min-width: 150px;
+  overflow: hidden;
+  display: inline-block;
 }
 
-.form-button:hover {
+.submit-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--highlight-color);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transition: width 0.6s ease, height 0.6s ease;
+  z-index: -1;
+  opacity: 0;
+}
+
+.submit-button:hover {
+  color: var(--bg-color);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
+  box-shadow: 0 4px 12px rgba(100, 255, 218, 0.2);
 }
 
-.form-button:active {
+.submit-button:hover::before {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+}
+
+.submit-button:active {
   transform: translateY(0);
+}
+
+/*=========================== CODE PREVIEW STYLES ==========================*/
+.code-preview {
+  background: var(--section-bg);
+  border-radius: 12px;
+  padding: var(--section-padding-v) var(--section-padding-h);
+  overflow: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  height: auto;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-block {
+  font-family: "Consolas", monospace;
+  font-size: var(--code-font-size);
+  line-height: 1.6;
+  color: var(--text-color);
+  white-space: pre;
+}
+
+.line-number {
+  color: #4a5568;
+  margin-right: 1.5rem;
+  user-select: none;
+  display: inline-block;
+  min-width: 2ch;
+  text-align: right;
+}
+
+.const,
+.variable,
+.property {
+  color: var(--highlight-color);
+}
+
+.string {
+  color: var(--red-color);
+}
+
+.comment {
+  color: #4a5568;
 }
 
 .status-message {
@@ -207,201 +269,480 @@ description: Contactez Joachim Douillard pour vos projets de développement web 
   border: 1px solid #F44336;
 }
 
-/*=========================== CODE VISUALIZER ==========================*/
-.code-visualizer {
-  background: var(--section-bg);
-  border-radius: 12px;
-  padding: var(--section-padding-v) var(--section-padding-h);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-light);
-  height: fit-content;
-  align-self: start;
-}
-
-.code-title {
-  color: var(--highlight-color);
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.code-content {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  padding: 1.5rem;
-  font-family: 'Consolas', monospace;
-  font-size: var(--code-font-size);
-  line-height: 1.6;
-  border: 1px solid var(--border-light);
-}
-
-.code-line {
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.line-number {
-  color: rgba(136, 146, 176, 0.6);
-  margin-right: 1rem;
-  user-select: none;
-  min-width: 20px;
-}
-
-.code-keyword {
-  color: var(--highlight-color);
-}
-
-.code-string {
-  color: var(--red-color);
-}
-
-.code-comment {
-  color: rgba(136, 146, 176, 0.7);
-}
-
-/*=========================== RESPONSIVE ==========================*/
-@media (max-width: 1400px) {
-  .contact-layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+/* Grands écrans (à partir de 1920px) */
+@media (min-width: 1921px) {
+  body {
+    overflow: hidden;
   }
-  
-  .sidebar {
-    flex-direction: row;
-    gap: 1.5rem;
+
+  .contact-layout {
+    grid-template-columns: minmax(300px, auto) 1fr minmax(450px, auto);
+    gap: 2.5rem;
+    max-width: 2400px;
+  }
+}
+
+/* Écrans standards (1700px - 1920px) */
+@media (max-width: 1920px) {
+  body {
+    overflow: hidden;
+  }
+
+  .contact-layout {
+    grid-template-columns: minmax(260px, 280px) 1fr minmax(450px, auto);
+    gap: 0.9rem;
+    max-width: 1800px;
+    margin-top: 7%; 
   }
   
   .sidebar-section {
-    flex: 1;
+    padding: 1.5rem; 
+  }
+  
+  .sidebar-section h3 {
+    font-size: 0.95rem; 
+    margin-bottom: 1rem;
+  }
+  
+  .contact-item, .social-item {
+    font-size: 0.85rem; 
+    padding: 0.7rem; 
+    gap: 0.7rem; 
+    margin-bottom: 0.35rem; 
+  }
+  
+  .contact-item .icon {
+    font-size: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem; 
+  }
+  
+  .form-group label {
+    margin-bottom: 0.5rem; 
+    font-size: 0.9rem; 
+  }
+  
+  .terminal-input {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem; 
+  }
+  
+  textarea.terminal-input {
+    min-height: 90px; 
+    max-height: 160px; 
+  }
+  
+  .code-preview {
+    padding: 1.5rem; 
+  }
+  
+  .code-block {
+    font-size: 0.75rem; 
+    line-height: 1.45; 
+  }
+  
+  .submit-button {
+    padding: 10px 20px; 
+    font-size: 0.9rem; 
+  }
+  
+  .line-number {
+    margin-right: 1.1rem; 
   }
 }
 
-@media (max-width: 768px) {
+/* Écrans d'ordinateur portable 15-16" (1366px - 1700px) */
+@media (max-width: 1700px) {
+
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
+  
+  /* Pour Chrome, Safari et Opera */
+  html::-webkit-scrollbar, 
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
   .contact-main {
-    padding: 2rem 1rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+  }
+
+  .contact-layout {
+    grid-template-columns: 250px 1fr 600px;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    margin-top: 6%;
+  }
+    
+  .sidebar-section h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0.7rem;
+    opacity: 0.8;
+    color: #a0a0a0;
+  }
+  
+  .contact-item, .social-item {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.7rem;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+    border-radius: 4px;
+  }
+  
+  .contact-item .icon {
+    font-size: 1rem;
+  }
+}
+
+/* Écrans d'ordinateur portable 13-14" (1280px - 1366px) */
+@media (max-width: 1366px) {
+  body {
+    overflow: hidden;
+  }
+  
+  header, footer {
+    background-color: rgba(10, 25, 47, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: sticky;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .contact-main {
+    padding: 1.5rem 1rem;
     height: auto;
     min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 450px) minmax(350px, 550px);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+      "sidebar code"
+      "form form";
+    gap: 1.5rem;
+    margin: 1rem auto;
+    max-width: 1400px;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
   }
   
+  /* Positionnement de la sidebar */
   .sidebar {
-    flex-direction: column;
+    grid-area: sidebar;
+    max-height: none;
+    overflow-y: visible;
+    align-self: start;
+    background: var(--section-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    width: 280px;
+    margin-left: 70px;
   }
   
-  .form-row {
+  /* Positionnement du code */
+  .code-preview {
+    grid-area: code;
+    max-height: none;
+    overflow-y: visible;
+    background: var(--section-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 1.2rem;
+    align-self: start;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 350px;
+  }
+  
+  /* Positionnement du formulaire */
+  .contact-form {
+    grid-area: form;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Styles de la sidebar */
+  .sidebar-section {
+    padding: 1rem 1.5rem;
+    height: 100%;  
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .sidebar-section h3 {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color-light);
+  }
+  
+  .contact-item, .social-item {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    gap: 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .contact-item .icon {
+    font-size: 0.9rem;
+  }
+  
+  /* Styles du formulaire */
+  .form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+  }
+  
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    display: block;
+  }
+  
+  .terminal-input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    background: rgba(2, 12, 27, 0.7);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  textarea.terminal-input {
+    min-height: 100px;
+    max-height: 170px;
+    width: 100%;
+  }
+  
+  .submit-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Styles du code */
+  .code-block {
+    font-size: 0.65rem;
+    line-height: 1.3;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .line-number {
+    margin-right: 0.8rem;
+    opacity: 0.5;
+  }
+}
+
+/* Ajustements pour les écrans moyens */
+@media (max-width: 1100px) and (min-width: 768px) {
+  .contact-layout {
+    display: grid;
     grid-template-columns: 1fr;
+    grid-template-areas: 
+      "sidebar"
+      "form"
+      "code";
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto; 
+  }
+  
+  .contact-form {
+    padding: 0 1rem;
+  }
+  
+  /* Centre la sidebar */
+  .sidebar {
+    width: 280px;
+    margin: 0 auto;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .code-preview, .contact-form {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Ajustements pour les tablettes et mobiles */
+@media (max-width: 767px) {
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "sidebar"
+      "form"
+      "code";
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Centre la sidebar pour les mobiles */
+  .sidebar {
+    width: 280px;
+    margin: 0 auto;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .code-preview, .contact-form {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .contact-form {
+    padding: 0;
+  }
+  
+  /* Ajustements pour que chaque section tienne dans l'écran */
+  .code-preview, .sidebar {
+    height: auto;
+    max-height: none;
+  }
+  
+  /* Garantir que le formulaire est lisible */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  textarea.terminal-input {
+    min-height: 80px;
   }
 }
 </style>
 
 <main class="contact-main">
     <div class="contact-layout">
-        
-        <!-- Sidebar gauche avec informations de contact -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3>🏠 Adresse</h3>
-                <div class="contact-item">
-                    <span class="icon">📍</span>
-                    <span>Limoges, France</span>
-                </div>
+        <!-- Section gauche (raisons de me contacter) -->
+        <div class="sidebar">
+          <div class="sidebar-section">
+            <h3>▼ pourquoi_me_contacter ?</h3>
+            <div class="contact-item">
+              <span class="icon">💼</span>
+              <span class="text">Collaboration sur projet</span>
             </div>
-            
-            <div class="sidebar-section">
-                <h3>🔗 Réseaux Sociaux</h3>
-                <a href="{{ site.author.github }}" class="social-item" target="_blank">
-                    <span>🐙</span>
-                    <span>GitHub</span>
-                    <span class="arrow">→</span>
-                </a>
-                <a href="{{ site.author.linkedin }}" class="social-item" target="_blank">
-                    <span>💼</span>
-                    <span>LinkedIn</span>
-                    <span class="arrow">→</span>
-                </a>
+            <div class="contact-item">
+              <span class="icon">🚀</span>
+              <span class="text">Services développement web</span>
             </div>
-        </aside>
-
-        <!-- Formulaire de contact central -->
-        <div class="contact-form">
-            <h2 class="form-title">Contactez-moi</h2>
-            
-            <form action="#" method="POST" id="contactForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Nom *</label>
-                        <input type="text" id="name" name="name" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject" class="form-label">Sujet *</label>
-                    <input type="text" id="subject" name="subject" class="form-input" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message" class="form-label">Message *</label>
-                    <textarea id="message" name="message" class="form-textarea" required 
-                              placeholder="Décrivez votre projet ou votre demande..."></textarea>
-                </div>
-                
-                <button type="submit" class="form-button">
-                    Envoyer le message
-                </button>
-            </form>
+            <div class="contact-item">
+              <span class="icon">💡</span>
+              <span class="text">Besoin d'un conseil</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Code visualizer à droite -->
-        <aside class="code-visualizer">
-            <h3 class="code-title">
-                <span>💻</span>
-                Contact Object
-            </h3>
-            <div class="code-content">
-                <div class="code-line">
-                    <span class="line-number">1</span>
-                    <span class="code-keyword">const</span> <span style="color: var(--text-color);">contact = {</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">2</span>
-                    <span>&nbsp;&nbsp;name: </span><span class="code-string">"{{ site.author.name }}"</span><span style="color: var(--text-color);">,</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">3</span>
-                    <span>&nbsp;&nbsp;location: </span><span class="code-string">"Limoges, France"</span><span style="color: var(--text-color);">,</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">4</span>
-                    <span>&nbsp;&nbsp;status: </span><span class="code-string">"{{ site.author.status }}"</span><span style="color: var(--text-color);">,</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">5</span>
-                    <span>&nbsp;&nbsp;responseTime: </span><span class="code-string">"{{ site.author.response_time }}"</span><span style="color: var(--text-color);">,</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">6</span>
-                    <span>&nbsp;&nbsp;github: </span><span class="code-string">"{{ site.author.github }}"</span><span style="color: var(--text-color);">,</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">7</span>
-                    <span>&nbsp;&nbsp;linkedin: </span><span class="code-string">"{{ site.author.linkedin }}"</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">8</span>
-                    <span style="color: var(--text-color);">};</span>
-                </div>
-                <div class="code-line">
-                    <span class="line-number">9</span>
-                    <span class="code-comment">// Prêt pour nouveaux projets!</span>
-                </div>
-            </div>
-        </aside>
+        <!-- Section centrale (formulaire) -->
+        <form class="contact-form" action="https://formspree.io/f/xyzwvvwa" method="POST">
+          <div class="form-group">
+            <label>_nom:</label>
+            <input
+              type="text"
+              name="name"
+              class="terminal-input"
+              spellcheck="false"
+              placeholder="Jonathan Davis"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>_email:</label>
+            <input
+              type="email"
+              name="email"
+              class="terminal-input"
+              spellcheck="false"
+              placeholder="jonathan-davis@mail.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>_objet:</label>
+            <input
+              type="text"
+              name="subject"
+              class="terminal-input"
+              spellcheck="false"
+              placeholder="Demande de projet / Collaboration / Question..."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>_message:</label>
+            <textarea
+              name="message"
+              class="terminal-input"
+              spellcheck="false"
+              rows="6"
+              placeholder="Hey! Écrivez votre message ici..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-submit-container">
+            <button type="submit" class="submit-button">envoyer-message</button>
+          </div>
+        </form>
+        
+        
+        <!-- Section droite (politique de confidentialité) -->
+        <div class="code-preview">
+          <pre class="code-block">
+<span class="line-number">1</span><span class="const">class</span> <span class="variable">PolitiqueConfidentialité</span> {
+<span class="line-number">2</span>  <span class="const">constructor</span>() {
+<span class="line-number">3</span>    <span class="property">this.objectif</span> = <span class="string">"Contact uniquement"</span>;
+<span class="line-number">4</span>    <span class="property">this.conservationDonnées</span> = <span class="string">"Durée minimale requise"</span>;
+<span class="line-number">5</span>    <span class="property">this.tiersParties</span> = <span class="string">"Aucune"</span>;
+<span class="line-number">6</span>  }
+<span class="line-number">7</span>}
+<span class="line-number">8</span>
+<span class="line-number">9</span><span class="const">const</span> <span class="variable">infoConfidentialité</span> = {
+<span class="line-number">10</span>  <span class="property">donnéesPersonnelles</span>: <span class="string">"Toutes les informations personnelles collectées
+<span class="line-number">11</span>                  via ce formulaire sont utilisées exclusivement pour 
+<span class="line-number">12</span>                  établir une communication à but professionnel."</span>,
+<span class="line-number">13</span>
+<span class="line-number">14</span>  <span class="property">stockage</span>: <span class="string">"Vos données ne sont pas partagées et seront supprimées"</span>,
+<span class="line-number">15</span>
+<span class="line-number">16</span>  <span class="property">consentement</span>: <span class="string">"En soumettant ce formulaire, 
+<span class="line-number">17</span>                  vous acceptez ces conditions."</span>,
+<span class="line-number">18</span>}
+<span class="line-number">19</span>  
+<span class="line-number">20</span><span class="comment">// Merci de votre confiance !</span></pre>
+        </div>
     </div>
 </main>
