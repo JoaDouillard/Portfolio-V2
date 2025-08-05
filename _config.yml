@@ -2,7 +2,7 @@
 title: Joachim Douillard - Portfolio
 description: Portfolio de Joachim Douillard - Développeur Web & Logiciel, Technicien IT
 baseurl: ""
-url: "http://localhost:4000"
+url: "" # Sera défini automatiquement par Netlify
 
 # Configuration Jekyll
 markdown: kramdown

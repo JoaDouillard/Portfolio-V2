@@ -42,8 +42,16 @@ new-portfolio/
 
 ### Prérequis
 
-- Ruby 2.7+ et Bundler installés
+- Ruby 3.2.0 (spécifié dans `.ruby-version`)
+- Bundler installé
 - Git pour le versioning
+
+### Corrections apportées pour Netlify
+
+- **Jekyll 4.3.0** : Mise à jour depuis 4.2.0 pour compatibilité Ruby 3.4+
+- **Gems ajoutées** : `csv` et `logger` (requises pour Ruby 3.4+)
+- **Ruby 3.2.0** : Version fixée pour éviter les conflits
+- **Configuration Netlify** : `netlify.toml` avec redirections et optimisations
 
 ### Installation locale
 

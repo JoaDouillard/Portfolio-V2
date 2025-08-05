@@ -2,8 +2,12 @@
 
 source "https://rubygems.org"
 
-# Jekyll avec la même version que l'exemple
-gem "jekyll", "~> 4.2.0"
+# Jekyll - version mise à jour pour compatibilité Ruby 3.4+
+gem "jekyll", "~> 4.3.0"
+
+# Gems requises pour Ruby 3.4+ (auparavant incluses par défaut)
+gem "csv"
+gem "logger"
 
 # Plugins Jekyll
 group :jekyll_plugins do
