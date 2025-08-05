@@ -1,0 +1,407 @@
+---
+layout: default
+title: Contact
+description: Contactez Joachim Douillard pour vos projets de développement web et logiciel
+---
+
+<style>
+/*=========================== VARIABLES SPÉCIFIQUES ==========================*/
+:root {
+  --footer-height: 60px;
+  --sidebar-width: 350px;
+  --form-max-width: 900px;
+  --code-font-size: 0.9rem;
+  --section-bg: rgba(2, 12, 27, 0.9);
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-hover: rgba(255, 255, 255, 0.1);
+  --section-padding-v: 2.5rem;
+  --section-padding-h: 2.5rem;
+  --message-max-height: 200px;
+}
+
+/*=========================== LAYOUT CONTACT PAGE ==========================*/
+.contact-main {
+  height: calc(100vh - var(--nav-height) - var(--footer-height));
+  padding: 3rem 5rem;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, auto) 1fr minmax(450px, auto);
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 2400px;
+  margin: 0 auto;
+  min-height: 700px;
+}
+
+/*=========================== SIDEBAR STYLES ==========================*/
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: auto;
+  align-self: start;
+}
+
+.sidebar-section {
+  background: var(--section-bg);
+  border-radius: 12px;
+  padding: var(--section-padding-v) var(--section-padding-h);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section h3 {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-item,
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.contact-item .icon {
+  font-size: 1.25rem;
+}
+
+.social-item:hover {
+  color: var(--highlight-color);
+  background: rgba(255, 255, 255, 0.05);
+  padding-left: 1.2rem;
+}
+
+.social-item .arrow {
+  transition: transform 0.3s ease;
+}
+
+.social-item:hover .arrow {
+  transform: translateX(5px);
+}
+
+/*=========================== FORM STYLES ==========================*/
+.contact-form {
+  padding: var(--section-padding-v) var(--section-padding-h);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: var(--section-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  height: fit-content;
+}
+
+.form-title {
+  color: var(--highlight-color);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-label {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-input,
+.form-textarea {
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  resize: none;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--highlight-color);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
+}
+
+.form-textarea {
+  min-height: 120px;
+  max-height: var(--message-max-height);
+  resize: vertical;
+}
+
+.form-button {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--highlight-color), var(--bleu-color));
+  border: none;
+  border-radius: 8px;
+  color: var(--bg-color);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+  min-width: 150px;
+}
+
+.form-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+.status-message {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.success {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+
+.error {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+  border: 1px solid #F44336;
+}
+
+/*=========================== CODE VISUALIZER ==========================*/
+.code-visualizer {
+  background: var(--section-bg);
+  border-radius: 12px;
+  padding: var(--section-padding-v) var(--section-padding-h);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  height: fit-content;
+  align-self: start;
+}
+
+.code-title {
+  color: var(--highlight-color);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.code-content {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: 'Consolas', monospace;
+  font-size: var(--code-font-size);
+  line-height: 1.6;
+  border: 1px solid var(--border-light);
+}
+
+.code-line {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.line-number {
+  color: rgba(136, 146, 176, 0.6);
+  margin-right: 1rem;
+  user-select: none;
+  min-width: 20px;
+}
+
+.code-keyword {
+  color: var(--highlight-color);
+}
+
+.code-string {
+  color: var(--red-color);
+}
+
+.code-comment {
+  color: rgba(136, 146, 176, 0.7);
+}
+
+/*=========================== RESPONSIVE ==========================*/
+@media (max-width: 1400px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .sidebar {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .sidebar-section {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-main {
+    padding: 2rem 1rem;
+    height: auto;
+    min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+  }
+  
+  .sidebar {
+    flex-direction: column;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<main class="contact-main">
+    <div class="contact-layout">
+        
+        <!-- Sidebar gauche avec informations de contact -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>🏠 Adresse</h3>
+                <div class="contact-item">
+                    <span class="icon">📍</span>
+                    <span>Limoges, France</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>🔗 Réseaux Sociaux</h3>
+                <a href="{{ site.author.github }}" class="social-item" target="_blank">
+                    <span>🐙</span>
+                    <span>GitHub</span>
+                    <span class="arrow">→</span>
+                </a>
+                <a href="{{ site.author.linkedin }}" class="social-item" target="_blank">
+                    <span>💼</span>
+                    <span>LinkedIn</span>
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Formulaire de contact central -->
+        <div class="contact-form">
+            <h2 class="form-title">Contactez-moi</h2>
+            
+            <form action="#" method="POST" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nom *</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject" class="form-label">Sujet *</label>
+                    <input type="text" id="subject" name="subject" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="form-label">Message *</label>
+                    <textarea id="message" name="message" class="form-textarea" required 
+                              placeholder="Décrivez votre projet ou votre demande..."></textarea>
+                </div>
+                
+                <button type="submit" class="form-button">
+                    Envoyer le message
+                </button>
+            </form>
+        </div>
+
+        <!-- Code visualizer à droite -->
+        <aside class="code-visualizer">
+            <h3 class="code-title">
+                <span>💻</span>
+                Contact Object
+            </h3>
+            <div class="code-content">
+                <div class="code-line">
+                    <span class="line-number">1</span>
+                    <span class="code-keyword">const</span> <span style="color: var(--text-color);">contact = {</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">2</span>
+                    <span>&nbsp;&nbsp;name: </span><span class="code-string">"{{ site.author.name }}"</span><span style="color: var(--text-color);">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">3</span>
+                    <span>&nbsp;&nbsp;location: </span><span class="code-string">"Limoges, France"</span><span style="color: var(--text-color);">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">4</span>
+                    <span>&nbsp;&nbsp;status: </span><span class="code-string">"{{ site.author.status }}"</span><span style="color: var(--text-color);">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">5</span>
+                    <span>&nbsp;&nbsp;responseTime: </span><span class="code-string">"{{ site.author.response_time }}"</span><span style="color: var(--text-color);">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">6</span>
+                    <span>&nbsp;&nbsp;github: </span><span class="code-string">"{{ site.author.github }}"</span><span style="color: var(--text-color);">,</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">7</span>
+                    <span>&nbsp;&nbsp;linkedin: </span><span class="code-string">"{{ site.author.linkedin }}"</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">8</span>
+                    <span style="color: var(--text-color);">};</span>
+                </div>
+                <div class="code-line">
+                    <span class="line-number">9</span>
+                    <span class="code-comment">// Prêt pour nouveaux projets!</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+</main>

@@ -1,0 +1,287 @@
+---
+layout: default
+title: Compétences
+description: Découvrez les compétences techniques et soft skills de Joachim Douillard
+---
+
+<style>
+#skills {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.skills-container {
+    display: flex;
+    width: 80%;
+    height: calc(100vh - var(--nav-height) - 60px);
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.skills-visual {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding-right: 15px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--highlight-color) rgba(2, 12, 27, 0.7);
+}
+
+.skills-visual > div {
+    background: rgba(2, 12, 27, 0.7);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    margin-bottom: 15px;
+}
+
+.skills-section {
+    max-height: 180px;
+    flex: 1;
+}
+
+.skills-section h3 {
+    color: var(--highlight-color);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.skill-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.skill-label {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    min-width: 80px;
+    text-align: left;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--highlight-color), var(--bleu-color));
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+}
+
+.skill-percent {
+    color: var(--highlight-color);
+    font-size: 0.85rem;
+    min-width: 35px;
+    text-align: right;
+}
+
+.timeline-section {
+    flex: 1;
+    background: rgba(2, 12, 27, 0.7);
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.timeline-section h3 {
+    color: var(--highlight-color);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.timeline-item {
+    padding: 15px;
+    border-left: 2px solid var(--highlight-color);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.timeline-item:before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 24px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--highlight-color);
+}
+
+.date {
+    color: var(--highlight-color);
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.title {
+    color: var(--text-color);
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.subtitle {
+    font-size: 0.9em;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+#pdf-container {
+    width: 50%;
+    height: 100%;
+    background: rgba(2, 12, 27, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .skills-container {
+        flex-direction: column;
+        width: 95%;
+        height: auto;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .skills-visual, #pdf-container {
+        width: 100%;
+        height: auto;
+    }
+    
+    .skills-visual {
+        max-height: 400px;
+    }
+    
+    #pdf-container {
+        min-height: 300px;
+    }
+}
+</style>
+
+<section id="skills">
+    <div class="skills-container">
+        <!-- Partie gauche (50%) - CV/PDF -->
+        <div id="pdf-container">
+            <div>
+                <h3 style="color: var(--highlight-color); margin-bottom: 20px;">Mon CV</h3>
+                <p>Téléchargez mon CV pour découvrir mon parcours complet</p>
+                <br>
+                <a href="{{ '/assets/images/skills/CV.pdf' | relative_url }}" 
+                   target="_blank" 
+                   style="color: var(--highlight-color); text-decoration: none; 
+                          border: 1px solid var(--highlight-color); 
+                          padding: 10px 20px; border-radius: 5px; 
+                          transition: all 0.3s ease;">
+                    📄 Télécharger le CV
+                </a>
+            </div>
+        </div>
+
+        <!-- Partie droite (50%) -->
+        <div class="skills-visual">
+            <!-- Compétences techniques avec barres de progression -->
+            <div class="skills-section">
+                <h3>Soft Skills</h3>
+                <div class="skill-progress">
+                    <div class="skill-label">Curieux</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%"></div>
+                    </div>
+                    <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-label">Autonome</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%"></div>
+                    </div>
+                    <span class="skill-percent">90%</span>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-label">Créatif</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%"></div>
+                    </div>
+                    <span class="skill-percent">75%</span>
+                </div>
+            </div>
+
+            <!-- Section Compétences Techniques -->
+            <div class="skills-section">
+                <h3>Compétences Techniques</h3>
+                <div class="skill-progress">
+                    <div class="skill-label">JavaScript</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%"></div>
+                    </div>
+                    <span class="skill-percent">80%</span>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-label">PHP/Symfony</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 85%"></div>
+                    </div>
+                    <span class="skill-percent">85%</span>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-label">HTML/CSS</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%"></div>
+                    </div>
+                    <span class="skill-percent">90%</span>
+                </div>
+                <div class="skill-progress">
+                    <div class="skill-label">Python</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%"></div>
+                    </div>
+                    <span class="skill-percent">70%</span>
+                </div>
+            </div>
+
+            <!-- Timeline/Parcours -->
+            <div class="timeline-section">
+                <h3>Parcours</h3>
+                <div class="timeline-item">
+                    <div class="date">2023-2024</div>
+                    <div class="title">BUT Informatique Graphique</div>
+                    <div class="subtitle">IUT de Limoges</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2022-2023</div>
+                    <div class="title">Développeur Freelance</div>
+                    <div class="subtitle">Projets web et applications</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2021-2022</div>
+                    <div class="title">Formation Développement Web</div>
+                    <div class="subtitle">Auto-formation et projets personnels</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

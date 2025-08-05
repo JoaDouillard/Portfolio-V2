@@ -1,0 +1,296 @@
+---
+layout: default
+title: À propos
+description: Découvrez Joachim Douillard - Technicien IT, Développeur Web et Logiciel passionné
+---
+
+<style>
+/*=========================== VARIABLES ==========================*/
+:root {
+  --highlight-color: #64ffda;
+  --bg-dark: rgba(2, 12, 27, 0.7);
+  --card-border: rgba(100, 255, 218, 0.1);
+  --card-border-hover: rgba(100, 255, 218, 0.3);
+  --text-color: #8892b0;
+  --text-highlight: #e6f1ff;
+  --animation-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --primary-bg: #0a192f;
+}
+
+/*=========================== LAYOUT ABOUT ==========================*/
+.about-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  min-height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+}
+
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 80px;
+  width: 100%;
+}
+
+.bio-section {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.about-visual {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  margin-top: 80px;
+  max-width: 400px;
+}
+
+/*=========================== TITRE PRINCIPAL ==========================*/
+h1 {
+  color: #fff;
+  font-size: 3rem;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background-color: var(--highlight-color);
+}
+
+.glitch-effect {
+  position: relative;
+  color: white;
+}
+
+.glitch-effect::before,
+.glitch-effect::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-effect::before {
+  animation: glitch-effect-1 3s infinite;
+  color: #0ff;
+  clip: rect(24px, 550px, 90px, 0);
+  z-index: -1;
+}
+
+.glitch-effect::after {
+  animation: glitch-effect-2 4s infinite;
+  color: #f0f;
+  clip: rect(85px, 550px, 140px, 0);
+  z-index: -2;
+}
+
+@keyframes glitch-effect-1 {
+  0%, 14%, 18%, 22%, 25%, 53%, 57%, 100% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+  15%, 17%, 23%, 24%, 54%, 56% {
+    transform: translate3d(-2px, 0, 0) rotateX(0.02deg);
+  }
+}
+
+@keyframes glitch-effect-2 {
+  0%, 20%, 26%, 30%, 44%, 50%, 55%, 61%, 100% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+  21%, 25%, 31%, 43%, 51%, 54%, 60% {
+    transform: translate3d(2px, 0, 0) rotateX(0.02deg);
+  }
+}
+
+/*=========================== TEXTE BIO ==========================*/
+.bio-intro {
+  background: var(--bg-dark);
+  border-radius: 12px;
+  padding: 30px;
+  border: 1px solid var(--card-border);
+  transition: all 0.3s var(--animation-timing);
+}
+
+.bio-intro:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-5px);
+}
+
+.bio-intro p {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.highlight {
+  color: var(--highlight-color);
+  font-weight: 600;
+}
+
+/*=========================== SECTION PERSONNELLE ==========================*/
+.personal-section {
+  background: var(--bg-dark);
+  border-radius: 12px;
+  padding: 30px;
+  border: 1px solid var(--card-border);
+  transition: all 0.3s var(--animation-timing);
+}
+
+.personal-section:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-5px);
+}
+
+.personal-section h2 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+.personal-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.personal-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.personal-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(10px);
+}
+
+.personal-emoji {
+  font-size: 1.5rem;
+}
+
+.personal-text {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+/*=========================== PHOTO PROFILE ==========================*/
+.profile-photo {
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--card-border);
+  transition: all 0.3s var(--animation-timing);
+  position: relative;
+}
+
+.profile-photo:hover {
+  border-color: var(--card-border-hover);
+  transform: translateY(-10px) scale(1.05);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-photo:hover img {
+  transform: scale(1.1);
+}
+
+/*=========================== RESPONSIVE ==========================*/
+@media (max-width: 1024px) {
+  .about-content {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  .about-visual {
+    margin-top: 0;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 40px 20px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .profile-photo {
+    width: 250px;
+    height: 250px;
+  }
+}
+</style>
+
+<div class="about-container">
+    <div class="about-content">
+        
+        <!--  Partie gauche -->  
+        <div class="bio-section">
+            <h1 class="glitch-effect" data-text="About Me_">About Me_</h1>
+            <div class="bio-intro">
+                <p>Bonjour ! Je suis <span class="highlight">Joachim</span>, technicien, développeur Web et logiciel. Je suis passionné par mon métier et les enjeux du numérique de demain. Après ma formation en BUT (Bachelor universitaire de technologie) informatique graphique j'ai décidé de m'inscrire dans le monde de l'informatique pour relever les défis !</p>              
+            </div>
+
+            <div class="personal-section">
+                <h2>En Dehors du Code_</h2>
+                <div class="personal-items">
+                    <div class="personal-item">
+                        <span class="personal-emoji">🎮</span>
+                        <span class="personal-text">Amateur de jeux vidéo</span>
+                    </div>
+                    <div class="personal-item">
+                        <span class="personal-emoji">🚴</span>
+                        <span class="personal-text">Cycliste passionné</span>
+                    </div>
+                    <div class="personal-item">
+                        <span class="personal-emoji">📱</span>
+                        <span class="personal-text">Passionné de nouvelles technologies</span>
+                    </div>
+                    <div class="personal-item">
+                        <span class="personal-emoji">🎵</span>
+                        <span class="personal-text">Mélomane éclectique</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  Partie droite avec photo -->
+        <div class="about-visual">
+            <div class="profile-photo">
+                <img src="{{ '/assets/images/about/me.jpeg' | relative_url }}" alt="Photo de profil Joachim Douillard">
+            </div>
+        </div>
+    </div>
+</div>
