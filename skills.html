@@ -15,15 +15,15 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     display: flex;
     width: 80%;
     height: calc(100vh - var(--nav-height) - 60px);
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px 40px;
-    gap: 20px;
+    gap: 30px;
 }
 
-/* PDF Container - partie gauche (70%) */
+/* PDF Container - partie gauche (60%) */
 #pdf-container {
-    width: 70%;
+    width: 60%;
     height: 100%;
     background: rgba(2, 12, 27, 0.7);
     border-radius: 12px;
@@ -34,9 +34,10 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     overflow: hidden;
     position: relative;
     margin-right: 20px;
+    max-width: 500px;
 }
 
-/* Skills Visual - partie droite (30%) */
+/* Skills Visual - partie droite (40%) */
 .skills-visual {
     display: flex;
     flex-direction: column;
@@ -45,7 +46,8 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--highlight-color) rgba(2, 12, 27, 0.7);
-    width: 30%;
+    width: 40%;
+    justify-content: center;
 }
 
 .skills-visual > div {
@@ -158,8 +160,8 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
 /* Timeline revisitée */
 .timeline-section {
     position: relative;
-    flex: 0.8;
-    max-height: 300px;
+    flex: 1;
+    max-height: 380px;
 }
 
 .timeline-item {
@@ -397,7 +399,7 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
 
 @media (max-width: 1200px) {
     .skills-visual {
-        width: 35%;
+        width: 45%;
     }
     
     .skill-label {
@@ -405,7 +407,8 @@ description: Découvrez les compétences techniques et soft skills de Joachim Do
     }
     
     #pdf-container {
-        width: 65%;
+        width: 55%;
+        max-width: 450px;
     }
 }
 
