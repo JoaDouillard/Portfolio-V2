@@ -269,6 +269,44 @@ textarea.terminal-input {
   border: 1px solid #F44336;
 }
 
+/* Styles pour les messages de notification */
+.form-messages {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-family: "Consolas", monospace;
+  font-size: 0.9rem;
+  z-index: 1000;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+.form-messages.success {
+  background-color: rgba(76, 175, 80, 0.9);
+  color: #fff;
+  border: 1px solid #4CAF50;
+}
+
+.form-messages.error {
+  background-color: rgba(244, 67, 54, 0.9);
+  color: #fff;
+  border: 1px solid #F44336;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* Grands écrans (à partir de 1920px) */
 @media (min-width: 1921px) {
   body {
@@ -668,7 +706,8 @@ textarea.terminal-input {
         </div>
 
         <!-- Section centrale (formulaire) -->
-        <form class="contact-form" action="https://formspree.io/f/xyzwvvwa" method="POST">
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
+          <input type="hidden" name="form-name" value="contact" />
           <div class="form-group">
             <label>_nom:</label>
             <input
@@ -714,10 +753,15 @@ textarea.terminal-input {
             ></textarea>
           </div>
 
+          <div data-netlify-recaptcha="true"></div>
+
           <div class="form-submit-container">
             <button type="submit" class="submit-button">envoyer-message</button>
           </div>
         </form>
+
+        <!-- Messages de notification -->
+        <div id="form-messages" class="form-messages" style="display: none;"></div>
         
         
         <!-- Section droite (politique de confidentialité) -->
@@ -746,3 +790,58 @@ textarea.terminal-input {
         </div>
     </div>
 </main>
+
+<script>
+// Script pour gérer l'envoi du formulaire Netlify
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('.contact-form');
+  const messagesDiv = document.getElementById('form-messages');
+  
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      
+      // Bouton de soumission
+      const submitButton = form.querySelector('.submit-button');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'envoi-en-cours...';
+      submitButton.disabled = true;
+      
+      fetch('/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(response => {
+        if (response.ok) {
+          showMessage('✅ Message envoyé avec succès ! Je vous répondrai rapidement.', 'success');
+          form.reset();
+        } else {
+          throw new Error('Erreur réseau');
+        }
+      })
+      .catch(error => {
+        console.error('Erreur:', error);
+        showMessage('❌ Erreur lors de l\'envoi. Veuillez réessayer.', 'error');
+      })
+      .finally(() => {
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      });
+    });
+  }
+  
+  function showMessage(message, type) {
+    messagesDiv.textContent = message;
+    messagesDiv.className = `form-messages ${type}`;
+    messagesDiv.style.display = 'block';
+    
+    // Masquer le message après 5 secondes
+    setTimeout(() => {
+      messagesDiv.style.display = 'none';
+    }, 5000);
+  }
+});
+</script>
