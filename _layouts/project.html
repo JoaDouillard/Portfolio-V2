@@ -500,46 +500,46 @@
         <!-- Contenu principal -->
         <div class="project-content">
           <section id="intro" class="content-section active">
-            <h1 class="section-title">{{ page.title }}</h1>
+            <h1 class="section-title">Chargement...</h1>
             <div class="project-metadata">
-              <span class="project-date">Date : {{ page.date }}</span>
-              <span class="project-tech">Technologies used : {{ page.tech }}</span>
+              <span class="project-date">Date : ...</span>
+              <span class="project-tech">Technologies used : ...</span>
             </div>
-            <div class="content-text">{{ page.intro }}</div>
+            <div class="content-text">Chargement du contenu...</div>
           </section>
 
           <section id="details" class="content-section">
             <h2 class="section-title">Détails technique</h2>
-            <div class="content-text">{{ page.details }}</div>
+            <div class="content-text">Chargement du contenu...</div>
           </section>
 
           <section id="bonnesPratiques" class="content-section">
             <h2 class="section-title">Bonnes pratiques</h2>
-            <div class="content-text">{{ page.bonnesPratiques }}</div>
+            <div class="content-text">Chargement du contenu...</div>
           </section>
           
           <section id="conclusion" class="content-section">
             <h2 class="section-title">Conclusion</h2>
-            <div class="content-text">{{ page.conclusion }}</div>
+            <div class="content-text">Chargement du contenu...</div>
           </section>
 
           <section id="cahierdescharges" class="content-section">
             <h2 class="section-title">Cahier des charges</h2>
-            <div class="content-text markdown-content">{{ page.cahierdescharges | markdownify }}</div>
+            <div class="content-text markdown-content">Chargement du contenu...</div>
           </section>
         </div>
 
         <!-- Image du projet -->
         <div class="project-image">
-          <img id="projectImageStatic" src="{{ page.images.intro | relative_url }}" alt="Project Image" style="display: none;" />
+          <img id="projectImageStatic" src="" alt="Project Image" style="display: none;" />
           
           <video id="projectVideo" controls autoplay loop muted style="display: none;">
-            <source id="videoSource" src="{{ page.images.intro | relative_url }}" type="video/webm">
+            <source id="videoSource" src="" type="video/webm">
             Votre navigateur ne supporte pas la lecture de vidéos.
           </video>
           
           <div class="project-links">
-            <a href="{{ page.github }}" target="_blank">Go to GitHub</a>
+            <a href="#" target="_blank">Go to GitHub</a>
           </div>
         </div>
       </div>
@@ -556,15 +556,129 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const projectData = {
-        images: {
-          intro: "{{ page.images.intro | relative_url }}",
-          details: "{{ page.images.details | relative_url }}",
-          bonnesPratiques: "{{ page.images.bonnesPratiques | relative_url }}",
-          conclusion: "{{ page.images.conclusion | relative_url }}",
-          cahierdescharges: "{{ page.images.cahierdescharges | relative_url }}"
+      // Récupérer l'ID du projet depuis l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const projectId = parseInt(urlParams.get('id')) || 1;
+      
+      // Données des projets depuis _config.yml
+      const projectsData = {
+        1: {
+          title: "Projet Symfony",
+          date: "2025",
+          tech: "Symfony, Composer, PHP, SQLite, Twig..",
+          github: "https://github.com/JoaDouillard/SymfonyProject.git",
+          images: {
+            intro: "/assets/images/projects/project1/DemoP1.webm",
+            details: "/assets/images/projects/project1/DetailsP1.webm",
+            bonnesPratiques: "/assets/images/projects/go_to_github.svg",
+            conclusion: "/assets/images/projects/project1/DemoP1.webm",
+            cahierdescharges: "/assets/images/projects/go_to_github.svg"
+          },
+          intro: `Dans le cadre de notre formation, mon camarade Alex Guigue et moi-même avons développé une application de gestion d'événements musicaux que nous avons appelée <b>Symfony</b>.<br><br>Le but : répondre au besoin de connexion entre organisateurs, artistes et public d'un événement musical. Ce projet fullstack combine un backend Symfony 6 avec une API RESTful mais aussi une interface graphique faite avec des Template Twig.<br><br>Dans une deuxième partie du projet nous avons créé une interface React interactive qui requête notre API nouvellement créée, nous avons nommé cette interface "Event Manager Client".<br><br>Pour créer cette Application nous avons créé une approche de travail. Elle était structurée autour du cahier des charges que nous avons établi en début de projet. Chacun prenait en charge une tâche spécifique issue de ce document et s'occupait de l'implémenter de A à Z. Cette méthode nous a permis d'avancer efficacement tout en assurant une couverture complète des fonctionnalités requises. Lorsqu'un membre rencontrait un obstacle, nous organisions des sessions de pair programming pour résoudre ensemble les problèmes techniques complexes.`,
+          details: `Le backend du projet a été développé avec Symfony 6, utilisant Doctrine ORM pour la gestion de la base de données SQLite. Nous avons implémenté une architecture RESTful pour l'API, permettant une communication fluide entre le backend et les interfaces client. La sécurité a été gérée via le système d'authentification de Symfony avec JWT pour l'API.<br><br>Côté frontend, nous avons utilisé Twig pour le rendu des templates dans l'application principale Symfony, avec Bootstrap pour assurer un design responsive. L'interface React a été construite avec React Router pour la navigation et Axios pour les appels API. Nous avons également mis en place un système de cache pour optimiser les performances, notamment pour les requêtes fréquentes comme la liste des événements populaires.<br><br>Une difficulté technique particulière était la gestion des relations many-to-many entre les événements, les artistes et les utilisateurs, que nous avons résolue en implémentant des entités d'association avec des propriétés supplémentaires.`,
+          bonnesPratiques: `Nous avons adopté plusieurs bonnes pratiques tout au long du développement pour assurer la qualité et la maintenabilité du code :<br><br><ul><br><li><strong>Code review</strong> : Chaque fonctionnalité était soumise à une revue de code par l'autre membre de l'équipe avant d'être intégrée.</li><br><li><strong>Clean code</strong> : Application des principes SOLID et respect des standards PSR pour PHP.</li><br><li><strong>Architecture MVC</strong> : Stricte séparation des responsabilités suivant le pattern Modèle-Vue-Contrôleur, tant dans Symfony que dans l'interface React.</li><br><li><strong>Gestion des dépendances</strong> : Utilisation de Composer et npm pour gérer proprement les dépendances et leurs versions.</li><br><li><strong>Convention de nommage</strong> : Respect strict des conventions de nommage pour les classes, méthodes et variables, facilitant la compréhension du code.</li></ul><br><br>Ces pratiques nous ont permis de maintenir un code de qualité et de faciliter la collaboration, tout en assurant une base solide pour les évolutions futures du projet.`,
+          conclusion: `Ce projet a constitué une étape déterminante dans mon parcours de développeur web. Sur le plan technique, j'ai considérablement approfondi ma maîtrise du framework Symfony et des architectures MVC structurées. La mise en œuvre concrète de bonnes pratiques de développement, notamment les tests automatisés et l'intégration continue, a transformé ma vision du développement logiciel vers une approche plus professionnelle et industrialisée.<br><br>Au-delà des compétences techniques, cette expérience m'a permis de développer des aptitudes essentielles en gestion de projet. La répartition des tâches basée sur le cahier des charges et le respect des délais m'ont enseigné la discipline et la rigueur nécessaires dans un environnement professionnel. Les défis rencontrés, notamment dans la conception du modèle de données complexe, ont renforcé ma capacité à résoudre méthodiquement des problèmes techniques.<br><br>Sur le plan personnel, ce projet a été une opportunité de développer ma résilience face aux obstacles et ma capacité à collaborer efficacement au sein d'une équipe. Les sessions de pair programming et les revues de code m'ont fait comprendre la valeur du partage de connaissances et de la communication claire dans un contexte de développement collaboratif.<br><br>Cette expérience a confirmé mon attrait pour les défis techniques complexes et les projets structurants qui combinent innovation et rigueur méthodologique. Les compétences et la confiance acquises durant ce projet constituent désormais des atouts précieux que je compte mettre à profit dans mes futures missions professionnelles, avec une vision plus claire de mon évolution en tant que développeur web spécialisé en technologies back-end robustes et évolutives.`,
+          cahierdescharges: `## Structure technique\n- **Backend**: Symfony 6\n- **Frontend**: React avec Vite.js\n- **Base de données**: SQLite (obligatoire)\n- **Architecture**: Deux applications distinctes lancées séparément\n\n## Fonctionnalités principales\n\n### 1. Partie Fullstack\n- **Accès**: Page d'accueil publique, reste de l'application protégé par authentification\n- **Navigation**: Adaptative selon le profil utilisateur (admin/user)\n- **Ressources principales**: Utilisateurs, Artistes, Événements\n\n#### Rôles utilisateurs\n- **Admin**:\n  - Attribution automatique au premier utilisateur inscrit\n  - Gestion exclusive des artistes (création/modification)\n  - Accès à la liste complète des utilisateurs\n\n- **Utilisateur standard**:\n  - Consultation des artistes et événements\n  - Création/modification/suppression de ses propres événements\n  - Inscription/désinscription aux événements\n  - Inscription automatique à ses propres événements\n  - Filtrage et recherche (artistes par nom, événements par date)`
+        },
+        2: {
+          title: "Projet QuadTree",
+          date: "2024",
+          tech: "C++, Algorithmique, Structures de données",
+          github: "https://github.com/JoaDouillard",
+          images: {
+            intro: "/assets/images/projects/project2/DetailsP2.svg",
+            details: "/assets/images/projects/project2/DetailsP2.svg",
+            bonnesPratiques: "/assets/images/projects/go_to_github.svg",
+            conclusion: "/assets/images/projects/project2/DetailsP2.svg",
+            cahierdescharges: "/assets/images/projects/go_to_github.svg"
+          },
+          intro: `Le projet QuadTree est une implémentation avancée de la structure de données QuadTree en C++. Cette structure permet de diviser récursivement un espace bidimensionnel en quatre quadrants, optimisant ainsi les requêtes spatiales et la recherche de proximité.<br><br>L'objectif principal était de créer une solution efficace pour la gestion de grandes quantités de points dans un espace 2D, avec des performances optimales pour les opérations d'insertion, de suppression et de recherche.<br><br>Ce projet m'a permis d'approfondir mes connaissances en algorithmique et en structures de données complexes, tout en appliquant les principes de programmation orientée objet en C++.`,
+          details: `L'implémentation utilise une approche récursive pour la division de l'espace, avec une gestion intelligente de la mémoire et des optimisations pour les cas limites. Le QuadTree supporte l'insertion dynamique de points, la suppression avec réorganisation automatique, et diverses requêtes spatiales comme la recherche par région ou par proximité.<br><br>Les principales fonctionnalités incluent : construction automatique de l'arbre, équilibrage dynamique, requêtes de plage efficaces, et visualisation graphique des partitions. La complexité temporelle moyenne est de O(log n) pour les opérations de base, avec une complexité spatiale de O(n).<br><br>Un système de tests automatisés garantit la robustesse de l'implémentation avec des jeux de données de différentes tailles et distributions.`,
+          bonnesPratiques: `Durant le développement, j'ai appliqué plusieurs bonnes pratiques de programmation C++ :<br><br><ul><br><li><strong>RAII</strong> : Gestion automatique des ressources avec constructeurs/destructeurs</li><br><li><strong>Smart Pointers</strong> : Utilisation de unique_ptr et shared_ptr pour éviter les fuites mémoire</li><br><li><strong>Const-correctness</strong> : Respect strict de la constance des méthodes et paramètres</li><br><li><strong>Template Programming</strong> : Création d'une structure générique adaptable à différents types de données</li><br><li><strong>Unit Testing</strong> : Tests unitaires complets avec Google Test</li></ul><br><br>Ces pratiques ont assuré un code maintenable, performant et sans fuites mémoire.`,
+          conclusion: `Ce projet m'a permis de maîtriser les structures de données avancées et d'approfondir ma compréhension des algorithmes de partitionnement spatial. L'implémentation d'un QuadTree from scratch m'a confronté à des défis passionnants de gestion mémoire et d'optimisation algorithmique.<br><br>Sur le plan technique, j'ai acquis une expertise solide en C++ moderne, en particulier dans l'utilisation des smart pointers, des templates et des techniques d'optimisation. La mise en place d'un système de tests robuste m'a enseigné l'importance du test-driven development.<br><br>Ce projet constitue une excellente démonstration de mes compétences en algorithmique et en programmation système, skills essentielles pour le développement de logiciels performants.`,
+          cahierdescharges: `## Objectifs techniques\n- Implémentation complète d'un QuadTree en C++\n- Support des opérations CRUD (Create, Read, Update, Delete)\n- Optimisation des performances pour grandes datasets\n- Interface simple et intuitive\n\n## Fonctionnalités requises\n\n### Structure de données\n- Division récursive de l'espace en quadrants\n- Gestion dynamique des noeuds\n- Équilibrage automatique\n\n### Opérations supportées\n- Insertion de points O(log n)\n- Suppression avec réorganisation\n- Requêtes spatiales par région\n- Recherche de proximité\n\n### Tests et validation\n- Suite de tests unitaires complète\n- Tests de performance avec datasets volumineux\n- Validation de la complexité algorithmique`
+        },
+        3: {
+          title: "Portfolio Web",
+          date: "2024",
+          tech: "Jekyll, HTML5, CSS3, JavaScript",
+          github: "https://github.com/JoaDouillard",
+          images: {
+            intro: "/assets/images/projects/project3/VignetteP3.webp",
+            details: "/assets/images/projects/project3/DetailsP3.webp",
+            bonnesPratiques: "/assets/images/projects/go_to_github.svg",
+            conclusion: "/assets/images/projects/project3/VignetteP3.webp",
+            cahierdescharges: "/assets/images/projects/go_to_github.svg"
+          },
+          intro: `Ce portfolio web moderne a été conçu pour présenter mes projets et compétences de manière élégante et professionnelle. Développé avec Jekyll, il combine performance, design responsive et facilité de maintenance.<br><br>L'objectif était de créer une vitrine numérique qui reflète mon expertise technique tout en offrant une expérience utilisateur optimale. Le site intègre des animations subtiles, un design épuré inspiré des interfaces modernes, et une navigation intuitive.<br><br>Ce projet m'a permis d'explorer les générateurs de sites statiques et d'approfondir mes compétences en design web et en optimisation des performances.`,
+          details: `Le développement utilise Jekyll comme générateur de site statique, permettant une génération rapide et un hébergement simple. L'architecture est basée sur des composants réutilisables avec un système de layouts et d'includes modulaires.<br><br>Les technologies clés incluent : Sass pour la gestion des styles, Liquid pour la templating, JavaScript vanilla pour les interactions, et Git/GitHub pour le versioning. Le déploiement automatique via Netlify garantit une mise en ligne instantanée à chaque commit.<br><br>Les optimisations incluent la minification CSS/JS, la compression d'images, le lazy loading, et un système de cache efficace pour des temps de chargement optimaux.`,
+          bonnesPratiques: `Le développement a suivi les meilleures pratiques du web moderne :<br><br><ul><br><li><strong>Mobile First</strong> : Design responsive avec breakpoints optimisés</li><br><li><strong>Performance</strong> : Optimisation des images, minification des assets</li><br><li><strong>Accessibilité</strong> : Respect des standards WCAG 2.1</li><br><li><strong>SEO</strong> : Métadonnées optimisées, structure sémantique</li><br><li><strong>Versionning</strong> : Workflow Git avec branches de fonctionnalités</li></ul><br><br>Ces pratiques assurent un site performant, accessible et bien référencé.`,
+          conclusion: `La création de ce portfolio m'a permis d'explorer en profondeur les générateurs de sites statiques et de maîtriser les outils modernes du développement web. Jekyll s'est révélé être un excellent choix pour allier simplicité de développement et performance.<br><br>Ce projet a renforcé mes compétences en design responsive, en optimisation des performances, et en déploiement automatique. La création d'un système de navigation fluide et d'animations CSS subtiles a été particulièrement enrichissante.<br><br>Le portfolio constitue désormais une vitrine professionnelle de mes compétences, démontrant ma capacité à créer des expériences web modernes et performantes.`,
+          cahierdescharges: `## Spécifications techniques\n- Générateur de site statique Jekyll\n- Design responsive mobile-first\n- Animations CSS fluides\n- Temps de chargement < 2 secondes\n\n## Fonctionnalités requises\n\n### Pages principales\n- Accueil avec présentation\n- Portfolio des projets\n- Page de compétences\n- Formulaire de contact\n\n### Design et UX\n- Interface moderne et épurée\n- Navigation intuitive\n- Animations subtiles\n- Optimisation mobile\n\n### Performance\n- Score Lighthouse > 90\n- Images optimisées\n- CSS/JS minifiés\n- Déploiement automatique`
+        },
+        4: {
+          title: "Application Desktop",
+          date: "2023",
+          tech: "Java, Swing, SQLite",
+          github: "https://github.com/JoaDouillard",
+          images: {
+            intro: "/assets/images/projects/project4/VignetteP4.webp",
+            details: "/assets/images/projects/project4/VignetteP4.webp",
+            bonnesPratiques: "/assets/images/projects/go_to_github.svg",
+            conclusion: "/assets/images/projects/project4/VignetteP4.webp",
+            cahierdescharges: "/assets/images/projects/go_to_github.svg"
+          },
+          intro: `Cette application desktop développée en Java avec Swing propose une interface utilisateur complète pour la gestion de données avec base de données intégrée. Le projet illustre une approche traditionnelle du développement d'applications lourdes avec une architecture MVC bien structurée.<br><br>L'objectif était de créer une solution complète incluant interface graphique intuitive, persistance des données, et fonctionnalités avancées de recherche et de filtrage. L'application gère efficacement de gros volumes de données tout en maintenant une interface responsive.<br><br>Ce projet m'a permis d'approfondir Java Swing, la programmation orientée objet avancée, et la gestion de bases de données SQLite.`,
+          details: `L'architecture suit le pattern MVC avec séparation claire des responsabilités : les vues Swing pour l'interface, les contrôleurs pour la logique métier, et les modèles pour la gestion des données. La base de données SQLite assure la persistance avec un ORM custom léger.<br><br>Les fonctionnalités incluent : CRUD complet sur les entités, système de recherche avancée, export/import de données, sauvegarde automatique, et interface multi-onglets. Le système de threading garantit une interface réactive même lors d'opérations lourdes.<br><br>Un système de plugins permet l'extension des fonctionnalités, et un mécanisme de mise à jour automatique assure la maintenance du logiciel en production.`,
+          bonnesPratiques: `Le développement a suivi les principes de clean architecture :<br><br><ul><br><li><strong>Pattern MVC</strong> : Séparation claire des couches de présentation, logique et données</li><br><li><strong>Injection de dépendance</strong> : Couplage faible entre composants</li><br><li><strong>Gestion d'erreurs</strong> : Exception handling robuste avec logs détaillés</li><br><li><strong>Threading</strong> : EDT Swing et tâches asynchrones pour la réactivité</li><br><li><strong>Tests unitaires</strong> : Couverture de code > 80% avec JUnit</li></ul><br><br>Ces pratiques ont produit une application stable, maintenable et extensible.`,
+          conclusion: `Le développement de cette application desktop m'a donné une expertise solide en Java Swing et en architecture logicielle traditionnelle. La gestion complète du cycle de développement, des spécifications à la mise en production, a été une expérience formatrice.<br><br>J'ai particulièrement apprécié les défis liés à l'optimisation des performances, à la gestion de la mémoire, et à la création d'interfaces utilisateur intuitives. La mise en place d'un système de plugins a été un excellent exercice d'architecture extensible.<br><br>Cette expérience complète mes compétences web en ajoutant une dimension desktop, démontrant ma polyvalence technique et ma capacité à m'adapter à différents contextes de développement.`,
+          cahierdescharges: `## Architecture technique\n- Application Java Swing\n- Base de données SQLite intégrée\n- Pattern MVC strict\n- Interface multi-plateforme\n\n## Fonctionnalités core\n\n### Gestion des données\n- CRUD complet sur toutes les entités\n- Import/export de données\n- Sauvegarde automatique\n- Recherche et filtrage avancés\n\n### Interface utilisateur\n- Interface intuitive et responsive\n- Système d'onglets\n- Raccourcis clavier\n- Thèmes personnalisables\n\n### Extensibilité\n- Système de plugins\n- API pour extensions\n- Mise à jour automatique\n- Configuration flexible`
         }
       };
+      
+      // Récupérer les données du projet sélectionné
+      const currentProject = projectsData[projectId] || projectsData[1];
+      
+      // Mettre à jour le contenu de la page
+      document.title = currentProject.title + " - Joachim Douillard";
+      
+      const projectData = {
+        images: currentProject.images
+      };
+
+      // Mettre à jour le contenu avec les données du projet sélectionné
+      function updateProjectContent() {
+        // Titre et métadonnées
+        const titleElement = document.querySelector('.section-title');
+        const dateElement = document.querySelector('.project-date');
+        const techElement = document.querySelector('.project-tech');
+        const githubLink = document.querySelector('.project-links a[href]');
+        
+        if (titleElement) titleElement.textContent = currentProject.title;
+        if (dateElement) dateElement.innerHTML = 'Date : ' + currentProject.date;
+        if (techElement) techElement.innerHTML = 'Technologies used : ' + currentProject.tech;
+        if (githubLink) githubLink.href = currentProject.github;
+        
+        // Contenu des sections
+        const introContent = document.querySelector('#intro .content-text');
+        const detailsContent = document.querySelector('#details .content-text');
+        const bonnesPratiquesContent = document.querySelector('#bonnesPratiques .content-text');
+        const conclusionContent = document.querySelector('#conclusion .content-text');
+        const cahierdeschargesContent = document.querySelector('#cahierdescharges .content-text');
+        
+        if (introContent) introContent.innerHTML = currentProject.intro;
+        if (detailsContent) detailsContent.innerHTML = currentProject.details;
+        if (bonnesPratiquesContent) bonnesPratiquesContent.innerHTML = currentProject.bonnesPratiques;
+        if (conclusionContent) conclusionContent.innerHTML = currentProject.conclusion;
+        if (cahierdeschargesContent) {
+          // Convertir le markdown en HTML pour le cahier des charges
+          if (typeof marked !== 'undefined') {
+            cahierdeschargesContent.innerHTML = marked.parse(currentProject.cahierdescharges);
+          } else {
+            cahierdeschargesContent.innerHTML = currentProject.cahierdescharges.replace(/\n/g, '<br>');
+          }
+        }
+      }
 
       // Configure la navigation entre les sections
       function setupNavigation() {
@@ -617,6 +731,8 @@
         }
       }
 
+      // Initialiser le contenu de la page
+      updateProjectContent();
       setupNavigation();
       
       // Initialiser avec la première section
