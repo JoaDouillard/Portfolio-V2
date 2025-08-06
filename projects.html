@@ -5,218 +5,224 @@ description: Découvrez les projets développés par Joachim Douillard
 ---
 
 <style>
+/* Effet de fond */
+.background-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(100, 255, 218, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(100, 255, 218, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(100, 255, 218, 0.01) 0%, transparent 50%);
+  z-index: -1;
+}
+
+/* Container principal */
 .projects-container {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 80px 40px;
-    min-height: calc(100vh - 150px);
-}
-
-.projects-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.projects-header h1 {
-    color: #fff;
-    font-size: 3rem;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-}
-
-.projects-header h1::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--highlight-color);
-}
-
-.projects-header p {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
+  height: calc(100vh - var(--nav-height) - 60px);
+  padding: var(--nav-height) 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 30px;
+  width: 90%;
+  max-width: 1200px;
+  height: 80%;
 }
 
-.project-card {
-    background: rgba(2, 12, 27, 0.9);
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(100, 255, 218, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
+/* Style des cartes */
+.card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(1, 22, 39, 0.5);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.project-card:hover {
-    border-color: rgba(100, 255, 218, 0.3);
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--highlight-color);
+  box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
 }
 
-.project-image {
-    width: 100%;
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
+/* Images des projets */
+.card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center;
 }
 
-.project-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 12, 27, 0.4);
-    z-index: 1;
-    transition: background 0.3s ease;
+/* Configuration spécifique des images */
+.card--1 .card__img {
+  background-image: url('/assets/images/projects/project1/VignetteP1.webp');
 }
 
-.project-card:hover .project-image::before {
-    background: rgba(2, 12, 27, 0.2);
+.card--2 .card__img {
+  background-image: url('/assets/images/projects/project2/DetailsP2.svg');
 }
 
-.project-content {
-    padding: 30px;
+.card--3 .card__img {
+  background-image: url('/assets/images/projects/project3/VignetteP3.webp');
 }
 
-.project-title {
-    color: var(--highlight-color);
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    font-weight: bold;
+.card--4 .card__img {
+  background-image: url('/assets/images/projects/project4/VignetteP4.webp');
 }
 
-.project-description {
-    color: var(--text-color);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
+.card__info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: rgba(1, 22, 39, 0.9);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
 }
 
-.project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 25px;
+.card:hover .card__info {
+  transform: translateY(0);
 }
 
-.tech-tag {
-    background: rgba(100, 255, 218, 0.1);
-    color: var(--highlight-color);
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(100, 255, 218, 0.2);
+.card__category {
+  color: var(--highlight-color);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.4;
 }
 
-.project-links {
-    display: flex;
-    gap: 15px;
+.card__title {
+  color: #fff;
+  margin: 8px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-.project-link {
-    padding: 10px 20px;
-    border: 1px solid var(--highlight-color);
-    border-radius: 5px;
-    color: var(--highlight-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.card__by {
+  color: var(--text-color);
+  font-size: 0.8rem;
 }
 
-.project-link:hover {
-    background: rgba(100, 255, 218, 0.1);
-    transform: translateY(-2px);
+/* Media Queries */
+@media (max-width: 1024px) {
+  .projects-container {
+    height: auto;
+    min-height: calc(100vh - var(--nav-height) - 60px);
+    padding: 80px 20px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    height: auto;
+    min-height: 600px;
+  }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .projects-container {
-        padding: 40px 20px;
-    }
-    
-    .projects-header h1 {
-        font-size: 2.5rem;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .project-content {
-        padding: 20px;
-    }
+  .projects-container {
+    padding: 60px 20px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 300px);
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-container {
+    padding: 40px 15px;
+  }
+  
+  .projects-grid {
+    gap: 20px;
+    grid-template-rows: repeat(4, 250px);
+  }
+  
+  .card__info {
+    padding: 15px;
+  }
+  
+  .card__title {
+    font-size: 1rem;
+  }
+  
+  .card__category, .card__by {
+    font-size: 0.75rem;
+  }
 }
 </style>
 
-<div class="projects-container">
-    <div class="projects-header">
-        <h1>Mes Projets_</h1>
-        <p>
-            Découvrez une sélection de mes projets professionnels et personnels. 
-            Chaque projet représente un défi technique relevé avec passion et créativité.
-        </p>
-    </div>
+<div class="background-gradient"></div>
 
-    <div class="projects-grid">
-        {% for project in site.projects %}
-        <div class="project-card" onclick="window.location.href='{{ '/project' | relative_url }}?id={{ project.id }}'">
-            <div class="project-image" style="background-image: url('{{ project.image | relative_url }}')"></div>
-            <div class="project-content">
-                <h3 class="project-title">{{ project.title }}</h3>
-                <p class="project-description">{{ project.description }}</p>
-                
-                <!-- Technologies utilisées (exemple) -->
-                <div class="project-tech">
-                    {% if project.id == 1 %}
-                        <span class="tech-tag">Symfony</span>
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">JavaScript</span>
-                    {% elsif project.id == 2 %}
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">MongoDB</span>
-                    {% else %}
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                    {% endif %}
-                </div>
-                
-                <div class="project-links">
-                    <a href="{{ '/project' | relative_url }}?id={{ project.id }}" class="project-link">
-                        👁️ Voir le projet
-                    </a>
-                    {% if project.id == 1 %}
-                    <a href="https://github.com/JoaDouillard" class="project-link" target="_blank">
-                        🔗 GitHub
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+<main class="projects-container">
+  <div class="projects-grid">
+    <article class="card card--1" onclick="window.location.href='{{ '/project' | relative_url }}?id=1'">
+      <div class="card__img"></div>
+      <div class="card__info">
+        <span class="card__category">Symfony est un gestionnaire d'événements musicaux créé à l'aide du Framework Symfony (php)</span>
+        <h3 class="card__title">Projet Symfony</h3>
+        <span class="card__by">Tech used : Symfony, Composer, PHP, Twig, SQLite..</span>
+      </div>
+    </article>
+
+    <article class="card card--2" onclick="window.location.href='{{ '/project' | relative_url }}?id=2'">
+      <div class="card__img"></div>
+      <div class="card__info">
+        <span class="card__category">Découvrez comment j'ai implémenté une structure de données QuadTree en C++ qui permet d'optimiser certaines de vos applications !</span>
+        <h3 class="card__title">QuadTree</h3>
+        <span class="card__by">Tech used : C++, Visual Studio & QT</span>
+      </div>
+    </article>
+
+    <article class="card card--3" onclick="window.location.href='{{ '/project' | relative_url }}?id=3'">
+      <div class="card__img"></div>
+      <div class="card__info">
+        <span class="card__category">Portfolio web moderne développé avec Jekyll, alliant design responsive et performance optimale</span>
+        <h3 class="card__title">Portfolio Web</h3>
+        <span class="card__by">Tech used : Jekyll, HTML5, CSS3, JavaScript</span>
+      </div>
+    </article>
+
+    <article class="card card--4" onclick="window.location.href='{{ '/project' | relative_url }}?id=4'">
+      <div class="card__img"></div>
+      <div class="card__info">
+        <span class="card__category">Application desktop complète avec interface Swing et base de données intégrée pour la gestion de données</span>
+        <h3 class="card__title">Application Desktop</h3>
+        <span class="card__by">Tech used : Java, Swing, SQLite</span>
+      </div>
+    </article>
+  </div>
+</main>
+
+<script>
+// Ajouter des effets d'animation au chargement
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.card');
+  
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+      card.style.transition = 'all 0.6s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
+});
+</script>
