@@ -30,7 +30,8 @@
       gap: 2rem;
       max-width: 1500px;
       margin: 0 auto;
-      margin-top: 5%;
+      margin-top: 2%;
+      min-height: calc(100vh - 200px);
     }
 
     /* Navigation et ligne verticale */
@@ -109,12 +110,13 @@
 
     /* Conteneur principal du contenu */
     .content-text {
-      max-height: calc(100vh - 300px);
+      max-height: calc(100vh - 250px);
       overflow-y: auto;
       padding: 20px 25px 20px 0;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       position: relative;
       border-radius: 8px;
+      line-height: 1.6;
     }
 
     /* Personnalisation de la scrollbar */
@@ -151,6 +153,7 @@
     .project-image {
       position: sticky;
       top: 2rem;
+      height: fit-content;
     }
 
     .project-image img {
@@ -190,6 +193,7 @@
       display: flex;
       gap: 1rem;
       justify-content: center;
+      margin-top: 2rem;
     }
 
     .project-links a {
@@ -199,6 +203,7 @@
       border: 1px solid var(--green);
       border-radius: 4px;
       transition: all 0.3s;
+      font-size: 0.9rem;
     }
 
     .project-links a:hover {
@@ -337,6 +342,112 @@
     /* Effet de survol sur les lignes */
     tr:hover {
       background-color: rgba(100, 255, 218, 0.05);
+    }
+
+    /* Media Queries pour meilleur affichage */
+    @media (min-width: 1600px) {
+      .project-container {
+        grid-template-columns: 350px 1fr 550px;
+        gap: 3rem;
+        max-width: 1800px;
+      }
+      
+      .content-text {
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+      
+      .project-metadata {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 1400px) {
+      .project-container {
+        grid-template-columns: 280px 1fr 450px;
+        gap: 1.5rem;
+        margin-top: 3%;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .project-container {
+        grid-template-columns: 250px 1fr 400px;
+        gap: 1.2rem;
+      }
+      
+      .content-text {
+        max-height: calc(100vh - 220px);
+      }
+    }
+
+    /* Responsive pour tablettes et mobiles */
+    @media (max-width: 1024px) {
+      .project-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+      
+      .nav-container {
+        order: 1;
+        padding-left: 0;
+      }
+      
+      .vertical-line {
+        width: 100%;
+        height: 2px;
+        top: auto;
+        bottom: -0.5rem;
+      }
+      
+      .project-nav ul {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .project-content {
+        order: 2;
+      }
+      
+      .project-image {
+        order: 3;
+        position: static;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .content-text {
+        max-height: none;
+        overflow-y: visible;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-container {
+        padding: 0 1rem;
+      }
+      
+      .nav-btn {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.5rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .content-text {
+        font-size: 0.9rem;
+        padding: 15px 20px 15px 0;
+      }
     }
     </style>
   </head>
