@@ -4,6 +4,578 @@ title: Compétences
 description: Découvrez les compétences techniques et soft skills de Joachim Douillard
 ---
 
+<style>
+  #skills {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .skills-container {
+    display: flex;
+    width: 80%;
+    height: calc(100vh - var(--nav-height) - 60px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    gap: 30px;
+  }
+
+  /* PDF Container - partie gauche (65%) */
+  #pdf-container {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    margin-right: 20px;
+  }
+
+  /* Skills Visual - partie droite (40%) */
+  .skills-visual {
+    display: flex;
+    flex-direction: column;
+    padding-right: 15px;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--highlight-color) rgba(2, 12, 27, 0.7);
+    width: 40%;
+    justify-content: center;
+  }
+
+  .skills-visual > div {
+    background: rgba(2, 12, 27, 0.7);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    margin-bottom: 15px;
+  }
+
+  /* Styles des titres de section */
+  .skills-visual h3 {
+    color: var(--highlight-color);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-left: 12px;
+  }
+
+  .skills-visual h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 18px;
+    background-color: var(--highlight-color);
+    border-radius: 4px;
+  }
+
+  /* Styles pour les barres de compétences */
+  .skills-section {
+    max-height: 180px;
+    flex: 1;
+  }
+
+  .skill-progress {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .skill-label {
+    width: 120px;
+    font-size: 0.9rem;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--highlight-color), #2dd4bf);
+    border-radius: 4px;
+    width: 0;
+  }
+
+  /* Animation spécifique pour chaque barre */
+  .skill-progress:nth-child(2) .progress {
+    animation: progress85 1.5s ease-out forwards;
+  }
+
+  .skill-progress:nth-child(3) .progress {
+    animation: progress70 1.5s ease-out forwards;
+  }
+
+  .skill-progress:nth-child(4) .progress {
+    animation: progress75 1.5s ease-out forwards;
+  }
+
+  .skill-progress:nth-child(5) .progress {
+    animation: progress65 1.5s ease-out forwards;
+  }
+
+  @keyframes progress85 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 85%;
+    }
+  }
+
+  @keyframes progress70 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 70%;
+    }
+  }
+
+  @keyframes progress75 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 75%;
+    }
+  }
+
+  @keyframes progress65 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 65%;
+    }
+  }
+
+  .skill-percent {
+    width: 40px;
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--highlight-color);
+  }
+
+  /* Timeline revisitée */
+  .timeline-section {
+    position: relative;
+    flex: 1;
+    max-height: 380px;
+  }
+
+  .timeline-item {
+    padding: 0 0 0 30px;
+    border-left: none;
+    margin-bottom: 25px;
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--highlight-color);
+    border: 3px solid rgba(2, 12, 27, 0.7);
+    z-index: 2;
+  }
+
+  .timeline-item:not(:last-child):after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 18px;
+    width: 2px;
+    height: calc(100% + 15px);
+    background: rgba(100, 255, 218, 0.3);
+  }
+
+  .timeline-content {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .date {
+    color: var(--highlight-color);
+    font-size: 0.9em;
+  }
+
+  .title {
+    color: var(--text-color);
+    margin: 5px 0;
+    font-weight: bold;
+  }
+
+  .subtitle {
+    font-size: 0.9em;
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+
+  .timeline-description {
+    font-size: 0.85em;
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  /* Langues et certifications */
+  .languages-section {
+    flex: 0.8;
+    max-height: 180px;
+  }
+
+  .language-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .language-name {
+    width: 100px;
+    font-size: 0.9rem;
+  }
+
+  .language-level {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+  }
+
+  .level-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .level-dot.active {
+    background: var(--highlight-color);
+  }
+
+  .language-text {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    width: 120px;
+    text-align: right;
+  }
+
+  .certifications {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .certification-badge {
+    background: rgba(100, 255, 218, 0.1);
+    color: var(--highlight-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+  }
+
+  /* Liens rapides */
+  .quick-links {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 15px;
+  }
+
+  .quick-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+  }
+
+  .quick-link:hover {
+    background: rgba(100, 255, 218, 0.1);
+    color: var(--highlight-color);
+    transform: translateY(-2px);
+  }
+
+  /* Styles de scrollbar */
+  .skills-visual::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .skills-visual::-webkit-scrollbar-track {
+    background: rgba(2, 12, 27, 0.7);
+    border-radius: 4px;
+  }
+
+  .skills-visual::-webkit-scrollbar-thumb {
+    background-color: var(--highlight-color);
+    border-radius: 4px;
+    height: 50px;
+  }
+
+  .skills-visual::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* PDF Embed Styles */
+  .pdf-fallback {
+    color: var(--text-color);
+    text-align: center;
+    padding: 40px;
+  }
+
+  .pdf-fallback h3 {
+    color: var(--highlight-color);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+  }
+
+  .pdf-fallback p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .pdf-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--highlight-color);
+    border: 2px solid var(--highlight-color);
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .pdf-download-btn:hover {
+    background: rgba(100, 255, 218, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1400px) {
+    .skills-container {
+      width: 100%;
+    }
+
+    html,
+    body {
+      overflow-y: auto;
+      height: auto;
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    header,
+    footer {
+      background-color: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .skills-visual {
+      width: 45%;
+    }
+
+    .skill-label {
+      width: 100px;
+    }
+
+    #pdf-container {
+      width: 55%;
+      max-width: 450px;
+      overflow: visible;
+    }
+  }
+
+  @media (max-width: 1070px) {
+    .skills-container {
+      flex-direction: column;
+      height: auto;
+      gap: 20px;
+    }
+
+    .skills-visual {
+      height: auto;
+      overflow-y: visible;
+      padding-right: 0;
+      width: 80%;
+    }
+
+    #pdf-container {
+      width: 80%;
+      min-height: 500px;
+      overflow: visible;
+      margin-right: 0;
+    }
+
+    .skills-visual > div {
+      margin-bottom: 15px;
+    }
+
+    .quick-links {
+      justify-content: space-around;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .skills-container {
+      padding: 10px;
+    }
+
+    .skills-visual {
+      width: 100%;
+    }
+
+    #pdf-container {
+      width: 100%;
+      min-height: 400px;
+    }
+
+    .skill-progress {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .skills-section {
+      max-height: 300px;
+    }
+
+    .skill-label {
+      width: 40%;
+      margin-bottom: 5px;
+    }
+
+    .progress-bar {
+      width: 40%;
+      height: 6px;
+      margin-bottom: 5px;
+      display: block !important;
+      z-index: 10;
+      position: relative;
+    }
+
+    .skill-percent {
+      width: 15%;
+      text-align: right;
+      margin-top: 0;
+    }
+
+    .timeline-item {
+      padding-left: 20px;
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      left: 2px;
+    }
+
+    .timeline-item:not(:last-child):after {
+      left: 5px;
+    }
+
+    .languages-section {
+      max-height: 250px;
+    }
+
+    .language-item {
+      flex-wrap: wrap;
+    }
+
+    .language-name {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    .language-text {
+      width: auto;
+      text-align: left;
+      margin-top: 5px;
+    }
+
+    .certifications {
+      justify-content: center;
+    }
+
+    .quick-links {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quick-link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .skills-visual > div {
+      padding: 12px;
+    }
+
+    .skills-visual h3 {
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .timeline-content {
+      padding: 10px;
+    }
+
+    .timeline-description {
+      font-size: 0.8em;
+    }
+
+    .certification-badge {
+      font-size: 0.75em;
+      padding: 3px 6px;
+    }
+  }
+</style>
 
 <main>
   <section id="skills">

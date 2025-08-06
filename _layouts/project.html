@@ -39,6 +39,442 @@
     <meta name="msapplication-TileColor" content="#020c1b" />
     <meta name="theme-color" content="#020c1b" />
 
+    <style>
+      /* CSS spécifique pour les pages projet - copie exacte de l'original */
+      .project-detail {
+        background-color: var(--navy);
+        min-height: 100vh;
+        padding: 2rem;
+        color: var(--slate);
+        font-family: "Fira Code", monospace;
+      }
+
+      .project-container {
+        display: grid;
+        grid-template-columns: 300px 1fr 500px;
+        gap: 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
+        margin-top: 2%;
+        min-height: calc(100vh - 200px);
+      }
+
+      /* Navigation et ligne verticale */
+      .nav-container {
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .vertical-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: var(--green);
+        opacity: 0.3;
+      }
+
+      .project-nav {
+        position: sticky;
+        top: 2rem;
+      }
+
+      .project-nav ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .nav-btn {
+        background: none;
+        border: none;
+        color: var(--slate);
+        font-family: "Fira Code", monospace;
+        font-size: 1rem;
+        padding: 0.5rem;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        color: var(--green);
+      }
+
+      .bullet {
+        color: var(--green);
+        opacity: 0;
+        transition: opacity 0.3s;
+        margin-right: 0.5rem;
+      }
+
+      .nav-btn:hover .bullet,
+      .nav-btn.active .bullet {
+        opacity: 1;
+      }
+
+      /* Contenu */
+      .section-title {
+        color: var(--lightest-slate);
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .project-metadata {
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+      }
+
+      .project-date,
+      .project-tech {
+        color: var(--green);
+        margin-right: 1rem;
+      }
+
+      /* Conteneur principal du contenu */
+      .content-text {
+        max-height: calc(100vh - 250px);
+        overflow-y: auto;
+        padding: 20px 25px 20px 0;
+        margin-bottom: 20px;
+        position: relative;
+        border-radius: 8px;
+        line-height: 1.6;
+      }
+
+      /* Personnalisation de la scrollbar */
+      .content-text::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .content-text::-webkit-scrollbar-track {
+        background: rgba(136, 146, 176, 0.1);
+        border-radius: 3px;
+      }
+
+      .content-text::-webkit-scrollbar-thumb {
+        background: var(--highlight-color);
+        border-radius: 3px;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+      }
+
+      .content-text::-webkit-scrollbar-thumb:hover {
+        background: rgba(100, 255, 218, 0.8);
+      }
+
+      .content-section {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .content-section.active {
+        display: block;
+      }
+
+      /* Image et liens */
+      .project-image {
+        position: sticky;
+        top: 2rem;
+        height: fit-content;
+      }
+
+      .project-image img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+
+      /* Style commun pour les médias (images et vidéos) */
+      .project-image img,
+      .project-image video {
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+      }
+
+      /* Hover effect sur les médias */
+      .project-image img:hover,
+      .project-image video:hover {
+        transform: scale(1.02);
+      }
+
+      /* Style spécifique aux vidéos */
+      .project-image video {
+        outline: none;
+      }
+
+      /* Styles pour les contrôles vidéo */
+      .project-image video::-webkit-media-controls {
+        border-radius: 0 0 5px 5px;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .project-links a {
+        color: var(--green);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--green);
+        border-radius: 4px;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+      }
+
+      .project-links a:hover {
+        background-color: var(--green-tint);
+      }
+
+      /* Style Markdown amélioré */
+      .markdown-content {
+        font-family: "Consolas", monospace;
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      .markdown-content h1,
+      .markdown-content h2,
+      .markdown-content h3 {
+        color: var(--highlight-color);
+        font-weight: 600;
+      }
+
+      .markdown-content h1 {
+        font-size: 1.6rem;
+        border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        padding-bottom: 0.5rem;
+      }
+
+      .markdown-content h2 {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+      }
+
+      .markdown-content h3 {
+        font-size: 1.2rem;
+        color: var(--text-color);
+      }
+
+      .markdown-content ul,
+      .markdown-content ol {
+        padding-left: 1.5rem;
+        margin: 0.8rem 0;
+      }
+
+      .markdown-content li {
+        margin: 0.4rem 0;
+        position: relative;
+      }
+
+      .markdown-content li::before {
+        content: ">";
+        color: var(--highlight-color);
+        position: absolute;
+        left: -1.2rem;
+        opacity: 0.7;
+      }
+
+      .markdown-content code {
+        background: rgba(100, 255, 218, 0.1);
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+        color: var(--highlight-color);
+      }
+
+      .markdown-content pre {
+        background: rgba(10, 25, 47, 0.8);
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        margin: 1rem 0;
+      }
+
+      .markdown-content blockquote {
+        border-left: 2px solid var(--highlight-color);
+        padding-left: 1rem;
+        margin: 1rem 0;
+        font-style: italic;
+        color: var(--text-color);
+      }
+
+      /* Animations des sections */
+      .content-section {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease-out;
+      }
+
+      .content-section.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Style spécifique pour le tableau du projet Verdant Sentinel */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 5px;
+        border: 1px solid rgba(100, 255, 218, 0.2);
+        overflow: hidden;
+      }
+
+      /* Style pour les cellules */
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        transition: background-color 0.3s ease;
+      }
+
+      /* Style pour la première ligne (en-tête) */
+      tr:first-child td {
+        background-color: rgba(100, 255, 218, 0.1);
+        color: var(--green);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+      }
+
+      /* Style pour les lignes paires */
+      tr:nth-child(even) {
+        background-color: rgba(10, 25, 47, 0.5);
+      }
+
+      /* Effet de survol sur les lignes */
+      tr:hover {
+        background-color: rgba(100, 255, 218, 0.05);
+      }
+
+      /* Media Queries pour meilleur affichage */
+      @media (min-width: 1600px) {
+        .project-container {
+          grid-template-columns: 350px 1fr 550px;
+          gap: 3rem;
+          max-width: 1800px;
+        }
+
+        .content-text {
+          font-size: 1.05rem;
+          line-height: 1.7;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .project-metadata {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 1400px) {
+        .project-container {
+          grid-template-columns: 280px 1fr 450px;
+          gap: 1.5rem;
+          margin-top: 3%;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .project-container {
+          grid-template-columns: 250px 1fr 400px;
+          gap: 1.2rem;
+        }
+
+        .content-text {
+          max-height: calc(100vh - 220px);
+        }
+      }
+
+      /* Responsive pour tablettes et mobiles */
+      @media (max-width: 1024px) {
+        .project-container {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-top: 1rem;
+        }
+
+        .nav-container {
+          order: 1;
+          padding-left: 0;
+        }
+
+        .vertical-line {
+          width: 100%;
+          height: 2px;
+          top: auto;
+          bottom: -0.5rem;
+        }
+
+        .project-nav ul {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .project-content {
+          order: 2;
+        }
+
+        .project-image {
+          order: 3;
+          position: static;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .content-text {
+          max-height: none;
+          overflow-y: visible;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .project-container {
+          padding: 0 1rem;
+        }
+
+        .nav-btn {
+          font-size: 0.9rem;
+          padding: 0.3rem 0.5rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .content-text {
+          font-size: 0.9rem;
+          padding: 15px 20px 15px 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="gradient-overlay"></div>
