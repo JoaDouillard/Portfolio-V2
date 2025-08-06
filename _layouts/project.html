@@ -1,15 +1,42 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} - Joachim Douillard</title>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ '/assets/images/favicon/favicon.svg' | relative_url }}" type="image/svg+xml">
+</head>
+<body>
+  <div class="gradient-overlay"></div>
+  <div class="background-gradient"></div>
+  <header>
+    <a href="{{ '/' | relative_url }}" class="logo">Joachim_Douillard_</a>
+    <nav>
+      <a href="{{ '/contact' | relative_url }}" class="contact-link">contact_me_</a>
+    </nav>
+  </header>
 
 <style>
+/* Reset et styles de base pour la page projet */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--navy);
+  color: var(--slate);
+  font-family: "Fira Code", monospace;
+  overflow-x: hidden;
+}
+
 /* Template des pages projet - CSS complet de l'original */
 .project-detail {
   background-color: var(--navy);
-  min-height: 100vh;
+  min-height: calc(100vh - 140px); /* Ajusté pour header/footer */
   padding: 2rem;
   color: var(--slate);
   font-family: "Fira Code", monospace;
+  margin-top: var(--nav-height);
 }
 
 .project-container {
@@ -1109,3 +1136,14 @@ document.addEventListener('DOMContentLoaded', function() {
   updateMediaDisplay('intro');
 });
 </script>
+
+<footer>
+  <div class="social-links">
+    <span class="find-me">find me in:</span>
+    <a href="https://github.com/JoaDouillard?tab=repositories" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/joachim-douillard" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>
