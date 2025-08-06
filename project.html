@@ -1,303 +1,100 @@
 ---
-layout: default
-title: Détail du Projet
-description: Détails du projet sélectionné
+layout: project
+title: "Projet Symfony"
+date: "2025"
+tech: "Symfony, Composer, PHP, SQLite, Twig.."
+github: "https://github.com/JoaDouillard/SymfonyProject.git"
+images:
+  intro: "/assets/images/projects/project1/DemoP1.webm"
+  details: "/assets/images/projects/project1/DetailsP1.webm"
+  bonnesPratiques: "/assets/images/projects/go_to_github.svg"
+  conclusion: "/assets/images/projects/project1/DemoP1.webm"
+  cahierdescharges: "/assets/images/projects/go_to_github.svg"
+intro: |
+  Dans le cadre de notre formation, mon camarade Alex Guigue et moi-même avons développé une application de gestion d'événements musicaux que nous avons appelée <b>Symfony</b>.
+
+  <br><br>Le but : répondre au besoin de connexion entre organisateurs, artistes et public d'un événement musical. Ce projet fullstack combine un backend Symfony 6 avec une API RESTful mais aussi une interface graphique faite avec des Template Twig.
+      
+  <br><br>Dans une deuxième partie du projet nous avons créé une interface React interactive qui requête notre API nouvellement créée, nous avons nommé cette interface "Event Manager Client".
+      
+  <br><br>Pour créer cette Application nous avons créé une approche de travail. Elle était structurée autour du cahier des charges que nous avons établi en début de projet. Chacun prenait en charge une tâche spécifique issue de ce document et s'occupait de l'implémenter de A à Z. Cette méthode nous a permis d'avancer efficacement tout en assurant une couverture complète des fonctionnalités requises. Lorsqu'un membre rencontrait un obstacle, nous organisions des sessions de pair programming pour résoudre ensemble les problèmes techniques complexes.
+
+details: |
+  Le backend du projet a été développé avec Symfony 6, utilisant Doctrine ORM pour la gestion de la base de données SQLite. Nous avons implémenté une architecture RESTful pour l'API, permettant une communication fluide entre le backend et les interfaces client. La sécurité a été gérée via le système d'authentification de Symfony avec JWT pour l'API.
+
+  <br><br>Côté frontend, nous avons utilisé Twig pour le rendu des templates dans l'application principale Symfony, avec Bootstrap pour assurer un design responsive. L'interface React a été construite avec React Router pour la navigation et Axios pour les appels API. Nous avons également mis en place un système de cache pour optimiser les performances, notamment pour les requêtes fréquentes comme la liste des événements populaires.
+
+  <br><br>Une difficulté technique particulière était la gestion des relations many-to-many entre les événements, les artistes et les utilisateurs, que nous avons résolue en implémentant des entités d'association avec des propriétés supplémentaires.
+
+bonnesPratiques: |
+  Nous avons adopté plusieurs bonnes pratiques tout au long du développement pour assurer la qualité et la maintenabilité du code :
+  <br><br>
+  <ul>
+    <br><li><strong>Code review</strong> : Chaque fonctionnalité était soumise à une revue de code par l'autre membre de l'équipe avant d'être intégrée.</li>
+    <br><li><strong>Clean code</strong> : Application des principes SOLID et respect des standards PSR pour PHP.</li>
+    <br><li><strong>Architecture MVC</strong> : Stricte séparation des responsabilités suivant le pattern Modèle-Vue-Contrôleur, tant dans Symfony que dans l'interface React.</li>
+    <br><li><strong>Gestion des dépendances</strong> : Utilisation de Composer et npm pour gérer proprement les dépendances et leurs versions.</li>
+    <br><li><strong>Convention de nommage</strong> : Respect strict des conventions de nommage pour les classes, méthodes et variables, facilitant la compréhension du code.</li>
+  </ul>
+
+  <br><br>Ces pratiques nous ont permis de maintenir un code de qualité et de faciliter la collaboration, tout en assurant une base solide pour les évolutions futures du projet.
+
+conclusion: |
+  Ce projet a constitué une étape déterminante dans mon parcours de développeur web. Sur le plan technique, j'ai considérablement approfondi ma maîtrise du framework Symfony et des architectures MVC structurées. La mise en œuvre concrète de bonnes pratiques de développement, notamment les tests automatisés et l'intégration continue, a transformé ma vision du développement logiciel vers une approche plus professionnelle et industrialisée.
+
+  <br><br>Au-delà des compétences techniques, cette expérience m'a permis de développer des aptitudes essentielles en gestion de projet. La répartition des tâches basée sur le cahier des charges et le respect des délais m'ont enseigné la discipline et la rigueur nécessaires dans un environnement professionnel. Les défis rencontrés, notamment dans la conception du modèle de données complexe, ont renforcé ma capacité à résoudre méthodiquement des problèmes techniques.
+
+  <br><br>Sur le plan personnel, ce projet a été une opportunité de développer ma résilience face aux obstacles et ma capacité à collaborer efficacement au sein d'une équipe. Les sessions de pair programming et les revues de code m'ont fait comprendre la valeur du partage de connaissances et de la communication claire dans un contexte de développement collaboratif.
+
+  <br><br>Cette expérience a confirmé mon attrait pour les défis techniques complexes et les projets structurants qui combinent innovation et rigueur méthodologique. Les compétences et la confiance acquises durant ce projet constituent désormais des atouts précieux que je compte mettre à profit dans mes futures missions professionnelles, avec une vision plus claire de mon évolution en tant que développeur web spécialisé en technologies back-end robustes et évolutives.
+
+cahierdescharges: |
+  ## Structure technique
+  - **Backend**: Symfony 6
+  - **Frontend**: React avec Vite.js
+  - **Base de données**: SQLite (obligatoire)
+  - **Architecture**: Deux applications distinctes lancées séparément
+
+  ## Fonctionnalités principales
+
+  ### 1. Partie Fullstack
+  - **Accès**: Page d'accueil publique, reste de l'application protégé par authentification
+  - **Navigation**: Adaptative selon le profil utilisateur (admin/user)
+  - **Ressources principales**: Utilisateurs, Artistes, Événements
+
+  #### Rôles utilisateurs
+  - **Admin**:
+    - Attribution automatique au premier utilisateur inscrit
+    - Gestion exclusive des artistes (création/modification)
+    - Accès à la liste complète des utilisateurs
+
+  - **Utilisateur standard**:
+    - Consultation des artistes et événements
+    - Création/modification/suppression de ses propres événements
+    - Inscription/désinscription aux événements
+    - Inscription automatique à ses propres événements
+    - Filtrage et recherche (artistes par nom, événements par date)
+
+  #### Gestion des artistes
+  - Nom, description et image
+  - Affichage des événements associés
+
+  #### Gestion des événements
+  - Nom, date et artiste associé
+  - Liste des utilisateurs inscrits
+
+  ### 2. Partie API
+  - Routes accessibles via /api/*
+  - API publique sans authentification
+  - Endpoints pour artistes et événements (liste et détail)
+  - Documentation via Swagger UI (/api/doc)
+
+  ### 3. Partie Frontend React
+  - Développée avec React et Vite.js
+  - Interface de consultation des artistes et événements
+  - Pages spécifiques:
+    - Listing des artistes (avec filtre par nom)
+    - Détails d'un artiste (avec événements associés)
+    - Listing des événements (avec filtres par nom et date)
+    - Détails d'un événement (avec participants)
 ---
-
-<style>
-.project-detail-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 40px;
-    min-height: calc(100vh - 150px);
-}
-
-.project-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.project-title {
-    color: #fff;
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.project-description {
-    color: var(--text-color);
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-.project-media {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.media-section {
-    background: rgba(2, 12, 27, 0.9);
-    border-radius: 12px;
-    padding: 30px;
-    border: 1px solid rgba(100, 255, 218, 0.1);
-}
-
-.media-section h3 {
-    color: var(--highlight-color);
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.video-container {
-    width: 100%;
-    height: 300px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    border: 1px solid rgba(100, 255, 218, 0.2);
-}
-
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    background: rgba(100, 255, 218, 0.1);
-    border: 1px solid var(--highlight-color);
-    border-radius: 8px;
-    color: var(--highlight-color);
-    text-decoration: none;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    margin-bottom: 40px;
-}
-
-.back-button:hover {
-    background: rgba(100, 255, 218, 0.2);
-    transform: translateY(-2px);
-}
-
-.project-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 40px;
-}
-
-.info-section {
-    background: rgba(2, 12, 27, 0.9);
-    border-radius: 12px;
-    padding: 30px;
-    border: 1px solid rgba(100, 255, 218, 0.1);
-}
-
-.info-section h3 {
-    color: var(--highlight-color);
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-}
-
-.tech-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.tech-item {
-    background: rgba(100, 255, 218, 0.1);
-    color: var(--highlight-color);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    border: 1px solid rgba(100, 255, 218, 0.2);
-}
-
-.feature-list {
-    list-style: none;
-    padding: 0;
-}
-
-.feature-list li {
-    color: var(--text-color);
-    margin-bottom: 10px;
-    padding-left: 25px;
-    position: relative;
-}
-
-.feature-list li::before {
-    content: '▶';
-    color: var(--highlight-color);
-    position: absolute;
-    left: 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .project-detail-container {
-        padding: 40px 20px;
-    }
-    
-    .project-title {
-        font-size: 2.5rem;
-    }
-    
-    .project-media,
-    .project-info {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .video-container {
-        height: 250px;
-    }
-}
-</style>
-
-<div class="project-detail-container">
-    <a href="{{ '/projects' | relative_url }}" class="back-button">
-        ← Retour aux projets
-    </a>
-
-    <div class="project-header">
-        <h1 class="project-title" id="projectTitle">Chargement...</h1>
-        <p class="project-description" id="projectDescription">Chargement de la description...</p>
-    </div>
-
-    <div class="project-media">
-        <div class="media-section">
-            <h3>🎬 Démonstration</h3>
-            <div class="video-container" id="demoVideo">
-                <p>Vidéo de démonstration disponible</p>
-            </div>
-        </div>
-        
-        <div class="media-section">
-            <h3>📋 Détails Techniques</h3>
-            <div class="video-container" id="detailsMedia">
-                <p>Détails du projet</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="project-info">
-        <div class="info-section">
-            <h3>🛠️ Technologies Utilisées</h3>
-            <div class="tech-list" id="techList">
-                <!-- Technologies will be loaded here -->
-            </div>
-        </div>
-        
-        <div class="info-section">
-            <h3>✨ Fonctionnalités</h3>
-            <ul class="feature-list" id="featureList">
-                <!-- Features will be loaded here -->
-            </ul>
-        </div>
-    </div>
-</div>
-
-<script>
-// Configuration des projets (reprend les données de _config.yml)
-const projects = {
-    1: {
-        title: "Projet Symfony",
-        description: "Symfony est une plateforme permettant aux utilisateurs de consulter, gérer et s'inscrire à des événements musicaux.",
-        technologies: ["Symfony", "PHP", "MySQL", "JavaScript", "Bootstrap"],
-        features: [
-            "Gestion des événements musicaux",
-            "Système d'inscription utilisateur",
-            "Interface d'administration",
-            "Système de réservation",
-            "Notifications en temps réel"
-        ]
-    },
-    2: {
-        title: "Project 2",
-        description: "Description détaillée du projet 2. Technologies utilisées et objectifs atteints.",
-        technologies: ["React", "Node.js", "MongoDB", "Express"],
-        features: [
-            "Interface utilisateur moderne",
-            "Base de données NoSQL",
-            "API RESTful",
-            "Authentification JWT"
-        ]
-    },
-    3: {
-        title: "Project 3",
-        description: "Description du projet 3 avec les technologies et fonctionnalités implémentées.",
-        technologies: ["HTML5", "CSS3", "JavaScript", "Vue.js"],
-        features: [
-            "Design responsive",
-            "Animations CSS",
-            "Interface interactive",
-            "Optimisation mobile"
-        ]
-    },
-    4: {
-        title: "Project 4",
-        description: "Description du projet 4 et de ses spécificités techniques.",
-        technologies: ["Python", "Django", "PostgreSQL"],
-        features: [
-            "Application web robuste",
-            "Base de données relationnelle",
-            "Panel d'administration",
-            "Tests automatisés"
-        ]
-    }
-};
-
-// Récupérer l'ID du projet depuis l'URL
-function getProjectId() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id') || '1';
-}
-
-// Charger les informations du projet
-function loadProject() {
-    const projectId = getProjectId();
-    const project = projects[projectId];
-    
-    if (!project) {
-        document.getElementById('projectTitle').textContent = 'Projet non trouvé';
-        document.getElementById('projectDescription').textContent = 'Ce projet n\'existe pas.';
-        return;
-    }
-    
-    // Mettre à jour le titre et la description
-    document.getElementById('projectTitle').textContent = project.title;
-    document.getElementById('projectDescription').textContent = project.description;
-    
-    // Mettre à jour le titre de la page
-    document.title = project.title + ' - Joachim Douillard';
-    
-    // Charger les technologies
-    const techList = document.getElementById('techList');
-    techList.innerHTML = '';
-    project.technologies.forEach(tech => {
-        const techItem = document.createElement('span');
-        techItem.className = 'tech-item';
-        techItem.textContent = tech;
-        techList.appendChild(techItem);
-    });
-    
-    // Charger les fonctionnalités
-    const featureList = document.getElementById('featureList');
-    featureList.innerHTML = '';
-    project.features.forEach(feature => {
-        const li = document.createElement('li');
-        li.textContent = feature;
-        featureList.appendChild(li);
-    });
-}
-
-// Charger le projet au chargement de la page
-document.addEventListener('DOMContentLoaded', loadProject);
-</script>
