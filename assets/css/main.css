@@ -66,6 +66,8 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   height: var(--nav-height);
   z-index: 1000;
   padding: 0 50px;
@@ -73,6 +75,9 @@ header {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .logo {
@@ -119,9 +124,17 @@ footer {
   width: 100%;
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   padding: 20px 50px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .social-links {
@@ -625,16 +638,24 @@ h2 {
     display: none;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-container {
@@ -687,16 +708,24 @@ h2 {
     height: auto;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-container {
@@ -756,16 +785,24 @@ h2 {
     height: auto;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-container {
@@ -899,16 +936,24 @@ h2 {
     height: auto;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-container {
@@ -986,16 +1031,24 @@ h2 {
     height: auto;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-item {
@@ -1052,16 +1105,24 @@ h2 {
     height: auto;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-container {
@@ -1092,16 +1153,24 @@ h2 {
     height: auto;
   }
 
-  header,
+  header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   footer {
-    background-color: rgba(10, 25, 47, 0.85); /* Fond légèrement transparent */
-    backdrop-filter: blur(10px); /* Effet de flou pour un look moderne */
-    -webkit-backdrop-filter: blur(10px); /* Support pour Safari */
-    position: sticky; /* Pour que le header/footer reste en place */
-    z-index: 100; /* Au-dessus du contenu */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre subtile */
-    border-bottom: 1px solid rgba(100, 255, 218, 0.1); /* Bordure subtile */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation fluide */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .grid-container {
