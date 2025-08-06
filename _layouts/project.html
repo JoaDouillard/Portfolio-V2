@@ -5,450 +5,475 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ page.title }} - Joachim Douillard</title>
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="{{ '/assets/images/favicon/favicon.svg' | relative_url }}" type="image/svg+xml">
-    <link rel="icon" href="{{ '/assets/images/favicon/favicon.ico' | relative_url }}" sizes="any">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/favicon/apple-touch-icon.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon/favicon-32x32.png' | relative_url }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon/favicon-16x16.png' | relative_url }}">
-    <meta name="msapplication-TileColor" content="#020c1b">
-    <meta name="theme-color" content="#020c1b">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="{{ '/assets/images/favicon/favicon.svg' | relative_url }}"
+      type="image/svg+xml"
+    />
+    <link
+      rel="icon"
+      href="{{ '/assets/images/favicon/favicon.ico' | relative_url }}"
+      sizes="any"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ '/assets/images/favicon/apple-touch-icon.png' | relative_url }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{ '/assets/images/favicon/favicon-32x32.png' | relative_url }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{ '/assets/images/favicon/favicon-16x16.png' | relative_url }}"
+    />
+    <meta name="msapplication-TileColor" content="#020c1b" />
+    <meta name="theme-color" content="#020c1b" />
+
     <style>
-    /* CSS spécifique pour les pages projet - copie exacte de l'original */
-    .project-detail {
-      background-color: var(--navy);
-      min-height: 100vh;
-      padding: 2rem;
-      color: var(--slate);
-      font-family: "Fira Code", monospace;
-    }
-
-    .project-container {
-      display: grid;
-      grid-template-columns: 300px 1fr 500px;
-      gap: 2rem;
-      max-width: 1500px;
-      margin: 0 auto;
-      margin-top: 2%;
-      min-height: calc(100vh - 200px);
-    }
-
-    /* Navigation et ligne verticale */
-    .nav-container {
-      position: relative;
-      padding-left: 20px;
-    }
-
-    .vertical-line {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background-color: var(--green);
-      opacity: 0.3;
-    }
-
-    .project-nav {
-      position: sticky;
-      top: 2rem;
-    }
-
-    .project-nav ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--slate);
-      font-family: "Fira Code", monospace;
-      font-size: 1rem;
-      padding: 0.5rem;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      color: var(--green);
-    }
-
-    .bullet {
-      color: var(--green);
-      opacity: 0;
-      transition: opacity 0.3s;
-      margin-right: 0.5rem;
-    }
-
-    .nav-btn:hover .bullet,
-    .nav-btn.active .bullet {
-      opacity: 1;
-    }
-
-    /* Contenu */
-    .section-title {
-      color: var(--lightest-slate);
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-metadata {
-      margin-bottom: 2rem;
-      font-size: 0.9rem;
-    }
-
-    .project-date,
-    .project-tech {
-      color: var(--green);
-      margin-right: 1rem;
-    }
-
-    /* Conteneur principal du contenu */
-    .content-text {
-      max-height: calc(100vh - 250px);
-      overflow-y: auto;
-      padding: 20px 25px 20px 0;
-      margin-bottom: 20px;
-      position: relative;
-      border-radius: 8px;
-      line-height: 1.6;
-    }
-
-    /* Personnalisation de la scrollbar */
-    .content-text::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .content-text::-webkit-scrollbar-track {
-      background: rgba(136, 146, 176, 0.1);
-      border-radius: 3px;
-    }
-
-    .content-text::-webkit-scrollbar-thumb {
-      background: var(--highlight-color);
-      border-radius: 3px;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-    }
-
-    .content-text::-webkit-scrollbar-thumb:hover {
-      background: rgba(100, 255, 218, 0.8);
-    }
-
-    .content-section {
-      display: none;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .content-section.active {
-      display: block;
-    }
-
-    /* Image et liens */
-    .project-image {
-      position: sticky;
-      top: 2rem;
-      height: fit-content;
-    }
-
-    .project-image img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-
-    /* Style commun pour les médias (images et vidéos) */
-    .project-image img, 
-    .project-image video {
-      width: 100%;
-      height: auto;
-      max-height: 500px;
-      object-fit: cover;
-      border-radius: 5px;
-      transition: transform 0.3s ease;
-    }
-
-    /* Hover effect sur les médias */
-    .project-image img:hover,
-    .project-image video:hover {
-      transform: scale(1.02);
-    }
-
-    /* Style spécifique aux vidéos */
-    .project-image video {
-      outline: none;
-    }
-
-    /* Styles pour les contrôles vidéo */
-    .project-image video::-webkit-media-controls {
-      border-radius: 0 0 5px 5px;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-
-    .project-links a {
-      color: var(--green);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--green);
-      border-radius: 4px;
-      transition: all 0.3s;
-      font-size: 0.9rem;
-    }
-
-    .project-links a:hover {
-      background-color: var(--green-tint);
-    }
-
-    /* Style Markdown amélioré */
-    .markdown-content {
-      font-family: "Consolas", monospace;
-      line-height: 1.6;
-      padding: 20px;
-    }
-
-    .markdown-content h1,
-    .markdown-content h2,
-    .markdown-content h3 {
-      color: var(--highlight-color);
-      font-weight: 600;
-    }
-
-    .markdown-content h1 {
-      font-size: 1.6rem;
-      border-bottom: 1px solid rgba(100, 255, 218, 0.2);
-      padding-bottom: 0.5rem;
-    }
-
-    .markdown-content h2 {
-      font-size: 1.4rem;
-      margin-top: 1.5rem;
-    }
-
-    .markdown-content h3 {
-      font-size: 1.2rem;
-      color: var(--text-color);
-    }
-
-    .markdown-content ul, 
-    .markdown-content ol {
-      padding-left: 1.5rem;
-      margin: 0.8rem 0;
-    }
-
-    .markdown-content li {
-      margin: 0.4rem 0;
-      position: relative;
-    }
-
-    .markdown-content li::before {
-      content: '>';
-      color: var(--highlight-color);
-      position: absolute;
-      left: -1.2rem;
-      opacity: 0.7;
-    }
-
-    .markdown-content code {
-      background: rgba(100, 255, 218, 0.1);
-      padding: 0.2rem 0.4rem;
-      border-radius: 3px;
-      font-size: 0.9em;
-      color: var(--highlight-color);
-    }
-
-    .markdown-content pre {
-      background: rgba(10, 25, 47, 0.8);
-      padding: 1rem;
-      border-radius: 5px;
-      border: 1px solid rgba(100, 255, 218, 0.1);
-      margin: 1rem 0;
-    }
-
-    .markdown-content blockquote {
-      border-left: 2px solid var(--highlight-color);
-      padding-left: 1rem;
-      margin: 1rem 0;
-      font-style: italic;
-      color: var(--text-color);
-    }
-
-    /* Animations des sections */
-    .content-section {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.3s ease-out;
-    }
-
-    .content-section.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
+      /* CSS spécifique pour les pages projet - copie exacte de l'original */
+      .project-detail {
+        background-color: var(--navy);
+        min-height: 100vh;
+        padding: 2rem;
+        color: var(--slate);
+        font-family: "Fira Code", monospace;
       }
-      to {
+
+      .project-container {
+        display: grid;
+        grid-template-columns: 300px 1fr 500px;
+        gap: 2rem;
+        max-width: 1500px;
+        margin: 0 auto;
+        margin-top: 2%;
+        min-height: calc(100vh - 200px);
+      }
+
+      /* Navigation et ligne verticale */
+      .nav-container {
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .vertical-line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: var(--green);
+        opacity: 0.3;
+      }
+
+      .project-nav {
+        position: sticky;
+        top: 2rem;
+      }
+
+      .project-nav ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .nav-btn {
+        background: none;
+        border: none;
+        color: var(--slate);
+        font-family: "Fira Code", monospace;
+        font-size: 1rem;
+        padding: 0.5rem;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .nav-btn:hover,
+      .nav-btn.active {
+        color: var(--green);
+      }
+
+      .bullet {
+        color: var(--green);
+        opacity: 0;
+        transition: opacity 0.3s;
+        margin-right: 0.5rem;
+      }
+
+      .nav-btn:hover .bullet,
+      .nav-btn.active .bullet {
         opacity: 1;
       }
-    }
-    
-    /* Style spécifique pour le tableau du projet Verdant Sentinel */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      border-radius: 5px;
-      border: 1px solid rgba(100, 255, 218, 0.2);
-      overflow: hidden;
-    }
 
-    /* Style pour les cellules */
-    td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid rgba(100, 255, 218, 0.1);
-      transition: background-color 0.3s ease;
-    }
-
-    /* Style pour la première ligne (en-tête) */
-    tr:first-child td {
-      background-color: rgba(100, 255, 218, 0.1);
-      color: var(--green);
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-    }
-
-    /* Style pour les lignes paires */
-    tr:nth-child(even) {
-      background-color: rgba(10, 25, 47, 0.5);
-    }
-
-    /* Effet de survol sur les lignes */
-    tr:hover {
-      background-color: rgba(100, 255, 218, 0.05);
-    }
-
-    /* Media Queries pour meilleur affichage */
-    @media (min-width: 1600px) {
-      .project-container {
-        grid-template-columns: 350px 1fr 550px;
-        gap: 3rem;
-        max-width: 1800px;
-      }
-      
-      .content-text {
-        font-size: 1.05rem;
-        line-height: 1.7;
-      }
-      
+      /* Contenu */
       .section-title {
-        font-size: 2.2rem;
+        color: var(--lightest-slate);
+        font-size: 2rem;
+        margin-bottom: 1rem;
       }
-      
+
       .project-metadata {
-        font-size: 1rem;
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
       }
-    }
 
-    @media (max-width: 1400px) {
-      .project-container {
-        grid-template-columns: 280px 1fr 450px;
-        gap: 1.5rem;
-        margin-top: 3%;
+      .project-date,
+      .project-tech {
+        color: var(--green);
+        margin-right: 1rem;
       }
-    }
 
-    @media (max-width: 1200px) {
-      .project-container {
-        grid-template-columns: 250px 1fr 400px;
-        gap: 1.2rem;
-      }
-      
+      /* Conteneur principal du contenu */
       .content-text {
-        max-height: calc(100vh - 220px);
+        max-height: calc(100vh - 250px);
+        overflow-y: auto;
+        padding: 20px 25px 20px 0;
+        margin-bottom: 20px;
+        position: relative;
+        border-radius: 8px;
+        line-height: 1.6;
       }
-    }
 
-    /* Responsive pour tablettes et mobiles */
-    @media (max-width: 1024px) {
-      .project-container {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        margin-top: 1rem;
+      /* Personnalisation de la scrollbar */
+      .content-text::-webkit-scrollbar {
+        width: 6px;
       }
-      
-      .nav-container {
-        order: 1;
-        padding-left: 0;
+
+      .content-text::-webkit-scrollbar-track {
+        background: rgba(136, 146, 176, 0.1);
+        border-radius: 3px;
       }
-      
-      .vertical-line {
+
+      .content-text::-webkit-scrollbar-thumb {
+        background: var(--highlight-color);
+        border-radius: 3px;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+      }
+
+      .content-text::-webkit-scrollbar-thumb:hover {
+        background: rgba(100, 255, 218, 0.8);
+      }
+
+      .content-section {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .content-section.active {
+        display: block;
+      }
+
+      /* Image et liens */
+      .project-image {
+        position: sticky;
+        top: 2rem;
+        height: fit-content;
+      }
+
+      .project-image img {
         width: 100%;
-        height: 2px;
-        top: auto;
-        bottom: -0.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
       }
-      
-      .project-nav ul {
+
+      /* Style commun pour les médias (images et vidéos) */
+      .project-image img,
+      .project-image video {
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+      }
+
+      /* Hover effect sur les médias */
+      .project-image img:hover,
+      .project-image video:hover {
+        transform: scale(1.02);
+      }
+
+      /* Style spécifique aux vidéos */
+      .project-image video {
+        outline: none;
+      }
+
+      /* Styles pour les contrôles vidéo */
+      .project-image video::-webkit-media-controls {
+        border-radius: 0 0 5px 5px;
+      }
+
+      .project-links {
         display: flex;
         gap: 1rem;
         justify-content: center;
-        flex-wrap: wrap;
+        margin-top: 2rem;
       }
-      
-      .project-content {
-        order: 2;
-      }
-      
-      .project-image {
-        order: 3;
-        position: static;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      
-      .content-text {
-        max-height: none;
-        overflow-y: visible;
-      }
-    }
 
-    @media (max-width: 768px) {
-      .project-container {
-        padding: 0 1rem;
-      }
-      
-      .nav-btn {
+      .project-links a {
+        color: var(--green);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--green);
+        border-radius: 4px;
+        transition: all 0.3s;
         font-size: 0.9rem;
-        padding: 0.3rem 0.5rem;
       }
-      
-      .section-title {
-        font-size: 1.5rem;
+
+      .project-links a:hover {
+        background-color: var(--green-tint);
       }
-      
-      .content-text {
-        font-size: 0.9rem;
-        padding: 15px 20px 15px 0;
+
+      /* Style Markdown amélioré */
+      .markdown-content {
+        font-family: "Consolas", monospace;
+        line-height: 1.6;
+        padding: 20px;
       }
-    }
+
+      .markdown-content h1,
+      .markdown-content h2,
+      .markdown-content h3 {
+        color: var(--highlight-color);
+        font-weight: 600;
+      }
+
+      .markdown-content h1 {
+        font-size: 1.6rem;
+        border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+        padding-bottom: 0.5rem;
+      }
+
+      .markdown-content h2 {
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+      }
+
+      .markdown-content h3 {
+        font-size: 1.2rem;
+        color: var(--text-color);
+      }
+
+      .markdown-content ul,
+      .markdown-content ol {
+        padding-left: 1.5rem;
+        margin: 0.8rem 0;
+      }
+
+      .markdown-content li {
+        margin: 0.4rem 0;
+        position: relative;
+      }
+
+      .markdown-content li::before {
+        content: ">";
+        color: var(--highlight-color);
+        position: absolute;
+        left: -1.2rem;
+        opacity: 0.7;
+      }
+
+      .markdown-content code {
+        background: rgba(100, 255, 218, 0.1);
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+        font-size: 0.9em;
+        color: var(--highlight-color);
+      }
+
+      .markdown-content pre {
+        background: rgba(10, 25, 47, 0.8);
+        padding: 1rem;
+        border-radius: 5px;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        margin: 1rem 0;
+      }
+
+      .markdown-content blockquote {
+        border-left: 2px solid var(--highlight-color);
+        padding-left: 1rem;
+        margin: 1rem 0;
+        font-style: italic;
+        color: var(--text-color);
+      }
+
+      /* Animations des sections */
+      .content-section {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease-out;
+      }
+
+      .content-section.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Style spécifique pour le tableau du projet Verdant Sentinel */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 5px;
+        border: 1px solid rgba(100, 255, 218, 0.2);
+        overflow: hidden;
+      }
+
+      /* Style pour les cellules */
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        transition: background-color 0.3s ease;
+      }
+
+      /* Style pour la première ligne (en-tête) */
+      tr:first-child td {
+        background-color: rgba(100, 255, 218, 0.1);
+        color: var(--green);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+      }
+
+      /* Style pour les lignes paires */
+      tr:nth-child(even) {
+        background-color: rgba(10, 25, 47, 0.5);
+      }
+
+      /* Effet de survol sur les lignes */
+      tr:hover {
+        background-color: rgba(100, 255, 218, 0.05);
+      }
+
+      /* Media Queries pour meilleur affichage */
+      @media (min-width: 1600px) {
+        .project-container {
+          grid-template-columns: 350px 1fr 550px;
+          gap: 3rem;
+          max-width: 1800px;
+        }
+
+        .content-text {
+          font-size: 1.05rem;
+          line-height: 1.7;
+        }
+
+        .section-title {
+          font-size: 2.2rem;
+        }
+
+        .project-metadata {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 1400px) {
+        .project-container {
+          grid-template-columns: 280px 1fr 450px;
+          gap: 1.5rem;
+          margin-top: 3%;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .project-container {
+          grid-template-columns: 250px 1fr 400px;
+          gap: 1.2rem;
+        }
+
+        .content-text {
+          max-height: calc(100vh - 220px);
+        }
+      }
+
+      /* Responsive pour tablettes et mobiles */
+      @media (max-width: 1024px) {
+        .project-container {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-top: 1rem;
+        }
+
+        .nav-container {
+          order: 1;
+          padding-left: 0;
+        }
+
+        .vertical-line {
+          width: 100%;
+          height: 2px;
+          top: auto;
+          bottom: -0.5rem;
+        }
+
+        .project-nav ul {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .project-content {
+          order: 2;
+        }
+
+        .project-image {
+          order: 3;
+          position: static;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .content-text {
+          max-height: none;
+          overflow-y: visible;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .project-container {
+          padding: 0 1rem;
+        }
+
+        .nav-btn {
+          font-size: 0.9rem;
+          padding: 0.3rem 0.5rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .content-text {
+          font-size: 0.9rem;
+          padding: 15px 20px 15px 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -457,7 +482,9 @@
     <header>
       <a href="{{ '/' | relative_url }}" class="logo">Joachim_Douillard_</a>
       <nav>
-        <a href="{{ '/contact' | relative_url }}" class="contact-link">contact_me_</a>
+        <a href="{{ '/contact' | relative_url }}" class="contact-link"
+          >contact_me_</a
+        >
       </nav>
     </header>
 
@@ -517,7 +544,7 @@
             <h2 class="section-title">Bonnes pratiques</h2>
             <div class="content-text">Chargement du contenu...</div>
           </section>
-          
+
           <section id="conclusion" class="content-section">
             <h2 class="section-title">Conclusion</h2>
             <div class="content-text">Chargement du contenu...</div>
@@ -525,19 +552,33 @@
 
           <section id="cahierdescharges" class="content-section">
             <h2 class="section-title">Cahier des charges</h2>
-            <div class="content-text markdown-content">Chargement du contenu...</div>
+            <div class="content-text markdown-content">
+              Chargement du contenu...
+            </div>
           </section>
         </div>
 
         <!-- Image du projet -->
         <div class="project-image">
-          <img id="projectImageStatic" src="" alt="Project Image" style="display: none;" />
-          
-          <video id="projectVideo" controls autoplay loop muted style="display: none;">
-            <source id="videoSource" src="" type="video/webm">
+          <img
+            id="projectImageStatic"
+            src=""
+            alt="Project Image"
+            style="display: none"
+          />
+
+          <video
+            id="projectVideo"
+            controls
+            autoplay
+            loop
+            muted
+            style="display: none"
+          >
+            <source id="videoSource" src="" type="video/webm" />
             Votre navigateur ne supporte pas la lecture de vidéos.
           </video>
-          
+
           <div class="project-links">
             <a href="#" target="_blank">Go to GitHub</a>
           </div>
@@ -548,196 +589,226 @@
     <footer>
       <div class="social-links">
         <span class="find-me">find me in:</span>
-        <a href="https://github.com/JoaDouillard?tab=repositories" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/joachim-douillard" target="_blank">LinkedIn</a>
+        <a
+          href="https://github.com/JoaDouillard?tab=repositories"
+          target="_blank"
+          >GitHub</a
+        >
+        <a href="https://www.linkedin.com/in/joachim-douillard" target="_blank"
+          >LinkedIn</a
+        >
       </div>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Récupérer l'ID du projet depuis l'URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const projectId = parseInt(urlParams.get('id')) || 1;
-      
-      // Données des projets depuis _config.yml
-      const projectsData = {
-        1: {
-          title: "Projet Symfony",
-          date: "2025",
-          tech: "Symfony, Composer, PHP, SQLite, Twig..",
-          github: "https://github.com/JoaDouillard/SymfonyProject.git",
-          images: {
-            intro: "/assets/images/projects/project1/DemoP1.webm",
-            details: "/assets/images/projects/project1/DetailsP1.webm",
-            bonnesPratiques: "/assets/images/projects/go_to_github.svg",
-            conclusion: "/assets/images/projects/project1/DemoP1.webm",
-            cahierdescharges: "/assets/images/projects/go_to_github.svg"
-          },
-          intro: `Dans le cadre de notre formation, mon camarade Alex Guigue et moi-même avons développé une application de gestion d'événements musicaux que nous avons appelée <b>Symfony</b>.<br><br>Le but : répondre au besoin de connexion entre organisateurs, artistes et public d'un événement musical. Ce projet fullstack combine un backend Symfony 6 avec une API RESTful mais aussi une interface graphique faite avec des Template Twig.<br><br>Dans une deuxième partie du projet nous avons créé une interface React interactive qui requête notre API nouvellement créée, nous avons nommé cette interface "Event Manager Client".<br><br>Pour créer cette Application nous avons créé une approche de travail. Elle était structurée autour du cahier des charges que nous avons établi en début de projet. Chacun prenait en charge une tâche spécifique issue de ce document et s'occupait de l'implémenter de A à Z. Cette méthode nous a permis d'avancer efficacement tout en assurant une couverture complète des fonctionnalités requises. Lorsqu'un membre rencontrait un obstacle, nous organisions des sessions de pair programming pour résoudre ensemble les problèmes techniques complexes.`,
-          details: `Le backend du projet a été développé avec Symfony 6, utilisant Doctrine ORM pour la gestion de la base de données SQLite. Nous avons implémenté une architecture RESTful pour l'API, permettant une communication fluide entre le backend et les interfaces client. La sécurité a été gérée via le système d'authentification de Symfony avec JWT pour l'API.<br><br>Côté frontend, nous avons utilisé Twig pour le rendu des templates dans l'application principale Symfony, avec Bootstrap pour assurer un design responsive. L'interface React a été construite avec React Router pour la navigation et Axios pour les appels API. Nous avons également mis en place un système de cache pour optimiser les performances, notamment pour les requêtes fréquentes comme la liste des événements populaires.<br><br>Une difficulté technique particulière était la gestion des relations many-to-many entre les événements, les artistes et les utilisateurs, que nous avons résolue en implémentant des entités d'association avec des propriétés supplémentaires.`,
-          bonnesPratiques: `Nous avons adopté plusieurs bonnes pratiques tout au long du développement pour assurer la qualité et la maintenabilité du code :<br><br><ul><br><li><strong>Code review</strong> : Chaque fonctionnalité était soumise à une revue de code par l'autre membre de l'équipe avant d'être intégrée.</li><br><li><strong>Clean code</strong> : Application des principes SOLID et respect des standards PSR pour PHP.</li><br><li><strong>Architecture MVC</strong> : Stricte séparation des responsabilités suivant le pattern Modèle-Vue-Contrôleur, tant dans Symfony que dans l'interface React.</li><br><li><strong>Gestion des dépendances</strong> : Utilisation de Composer et npm pour gérer proprement les dépendances et leurs versions.</li><br><li><strong>Convention de nommage</strong> : Respect strict des conventions de nommage pour les classes, méthodes et variables, facilitant la compréhension du code.</li></ul><br><br>Ces pratiques nous ont permis de maintenir un code de qualité et de faciliter la collaboration, tout en assurant une base solide pour les évolutions futures du projet.`,
-          conclusion: `Ce projet a constitué une étape déterminante dans mon parcours de développeur web. Sur le plan technique, j'ai considérablement approfondi ma maîtrise du framework Symfony et des architectures MVC structurées. La mise en œuvre concrète de bonnes pratiques de développement, notamment les tests automatisés et l'intégration continue, a transformé ma vision du développement logiciel vers une approche plus professionnelle et industrialisée.<br><br>Au-delà des compétences techniques, cette expérience m'a permis de développer des aptitudes essentielles en gestion de projet. La répartition des tâches basée sur le cahier des charges et le respect des délais m'ont enseigné la discipline et la rigueur nécessaires dans un environnement professionnel. Les défis rencontrés, notamment dans la conception du modèle de données complexe, ont renforcé ma capacité à résoudre méthodiquement des problèmes techniques.<br><br>Sur le plan personnel, ce projet a été une opportunité de développer ma résilience face aux obstacles et ma capacité à collaborer efficacement au sein d'une équipe. Les sessions de pair programming et les revues de code m'ont fait comprendre la valeur du partage de connaissances et de la communication claire dans un contexte de développement collaboratif.<br><br>Cette expérience a confirmé mon attrait pour les défis techniques complexes et les projets structurants qui combinent innovation et rigueur méthodologique. Les compétences et la confiance acquises durant ce projet constituent désormais des atouts précieux que je compte mettre à profit dans mes futures missions professionnelles, avec une vision plus claire de mon évolution en tant que développeur web spécialisé en technologies back-end robustes et évolutives.`,
-          cahierdescharges: `## Structure technique\n- **Backend**: Symfony 6\n- **Frontend**: React avec Vite.js\n- **Base de données**: SQLite (obligatoire)\n- **Architecture**: Deux applications distinctes lancées séparément\n\n## Fonctionnalités principales\n\n### 1. Partie Fullstack\n- **Accès**: Page d'accueil publique, reste de l'application protégé par authentification\n- **Navigation**: Adaptative selon le profil utilisateur (admin/user)\n- **Ressources principales**: Utilisateurs, Artistes, Événements\n\n#### Rôles utilisateurs\n- **Admin**:\n  - Attribution automatique au premier utilisateur inscrit\n  - Gestion exclusive des artistes (création/modification)\n  - Accès à la liste complète des utilisateurs\n\n- **Utilisateur standard**:\n  - Consultation des artistes et événements\n  - Création/modification/suppression de ses propres événements\n  - Inscription/désinscription aux événements\n  - Inscription automatique à ses propres événements\n  - Filtrage et recherche (artistes par nom, événements par date)`
-        },
-        2: {
-          title: "Projet QuadTree",
-          date: "2024",
-          tech: "C++, Algorithmique, Structures de données",
-          github: "https://github.com/JoaDouillard",
-          images: {
-            intro: "/assets/images/projects/project2/DetailsP2.svg",
-            details: "/assets/images/projects/project2/DetailsP2.svg",
-            bonnesPratiques: "/assets/images/projects/go_to_github.svg",
-            conclusion: "/assets/images/projects/project2/DetailsP2.svg",
-            cahierdescharges: "/assets/images/projects/go_to_github.svg"
-          },
-          intro: `Le projet QuadTree est une implémentation avancée de la structure de données QuadTree en C++. Cette structure permet de diviser récursivement un espace bidimensionnel en quatre quadrants, optimisant ainsi les requêtes spatiales et la recherche de proximité.<br><br>L'objectif principal était de créer une solution efficace pour la gestion de grandes quantités de points dans un espace 2D, avec des performances optimales pour les opérations d'insertion, de suppression et de recherche.<br><br>Ce projet m'a permis d'approfondir mes connaissances en algorithmique et en structures de données complexes, tout en appliquant les principes de programmation orientée objet en C++.`,
-          details: `L'implémentation utilise une approche récursive pour la division de l'espace, avec une gestion intelligente de la mémoire et des optimisations pour les cas limites. Le QuadTree supporte l'insertion dynamique de points, la suppression avec réorganisation automatique, et diverses requêtes spatiales comme la recherche par région ou par proximité.<br><br>Les principales fonctionnalités incluent : construction automatique de l'arbre, équilibrage dynamique, requêtes de plage efficaces, et visualisation graphique des partitions. La complexité temporelle moyenne est de O(log n) pour les opérations de base, avec une complexité spatiale de O(n).<br><br>Un système de tests automatisés garantit la robustesse de l'implémentation avec des jeux de données de différentes tailles et distributions.`,
-          bonnesPratiques: `Durant le développement, j'ai appliqué plusieurs bonnes pratiques de programmation C++ :<br><br><ul><br><li><strong>RAII</strong> : Gestion automatique des ressources avec constructeurs/destructeurs</li><br><li><strong>Smart Pointers</strong> : Utilisation de unique_ptr et shared_ptr pour éviter les fuites mémoire</li><br><li><strong>Const-correctness</strong> : Respect strict de la constance des méthodes et paramètres</li><br><li><strong>Template Programming</strong> : Création d'une structure générique adaptable à différents types de données</li><br><li><strong>Unit Testing</strong> : Tests unitaires complets avec Google Test</li></ul><br><br>Ces pratiques ont assuré un code maintenable, performant et sans fuites mémoire.`,
-          conclusion: `Ce projet m'a permis de maîtriser les structures de données avancées et d'approfondir ma compréhension des algorithmes de partitionnement spatial. L'implémentation d'un QuadTree from scratch m'a confronté à des défis passionnants de gestion mémoire et d'optimisation algorithmique.<br><br>Sur le plan technique, j'ai acquis une expertise solide en C++ moderne, en particulier dans l'utilisation des smart pointers, des templates et des techniques d'optimisation. La mise en place d'un système de tests robuste m'a enseigné l'importance du test-driven development.<br><br>Ce projet constitue une excellente démonstration de mes compétences en algorithmique et en programmation système, skills essentielles pour le développement de logiciels performants.`,
-          cahierdescharges: `## Objectifs techniques\n- Implémentation complète d'un QuadTree en C++\n- Support des opérations CRUD (Create, Read, Update, Delete)\n- Optimisation des performances pour grandes datasets\n- Interface simple et intuitive\n\n## Fonctionnalités requises\n\n### Structure de données\n- Division récursive de l'espace en quadrants\n- Gestion dynamique des noeuds\n- Équilibrage automatique\n\n### Opérations supportées\n- Insertion de points O(log n)\n- Suppression avec réorganisation\n- Requêtes spatiales par région\n- Recherche de proximité\n\n### Tests et validation\n- Suite de tests unitaires complète\n- Tests de performance avec datasets volumineux\n- Validation de la complexité algorithmique`
-        },
-        3: {
-          title: "The Verdant Sentinel",
-          date: "2025",
-          tech: "Unity, C#, Blender, 3DS Max, Jira, GitHub",
-          github: "https://drive.google.com/file/d/1oqaX_V7OgIHJ3jqKby8K9ECvfV17MzMz/view?usp=sharing",
-          images: {
-            intro: "/assets/images/projects/project3/DemoP3.webm",
-            details: "/assets/images/projects/go_to_github.svg",
-            bonnesPratiques: "/assets/images/projects/project3/DetailsP3.webp",
-            conclusion: "/assets/images/projects/project3/DemoP3.webm",
-            cahierdescharges: "/assets/images/projects/go_to_github.svg"
-          },
-          intro: `The Verdant Sentinel est un jeu d'action-aventure en solo dans un univers forestier mystique, développé en équipe de six personnes. Dans ce jeu à l'esthétique low poly colorée, le joueur incarne le dernier survivant d'une tribu massacrée qui dispose d'une heure pour s'équiper et affronter l'entité censée protéger son village. Cette dernière as disparue lorsque le village en avait le plus besoin. En effet la créature a abandonné sont rôle lorsque le village a été attaqué par des colonialistes.<br><br><strong>Membres du projet et leurs rôles</strong><table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;"><tr font-weight: bold;"><td>Nom</td><td>Rôle</td><td>Référent</td></tr><tr><td>Corentin Detournay</td><td>Programation</td><td>Code</td></tr><tr><td>Joachim Douillard</td><td>Modéliseur 3D</td><td>Inclusivité + écologie</td></tr><tr><td>Christophe Bolon</td><td>Programation</td><td>Code</td></tr><tr><td>Mathis Ciochetto</td><td>Modéliseur 3D</td><td>Inclusivité + écologie</td></tr><tr><td>Virgile Marion</td><td>3D pour le moment</td><td>Game design + histoire</td></tr><tr><td>Enzo Bordet</td><td>Programation</td><td>Tests</td></tr></table><br><br>Le projet est développé dans un environnement Unity, avec une répartition flexible des tâches entre programmation et modélisation 3D. Le gameplay est centré sur l'exploration, la récolte de ressources et un système de combat dynamique. Le joueur doit préparer son équipement et ses compétences durant les trois jours de jeu pour affronter l'entité finale avant qu'elle ne disparaisse.<br><br>Notre approche de développement met l'accent sur l'accessibilité et le numérique responsable, avec des optimisations de code et des fonctionnalités d'inclusion pour différents types de joueurs.`,
-          details: `Développé avec Unity, The Verdant Sentinel intègre plusieurs systèmes techniques sophistiqués. Le cœur du gameplay repose sur un système de combat dynamique avec diverses armes, un mécanisme de récolte de ressources, et un système de crafting permettant de créer des objets essentiels.<br><br>Le jeu inclut une gestion du temps simulant trois jours dans l'univers du jeu, avec un cycle jour/nuit influençant l'environnement et certaines mécaniques.<br><br>L'environnement forestier a été modélisé en style low poly coloré à l'aide de Blender et 3DS Max, optimisé pour maintenir de bonnes performances tout en préservant une esthétique attrayante.<br><br>Un système d'IA contrôle les ennemis et l'entité finale avec des patterns d'attaques et comportements variés. Le projet intègre également une gestion de sauvegarde permettant aux joueurs de conserver leur progression entre les sessions.`,
-          bonnesPratiques: `Notre équipe a implémenté de nombreuses bonnes pratiques tout au long du développement.<br><br><strong>Sur le plan du code :</strong><ul><li>Architecture modulaire avec des systèmes de scripts découplés</li><li>Optimisation pour minimiser les calculs inutiles, réduisant la consommation CPU et mémoire</li><li>Système de pooling d'objets pour éviter les instantiations/destructions répétitives</li></ul><br><strong>Pour la partie graphique :</strong><ul><li>Assets low poly avec équilibre optimal entre qualité visuelle et légèreté</li><li>Textures compressées et atlas pour réduire l'empreinte mémoire</li><li>Niveau de détail (LOD) dynamique adaptant la complexité des modèles selon la distance</li></ul><br><strong>Concernant l'accessibilité :</strong><ul><li>Options de configuration des couleurs pour les personnes daltoniennes</li><li>Système de sous-titres complet</li><li>Contrôles entièrement remappables</li><li>Assistance de visée optionnelle</li></ul><br><strong>Processus de développement :</strong><ul><li>Pratiques agiles avec des sprints hebdomadaires</li><li>Revue de code systématique via GitHub</li><li>Tests automatisés pour les fonctionnalités critiques</li></ul><br><strong>Optimisation énergétique :</strong><ul><li>Limitation des calculs de physique aux zones visibles</li><li>Réduction de la complexité des algorithmes de pathfinding</li><li>Diminution de la consommation de batterie sur les appareils portables</li></ul>`,
-          conclusion: `Ce projet collaboratif m'a permis d'approfondir mes compétences en développement de jeux vidéo avec Unity et en modélisation 3D, tout en travaillant efficacement au sein d'une équipe aux rôles bien définis. En clair, ce projet à était professionnalisant de par les exigences de notre cahier des charges mais aussi de par l'exercice de collaboration que nous avons du mettre en place moi et mes camarades pour mener le projet jusqu'à son terme.<br><br>Travailler avec des coéquipiers talentueux a été une expérience très enrichissante :<ul><li><strong>Corentin Detournay</strong> - Sa maîtrise du code et son leadership technique ont assuré la solidité de notre base de développement</li><li><strong>Joachim Douillard</strong> - Son expertise en modélisation 3D et son engagement pour l'accessibilité ont ajouté une dimension inclusive au projet</li><li><strong>Christophe Bolon</strong> - Ses compétences en programmation ont été cruciales pour l'implémentation des systèmes de jeu complexes</li><li><strong>Mathis Ciochetto</strong> - Ses contributions artistiques et sa sensibilité aux questions écologiques ont façonné l'esthétique durable du jeu</li><li><strong>Virgile Marion</strong> - Sa vision créative du game design et sa construction du lore ont donné vie et profondeur à l'univers du jeu</li><li><strong>Enzo Bordet</strong> - Son expertise en tests et en qualité a assuré une expérience de jeu fluide et sans bugs</li></ul>`,
-          cahierdescharges: `## Présentation du Projet\n\n**Nom du projet** : The Verdant Sentinel\n\n**Genre** : Action-aventure\n\n**Public cible** : Accessible à tous les joueurs (débutants, moyens, expérimentés)\n\n**Type de jeu** : Fun game en solo\n\n**Monétisation** : Achat unique\n\n## Concept du Jeu\n\n### Pitch\nUn jeune homme, dernier survivant d'une tribu massacrée par des envahisseurs, part à la recherche de l'entité qui était censée protéger son village. Apprenant que cette entité s'apprête à quitter les lieux, il décide de se préparer pendant trois jours avant de l'affronter.\n\n### Objectif Principal\nLe joueur doit s'équiper rapidement par l'exploration et vaincre le boss final (l'entité) avant la fin du temps imparti (3 jours dans le monde du jeu).\n\n### Caractéristiques Principales\n- **Temps limité** : Le joueur dispose de 3 jours dans le monde du jeu pour se préparer et affronter l'entité\n- **Multiples fins** : Possibilité de terminer le jeu de différentes manières selon les choix d'exploration\n- **Univers forestier** : Environnement naturel et mystique\n\n## Gameplay\n\n### Mécaniques Principales\n- **Combat** : Utilisation de différentes armes\n- **Craft** : Création d'objets à partir de ressources\n- **Récolte** : Collecte de ressources dans l'environnement\n- **Exploration** : Découverte d'éléments utiles pour la progression\n\n### Expérience de Jeu\n- Stimulante et non-linéaire\n- Possibilité de finir le jeu de plusieurs façons selon l'exploration\n- Récompense les joueurs qui explorent minutieusement le monde\n\n## Direction Artistique\n\n### Style Graphique\n- Low poly coloré\n- Détails mesurés pour rester fidèle au style\n- Inspiration fantasy\n\n### Ambiance Sonore\n- Bruits ambiants de forêt\n- Musiques adaptées à l'environnement et aux situations de jeu\n\n### Typographie\n- Caveat (pour les textes principaux)\n\n## Aspects Techniques\n\n### Outils et Technologies\n- **Moteur de jeu** : Unity\n- **Modélisation 3D** : 3DS Max, Blender\n- **Graphisme** : Gimp\n- **Gestion de projet** : GitHub, Google Drive\n\n### Plan de Développement\nLe projet est structuré en trois étapes :\n1. **Version de base jouable** (MVP)\n2. **Ajout de fonctionnalités** supplémentaires\n3. **Finalisation et polissage** (détails et optimisations)\n\n## Organisation & Équipe\n\n### Équipe de Développement\n- **Game Designer** : Virgile\n- **Développeurs** : Enzo, Corentin, Christophe\n- **Graphistes** : Virgile, Mathis, Joachim\n- **Sound Designer** : Équipe complète\n- **Level Designer** : Virgile\n\n### Répartition du Travail\nSix personnes réparties entre la partie 3D et la programmation, avec une flexibilité permettant à chaque membre de travailler sur différents aspects selon les besoins.\n\n### Suivi de Projet\n- Réunions hebdomadaires pour suivre l'avancement\n- 50% des tâches (hors audio) à réaliser avant janvier\n- Finalisation prévue 2 jours avant la présentation\n\n## Références et Inspirations\n- The Legend of Zelda: Majora's Mask pour le concept de temps limité`
-        },
-        4: {
-          title: "Game Stats Dashboard",
-          date: "2024",
-          tech: "React, Vite.js, Fetch API.. ",
-          github: "https://github.com/GUIGUEAxel/React-SymfonyProject",
-          images: {
-            intro: "/assets/images/projects/project4/DemoP3.webm",
-            details: "/assets/images/projects/go_to_github.svg",
-            bonnesPratiques: "/assets/images/projects/project4/DetailsP3.webp",
-            conclusion: "/assets/images/projects/project4/DemoP3.webm",
-            cahierdescharges: "/assets/images/projects/go_to_github.svg"
-          },
-          intro: `L'Event Manager Client est la partie frontend d'une architecture complète, travaillant de concert avec une API Symfony backend. Ce projet React, développé avec Vite.js, constitue l'interface utilisateur d'un système de gestion d'artistes et d'événements. Il représente la couche de présentation d'une application full-stack moderne et modulaire.<br><br>Cette application client s'appuie sur les données fournies par l'API Symfony pour offrir aux utilisateurs une expérience interactive et intuitive. Elle permet de naviguer, filtrer et interagir avec les artistes et les événements stockés dans la base de données backend. Le développement de ce composant frontend vient compléter l'architecture globale du projet, créant ainsi une solution complète de gestion événementielle.<br><br>En tant que couche de présentation d'une architecture microservices, ce projet démontre ma capacité à développer des interfaces modernes qui communiquent efficacement avec des API RESTful.`,
-          details: `L'Event Manager s'articule autour de deux composants principaux :<br>- <strong>Backend API (Symfony)</strong> : Fournit les endpoints RESTful, la logique métier et la persistance des données<br>- <strong>Frontend Client (React/Vite)</strong> : Offre l'interface utilisateur et gère les interactions<br><br>Cette séparation suit les principes d'une architecture orientée services, où chaque composant a une responsabilité unique et bien définie.<br><br><strong>Technologies clés du frontend</strong><ul><li><strong>React 18</strong> : Bibliothèque JavaScript pour construire l'interface utilisateur</li><li><strong>Vite.js</strong> : Outil de build ultra-rapide qui améliore considérablement le temps de développement</li><li><strong>React Router</strong> : Gestion avancée de la navigation entre les différentes pages</li><li><strong>ESLint</strong> : Outil d'analyse statique pour maintenir la qualité et la cohérence du code</li><li><strong>Fetch API</strong> : Utilisée pour communiquer avec l'API Symfony backend</li></ul><br><strong>Organisation du code frontend</strong><ul><li><strong>Components</strong> : Éléments d'interface réutilisables comme ArtistCard, EventCard, Navbar et Footer</li><li><strong>Pages</strong> : Vues principales (Artistes, Détails d'artiste, Événements, Détails d'événement)</li><li><strong>Services</strong> : Couche d'abstraction pour les appels à l'API Symfony</li></ul><br><strong>Fonctionnalités principales implémentées</strong><ol><li>Navigation intuitive entre 4 pages principales via une barre de navigation</li><li>Listing des artistes avec filtrage dynamique par nom et tri alphabétique</li><li>Visualisation détaillée des artistes incluant leurs informations et événements associés</li><li>Listing des événements avec filtrage par nom et options de tri par nom et date</li><li>Affichage des détails d'un événement incluant les participants inscrits</li></ol><br><strong>Communication avec le backend</strong><br><br>L'application consomme les endpoints documentés de l'API Symfony via des services dédiés qui centralisent et encapsulent tous les appels API. Cette approche permet :<ul><li>Une gestion cohérente des erreurs</li><li>Une meilleure testabilité</li><li>Une évolution indépendante des composants frontend et backend</li></ul>`,
-          bonnesPratiques: `<strong>Architecture microservices</strong><ul><li><strong>Séparation des responsabilités</strong> : Le client React se concentre sur la présentation tandis que l'API Symfony gère la logique métier</li><li><strong>Découplage</strong> : Les deux composants peuvent évoluer indépendamment tant que le contrat d'API est respecté</li><li><strong>Scalabilité</strong> : Possibilité de faire évoluer chaque partie séparément selon les besoins</li></ul><br><strong>Organisation du code frontend</strong><ul><li><strong>Architecture modulaire</strong> : Séparation claire des responsabilités entre composants, pages et services</li><li><strong>Composants réutilisables</strong> : Création de composants génériques comme ArtistCard et EventCard</li><li><strong>Isolation des services API</strong> : Centralisation des appels API pour faciliter la maintenance</li></ul><br><strong>Optimisation des performances</strong><ul><li>Utilisation de Vite.js comme bundler pour des temps de compilation réduits</li><li>Implémentation du filtrage côté client pour minimiser les appels réseau inutiles</li><li>Utilisation judicieuse des hooks React pour éviter les rendus superflus</li></ul><br><strong>Expérience utilisateur</strong><ul><li>Interface cohérente avec une navigation intuitive entre les différentes sections</li><li>Fonctionnalités de filtrage et de tri pour permettre aux utilisateurs de trouver rapidement l'information recherchée</li><li>Navigation contextuelle entre les artistes et leurs événements associés</li></ul><br><strong>Développement et maintenabilité</strong><ul><li>Configuration ESLint pour assurer la qualité et l'homogénéité du code</li><li>Structure de projet claire pour faciliter l'onboarding de nouveaux développeurs</li><li>Gestion des appels API isolée pour s'adapter facilement aux évolutions du backend</li></ul>`,
-          conclusion: `Le projet Event Manager Client démontre ma capacité à développer la partie frontend d'une architecture complète full-stack. En créant une interface React moderne qui communique efficacement avec une API Symfony, j'ai mis en œuvre une solution complète de gestion d'artistes et d'événements.<br><br>Cette réalisation illustre ma maîtrise des architectures modernes et ma compréhension des interactions entre frontend et backend. Le développement en parallèle des deux composantes m'a permis d'adopter une vision globale du projet tout en respectant les spécificités techniques de chaque technologie.<br><br>Les défis principaux de ce projet, notamment l'implémentation d'une communication fluide entre React et l'API Symfony, ont été surmontés grâce à une architecture bien pensée et une séparation claire des responsabilités. Cette expérience a considérablement renforcé mes compétences en développement d'applications web modernes, en me permettant de maîtriser l'ensemble de la chaîne de développement.`,
-          cahierdescharges: `# Cahier des Charges - Application Front-end React\n\n## 1. Présentation Générale\n- **Objectif** : Développer une interface utilisateur pour la gestion d'artistes et d'événements\n- **Technologie** : React avec ViteJS\n- **Architecture** : Application Single Page avec navigation entre composants\n\n## 2. Structure de l'Application\n- **Navigation** : Système de navigation avec boutons cliquables entre les différentes sections\n- **Pages** :\n  - Listing des artistes\n  - Détails d'un artiste\n  - Listing des événements\n  - Détails d'un événement\n\n## 3. Fonctionnalités Détaillées\n\n### 3.1 Listing des Artistes\n- **Affichage** : Liste complète des artistes disponibles\n- **Filtrage** :\n  - Champ texte pour filtrer dynamiquement les artistes par nom\n  - Filtrage effectué côté client (sans requête serveur supplémentaire)\n- **Tri** :\n  - Bouton pour trier la liste par nom (ordre alphabétique croissant/décroissant)\n- **Navigation** :\n  - Artistes cliquables redirigeant vers la page de détail correspondante\n\n### 3.2 Détails d'un Artiste\n- **Informations** : \n  - Nom de l'artiste\n  - Description\n  - Image/photo\n  - Autres informations pertinentes\n- **Événements** :\n  - Liste des événements auxquels l'artiste participe\n  - Événements cliquables menant à leurs détails respectifs\n- **Navigation** :\n  - Retour au listing des artistes\n\n### 3.3 Listing des Événements\n- **Affichage** : Liste complète des événements\n- **Filtrage** :\n  - Champ texte pour filtrer dynamiquement les événements par nom\n  - Filtrage effectué côté client\n- **Tri** :\n  - Bouton pour trier la liste par nom (ordre alphabétique croissant/décroissant)\n  - Bouton pour trier la liste par date (ordre chronologique croissant/décroissant)\n- **Navigation** :\n  - Événements cliquables redirigeant vers la page de détail correspondante\n\n### 3.4 Détails d'un Événement\n- **Informations** :\n  - Nom de l'événement\n  - Date\n  - Informations sur l'artiste associé\n  - Autres informations pertinentes\n- **Participants** :\n  - Liste des utilisateurs inscrits à l'événement\n- **Navigation** :\n  - Lien cliquable vers les détails de l'artiste associé\n  - Retour au listing des événements\n\n## 4. Exigences Techniques et UX\n\n### 4.1 Intégration avec l'API Backend\n- Consommation des endpoints RESTful documentés\n- Gestion cohérente des réponses et des erreurs\n- Respect du format des données échangées\n\n### 4.2 Interface Utilisateur\n- Interface responsive adaptée à différentes tailles d'écran\n- Design intuitif et cohérent\n- Feedback visuel pour les actions utilisateur principales\n\n### 4.3 Performance\n- Temps de réponse optimisés\n- Chargement efficace des données\n- Structure modulaire facilitant la maintenance\n\n## 5. Livrables Attendus\n- Code source de l'application React/Vite\n- Documentation d'installation et d'utilisation\n- Tests fonctionnels validant les exigences\n\n## 6. Critères d'Acceptation\n- Fonctionnement correct de l'ensemble des fonctionnalités décrites\n- Intégration fluide avec le backend Symfony\n- Interface utilisateur réactive et intuitive\n- Code maintenable et bien structuré`
-        }
-      };
-      
-      // Récupérer les données du projet sélectionné
-      const currentProject = projectsData[projectId] || projectsData[1];
-      
-      // Mettre à jour le contenu de la page
-      document.title = currentProject.title + " - Joachim Douillard";
-      
-      const projectData = {
-        images: currentProject.images
-      };
+      document.addEventListener("DOMContentLoaded", function () {
+        // Récupérer l'ID du projet depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = parseInt(urlParams.get("id")) || 1;
 
-      // Mettre à jour le contenu avec les données du projet sélectionné
-      function updateProjectContent() {
-        // Titre et métadonnées
-        const titleElement = document.querySelector('.section-title');
-        const dateElement = document.querySelector('.project-date');
-        const techElement = document.querySelector('.project-tech');
-        const githubLink = document.querySelector('.project-links a[href]');
-        
-        if (titleElement) titleElement.textContent = currentProject.title;
-        if (dateElement) dateElement.innerHTML = 'Date : ' + currentProject.date;
-        if (techElement) techElement.innerHTML = 'Technologies used : ' + currentProject.tech;
-        if (githubLink) githubLink.href = currentProject.github;
-        
-        // Contenu des sections
-        const introContent = document.querySelector('#intro .content-text');
-        const detailsContent = document.querySelector('#details .content-text');
-        const bonnesPratiquesContent = document.querySelector('#bonnesPratiques .content-text');
-        const conclusionContent = document.querySelector('#conclusion .content-text');
-        const cahierdeschargesContent = document.querySelector('#cahierdescharges .content-text');
-        
-        if (introContent) introContent.innerHTML = currentProject.intro;
-        if (detailsContent) detailsContent.innerHTML = currentProject.details;
-        if (bonnesPratiquesContent) bonnesPratiquesContent.innerHTML = currentProject.bonnesPratiques;
-        if (conclusionContent) conclusionContent.innerHTML = currentProject.conclusion;
-        if (cahierdeschargesContent) {
-          // Convertir le markdown en HTML pour le cahier des charges
-          if (typeof marked !== 'undefined') {
-            cahierdeschargesContent.innerHTML = marked.parse(currentProject.cahierdescharges);
-          } else {
-            cahierdeschargesContent.innerHTML = currentProject.cahierdescharges.replace(/\n/g, '<br>');
+        // Données des projets depuis _config.yml
+        const projectsData = {
+          1: {
+            title: "Projet Symfony",
+            date: "2025",
+            tech: "Symfony, Composer, PHP, SQLite, Twig..",
+            github: "https://github.com/JoaDouillard/SymfonyProject.git",
+            images: {
+              intro: "/assets/images/projects/project1/DemoP1.webm",
+              details: "/assets/images/projects/project1/DetailsP1.webm",
+              bonnesPratiques: "/assets/images/projects/go_to_github.svg",
+              conclusion: "/assets/images/projects/project1/DemoP1.webm",
+              cahierdescharges: "/assets/images/projects/go_to_github.svg",
+            },
+            intro: `Dans le cadre de notre formation, mon camarade Alex Guigue et moi-même avons développé une application de gestion d'événements musicaux que nous avons appelée <b>Symfony</b>.<br><br>Le but : répondre au besoin de connexion entre organisateurs, artistes et public d'un événement musical. Ce projet fullstack combine un backend Symfony 6 avec une API RESTful mais aussi une interface graphique faite avec des Template Twig.<br><br>Dans une deuxième partie du projet nous avons créé une interface React interactive qui requête notre API nouvellement créée, nous avons nommé cette interface "Event Manager Client".<br><br>Pour créer cette Application nous avons créé une approche de travail. Elle était structurée autour du cahier des charges que nous avons établi en début de projet. Chacun prenait en charge une tâche spécifique issue de ce document et s'occupait de l'implémenter de A à Z. Cette méthode nous a permis d'avancer efficacement tout en assurant une couverture complète des fonctionnalités requises. Lorsqu'un membre rencontrait un obstacle, nous organisions des sessions de pair programming pour résoudre ensemble les problèmes techniques complexes.`,
+            details: `Le backend du projet a été développé avec Symfony 6, utilisant Doctrine ORM pour la gestion de la base de données SQLite. Nous avons implémenté une architecture RESTful pour l'API, permettant une communication fluide entre le backend et les interfaces client. La sécurité a été gérée via le système d'authentification de Symfony avec JWT pour l'API.<br><br>Côté frontend, nous avons utilisé Twig pour le rendu des templates dans l'application principale Symfony, avec Bootstrap pour assurer un design responsive. L'interface React a été construite avec React Router pour la navigation et Axios pour les appels API. Nous avons également mis en place un système de cache pour optimiser les performances, notamment pour les requêtes fréquentes comme la liste des événements populaires.<br><br>Une difficulté technique particulière était la gestion des relations many-to-many entre les événements, les artistes et les utilisateurs, que nous avons résolue en implémentant des entités d'association avec des propriétés supplémentaires.`,
+            bonnesPratiques: `Nous avons adopté plusieurs bonnes pratiques tout au long du développement pour assurer la qualité et la maintenabilité du code :<br><br><ul><br><li><strong>Code review</strong> : Chaque fonctionnalité était soumise à une revue de code par l'autre membre de l'équipe avant d'être intégrée.</li><br><li><strong>Clean code</strong> : Application des principes SOLID et respect des standards PSR pour PHP.</li><br><li><strong>Architecture MVC</strong> : Stricte séparation des responsabilités suivant le pattern Modèle-Vue-Contrôleur, tant dans Symfony que dans l'interface React.</li><br><li><strong>Gestion des dépendances</strong> : Utilisation de Composer et npm pour gérer proprement les dépendances et leurs versions.</li><br><li><strong>Convention de nommage</strong> : Respect strict des conventions de nommage pour les classes, méthodes et variables, facilitant la compréhension du code.</li></ul><br><br>Ces pratiques nous ont permis de maintenir un code de qualité et de faciliter la collaboration, tout en assurant une base solide pour les évolutions futures du projet.`,
+            conclusion: `Ce projet a constitué une étape déterminante dans mon parcours de développeur web. Sur le plan technique, j'ai considérablement approfondi ma maîtrise du framework Symfony et des architectures MVC structurées. La mise en œuvre concrète de bonnes pratiques de développement, notamment les tests automatisés et l'intégration continue, a transformé ma vision du développement logiciel vers une approche plus professionnelle et industrialisée.<br><br>Au-delà des compétences techniques, cette expérience m'a permis de développer des aptitudes essentielles en gestion de projet. La répartition des tâches basée sur le cahier des charges et le respect des délais m'ont enseigné la discipline et la rigueur nécessaires dans un environnement professionnel. Les défis rencontrés, notamment dans la conception du modèle de données complexe, ont renforcé ma capacité à résoudre méthodiquement des problèmes techniques.<br><br>Sur le plan personnel, ce projet a été une opportunité de développer ma résilience face aux obstacles et ma capacité à collaborer efficacement au sein d'une équipe. Les sessions de pair programming et les revues de code m'ont fait comprendre la valeur du partage de connaissances et de la communication claire dans un contexte de développement collaboratif.<br><br>Cette expérience a confirmé mon attrait pour les défis techniques complexes et les projets structurants qui combinent innovation et rigueur méthodologique. Les compétences et la confiance acquises durant ce projet constituent désormais des atouts précieux que je compte mettre à profit dans mes futures missions professionnelles, avec une vision plus claire de mon évolution en tant que développeur web spécialisé en technologies back-end robustes et évolutives.`,
+            cahierdescharges: `## Structure technique\n- **Backend**: Symfony 6\n- **Frontend**: React avec Vite.js\n- **Base de données**: SQLite (obligatoire)\n- **Architecture**: Deux applications distinctes lancées séparément\n\n## Fonctionnalités principales\n\n### 1. Partie Fullstack\n- **Accès**: Page d'accueil publique, reste de l'application protégé par authentification\n- **Navigation**: Adaptative selon le profil utilisateur (admin/user)\n- **Ressources principales**: Utilisateurs, Artistes, Événements\n\n#### Rôles utilisateurs\n- **Admin**:\n  - Attribution automatique au premier utilisateur inscrit\n  - Gestion exclusive des artistes (création/modification)\n  - Accès à la liste complète des utilisateurs\n\n- **Utilisateur standard**:\n  - Consultation des artistes et événements\n  - Création/modification/suppression de ses propres événements\n  - Inscription/désinscription aux événements\n  - Inscription automatique à ses propres événements\n  - Filtrage et recherche (artistes par nom, événements par date)`,
+          },
+          2: {
+            title: "Projet QuadTree",
+            date: "2024",
+            tech: "C++, Algorithmique, Structures de données",
+            github: "https://github.com/JoaDouillard",
+            images: {
+              intro: "/assets/images/projects/project2/DetailsP2.svg",
+              details: "/assets/images/projects/project2/DetailsP2.svg",
+              bonnesPratiques: "/assets/images/projects/go_to_github.svg",
+              conclusion: "/assets/images/projects/project2/DetailsP2.svg",
+              cahierdescharges: "/assets/images/projects/go_to_github.svg",
+            },
+            intro: `Le projet QuadTree est une implémentation avancée de la structure de données QuadTree en C++. Cette structure permet de diviser récursivement un espace bidimensionnel en quatre quadrants, optimisant ainsi les requêtes spatiales et la recherche de proximité.<br><br>L'objectif principal était de créer une solution efficace pour la gestion de grandes quantités de points dans un espace 2D, avec des performances optimales pour les opérations d'insertion, de suppression et de recherche.<br><br>Ce projet m'a permis d'approfondir mes connaissances en algorithmique et en structures de données complexes, tout en appliquant les principes de programmation orientée objet en C++.`,
+            details: `L'implémentation utilise une approche récursive pour la division de l'espace, avec une gestion intelligente de la mémoire et des optimisations pour les cas limites. Le QuadTree supporte l'insertion dynamique de points, la suppression avec réorganisation automatique, et diverses requêtes spatiales comme la recherche par région ou par proximité.<br><br>Les principales fonctionnalités incluent : construction automatique de l'arbre, équilibrage dynamique, requêtes de plage efficaces, et visualisation graphique des partitions. La complexité temporelle moyenne est de O(log n) pour les opérations de base, avec une complexité spatiale de O(n).<br><br>Un système de tests automatisés garantit la robustesse de l'implémentation avec des jeux de données de différentes tailles et distributions.`,
+            bonnesPratiques: `Durant le développement, j'ai appliqué plusieurs bonnes pratiques de programmation C++ :<br><br><ul><br><li><strong>RAII</strong> : Gestion automatique des ressources avec constructeurs/destructeurs</li><br><li><strong>Smart Pointers</strong> : Utilisation de unique_ptr et shared_ptr pour éviter les fuites mémoire</li><br><li><strong>Const-correctness</strong> : Respect strict de la constance des méthodes et paramètres</li><br><li><strong>Template Programming</strong> : Création d'une structure générique adaptable à différents types de données</li><br><li><strong>Unit Testing</strong> : Tests unitaires complets avec Google Test</li></ul><br><br>Ces pratiques ont assuré un code maintenable, performant et sans fuites mémoire.`,
+            conclusion: `Ce projet m'a permis de maîtriser les structures de données avancées et d'approfondir ma compréhension des algorithmes de partitionnement spatial. L'implémentation d'un QuadTree from scratch m'a confronté à des défis passionnants de gestion mémoire et d'optimisation algorithmique.<br><br>Sur le plan technique, j'ai acquis une expertise solide en C++ moderne, en particulier dans l'utilisation des smart pointers, des templates et des techniques d'optimisation. La mise en place d'un système de tests robuste m'a enseigné l'importance du test-driven development.<br><br>Ce projet constitue une excellente démonstration de mes compétences en algorithmique et en programmation système, skills essentielles pour le développement de logiciels performants.`,
+            cahierdescharges: `## Objectifs techniques\n- Implémentation complète d'un QuadTree en C++\n- Support des opérations CRUD (Create, Read, Update, Delete)\n- Optimisation des performances pour grandes datasets\n- Interface simple et intuitive\n\n## Fonctionnalités requises\n\n### Structure de données\n- Division récursive de l'espace en quadrants\n- Gestion dynamique des noeuds\n- Équilibrage automatique\n\n### Opérations supportées\n- Insertion de points O(log n)\n- Suppression avec réorganisation\n- Requêtes spatiales par région\n- Recherche de proximité\n\n### Tests et validation\n- Suite de tests unitaires complète\n- Tests de performance avec datasets volumineux\n- Validation de la complexité algorithmique`,
+          },
+          3: {
+            title: "The Verdant Sentinel",
+            date: "2025",
+            tech: "Unity, C#, Blender, 3DS Max, Jira, GitHub",
+            github:
+              "https://drive.google.com/file/d/1oqaX_V7OgIHJ3jqKby8K9ECvfV17MzMz/view?usp=sharing",
+            images: {
+              intro: "/assets/images/projects/project3/DemoP3.webm",
+              details: "/assets/images/projects/go_to_github.svg",
+              bonnesPratiques:
+                "/assets/images/projects/project3/DetailsP3.webp",
+              conclusion: "/assets/images/projects/project3/DemoP3.webm",
+              cahierdescharges: "/assets/images/projects/go_to_github.svg",
+            },
+            intro: `The Verdant Sentinel est un jeu d'action-aventure en solo dans un univers forestier mystique, développé en équipe de six personnes. Dans ce jeu à l'esthétique low poly colorée, le joueur incarne le dernier survivant d'une tribu massacrée qui dispose d'une heure pour s'équiper et affronter l'entité censée protéger son village. Cette dernière as disparue lorsque le village en avait le plus besoin. En effet la créature a abandonné sont rôle lorsque le village a été attaqué par des colonialistes.<br><br><strong>Membres du projet et leurs rôles</strong><table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;"><tr font-weight: bold;"><td>Nom</td><td>Rôle</td><td>Référent</td></tr><tr><td>Corentin Detournay</td><td>Programation</td><td>Code</td></tr><tr><td>Joachim Douillard</td><td>Modéliseur 3D</td><td>Inclusivité + écologie</td></tr><tr><td>Christophe Bolon</td><td>Programation</td><td>Code</td></tr><tr><td>Mathis Ciochetto</td><td>Modéliseur 3D</td><td>Inclusivité + écologie</td></tr><tr><td>Virgile Marion</td><td>3D pour le moment</td><td>Game design + histoire</td></tr><tr><td>Enzo Bordet</td><td>Programation</td><td>Tests</td></tr></table><br><br>Le projet est développé dans un environnement Unity, avec une répartition flexible des tâches entre programmation et modélisation 3D. Le gameplay est centré sur l'exploration, la récolte de ressources et un système de combat dynamique. Le joueur doit préparer son équipement et ses compétences durant les trois jours de jeu pour affronter l'entité finale avant qu'elle ne disparaisse.<br><br>Notre approche de développement met l'accent sur l'accessibilité et le numérique responsable, avec des optimisations de code et des fonctionnalités d'inclusion pour différents types de joueurs.`,
+            details: `Développé avec Unity, The Verdant Sentinel intègre plusieurs systèmes techniques sophistiqués. Le cœur du gameplay repose sur un système de combat dynamique avec diverses armes, un mécanisme de récolte de ressources, et un système de crafting permettant de créer des objets essentiels.<br><br>Le jeu inclut une gestion du temps simulant trois jours dans l'univers du jeu, avec un cycle jour/nuit influençant l'environnement et certaines mécaniques.<br><br>L'environnement forestier a été modélisé en style low poly coloré à l'aide de Blender et 3DS Max, optimisé pour maintenir de bonnes performances tout en préservant une esthétique attrayante.<br><br>Un système d'IA contrôle les ennemis et l'entité finale avec des patterns d'attaques et comportements variés. Le projet intègre également une gestion de sauvegarde permettant aux joueurs de conserver leur progression entre les sessions.`,
+            bonnesPratiques: `Notre équipe a implémenté de nombreuses bonnes pratiques tout au long du développement.<br><br><strong>Sur le plan du code :</strong><ul><li>Architecture modulaire avec des systèmes de scripts découplés</li><li>Optimisation pour minimiser les calculs inutiles, réduisant la consommation CPU et mémoire</li><li>Système de pooling d'objets pour éviter les instantiations/destructions répétitives</li></ul><br><strong>Pour la partie graphique :</strong><ul><li>Assets low poly avec équilibre optimal entre qualité visuelle et légèreté</li><li>Textures compressées et atlas pour réduire l'empreinte mémoire</li><li>Niveau de détail (LOD) dynamique adaptant la complexité des modèles selon la distance</li></ul><br><strong>Concernant l'accessibilité :</strong><ul><li>Options de configuration des couleurs pour les personnes daltoniennes</li><li>Système de sous-titres complet</li><li>Contrôles entièrement remappables</li><li>Assistance de visée optionnelle</li></ul><br><strong>Processus de développement :</strong><ul><li>Pratiques agiles avec des sprints hebdomadaires</li><li>Revue de code systématique via GitHub</li><li>Tests automatisés pour les fonctionnalités critiques</li></ul><br><strong>Optimisation énergétique :</strong><ul><li>Limitation des calculs de physique aux zones visibles</li><li>Réduction de la complexité des algorithmes de pathfinding</li><li>Diminution de la consommation de batterie sur les appareils portables</li></ul>`,
+            conclusion: `Ce projet collaboratif m'a permis d'approfondir mes compétences en développement de jeux vidéo avec Unity et en modélisation 3D, tout en travaillant efficacement au sein d'une équipe aux rôles bien définis. En clair, ce projet à était professionnalisant de par les exigences de notre cahier des charges mais aussi de par l'exercice de collaboration que nous avons du mettre en place moi et mes camarades pour mener le projet jusqu'à son terme.<br><br>Travailler avec des coéquipiers talentueux a été une expérience très enrichissante :<ul><li><strong>Corentin Detournay</strong> - Sa maîtrise du code et son leadership technique ont assuré la solidité de notre base de développement</li><li><strong>Joachim Douillard</strong> - Son expertise en modélisation 3D et son engagement pour l'accessibilité ont ajouté une dimension inclusive au projet</li><li><strong>Christophe Bolon</strong> - Ses compétences en programmation ont été cruciales pour l'implémentation des systèmes de jeu complexes</li><li><strong>Mathis Ciochetto</strong> - Ses contributions artistiques et sa sensibilité aux questions écologiques ont façonné l'esthétique durable du jeu</li><li><strong>Virgile Marion</strong> - Sa vision créative du game design et sa construction du lore ont donné vie et profondeur à l'univers du jeu</li><li><strong>Enzo Bordet</strong> - Son expertise en tests et en qualité a assuré une expérience de jeu fluide et sans bugs</li></ul>`,
+            cahierdescharges: `## Présentation du Projet\n\n**Nom du projet** : The Verdant Sentinel\n\n**Genre** : Action-aventure\n\n**Public cible** : Accessible à tous les joueurs (débutants, moyens, expérimentés)\n\n**Type de jeu** : Fun game en solo\n\n**Monétisation** : Achat unique\n\n## Concept du Jeu\n\n### Pitch\nUn jeune homme, dernier survivant d'une tribu massacrée par des envahisseurs, part à la recherche de l'entité qui était censée protéger son village. Apprenant que cette entité s'apprête à quitter les lieux, il décide de se préparer pendant trois jours avant de l'affronter.\n\n### Objectif Principal\nLe joueur doit s'équiper rapidement par l'exploration et vaincre le boss final (l'entité) avant la fin du temps imparti (3 jours dans le monde du jeu).\n\n### Caractéristiques Principales\n- **Temps limité** : Le joueur dispose de 3 jours dans le monde du jeu pour se préparer et affronter l'entité\n- **Multiples fins** : Possibilité de terminer le jeu de différentes manières selon les choix d'exploration\n- **Univers forestier** : Environnement naturel et mystique\n\n## Gameplay\n\n### Mécaniques Principales\n- **Combat** : Utilisation de différentes armes\n- **Craft** : Création d'objets à partir de ressources\n- **Récolte** : Collecte de ressources dans l'environnement\n- **Exploration** : Découverte d'éléments utiles pour la progression\n\n### Expérience de Jeu\n- Stimulante et non-linéaire\n- Possibilité de finir le jeu de plusieurs façons selon l'exploration\n- Récompense les joueurs qui explorent minutieusement le monde\n\n## Direction Artistique\n\n### Style Graphique\n- Low poly coloré\n- Détails mesurés pour rester fidèle au style\n- Inspiration fantasy\n\n### Ambiance Sonore\n- Bruits ambiants de forêt\n- Musiques adaptées à l'environnement et aux situations de jeu\n\n### Typographie\n- Caveat (pour les textes principaux)\n\n## Aspects Techniques\n\n### Outils et Technologies\n- **Moteur de jeu** : Unity\n- **Modélisation 3D** : 3DS Max, Blender\n- **Graphisme** : Gimp\n- **Gestion de projet** : GitHub, Google Drive\n\n### Plan de Développement\nLe projet est structuré en trois étapes :\n1. **Version de base jouable** (MVP)\n2. **Ajout de fonctionnalités** supplémentaires\n3. **Finalisation et polissage** (détails et optimisations)\n\n## Organisation & Équipe\n\n### Équipe de Développement\n- **Game Designer** : Virgile\n- **Développeurs** : Enzo, Corentin, Christophe\n- **Graphistes** : Virgile, Mathis, Joachim\n- **Sound Designer** : Équipe complète\n- **Level Designer** : Virgile\n\n### Répartition du Travail\nSix personnes réparties entre la partie 3D et la programmation, avec une flexibilité permettant à chaque membre de travailler sur différents aspects selon les besoins.\n\n### Suivi de Projet\n- Réunions hebdomadaires pour suivre l'avancement\n- 50% des tâches (hors audio) à réaliser avant janvier\n- Finalisation prévue 2 jours avant la présentation\n\n## Références et Inspirations\n- The Legend of Zelda: Majora's Mask pour le concept de temps limité`,
+          },
+          4: {
+            title: "Game Stats Dashboard",
+            date: "2024",
+            tech: "React, Vite.js, Fetch API.. ",
+            github: "https://github.com/GUIGUEAxel/React-SymfonyProject",
+            images: {
+              intro: "/assets/images/projects/project4/DemoP4.webm",
+              details: "/assets/images/projects/go_to_github.svg",
+              bonnesPratiques:
+                "/assets/images/projects/project4/DetailsP4.webp",
+              conclusion: "/assets/images/projects/project4/DemoP4.webm",
+              cahierdescharges: "/assets/images/projects/go_to_github.svg",
+            },
+            intro: `L'Event Manager Client est la partie frontend d'une architecture complète, travaillant de concert avec une API Symfony backend. Ce projet React, développé avec Vite.js, constitue l'interface utilisateur d'un système de gestion d'artistes et d'événements. Il représente la couche de présentation d'une application full-stack moderne et modulaire.<br><br>Cette application client s'appuie sur les données fournies par l'API Symfony pour offrir aux utilisateurs une expérience interactive et intuitive. Elle permet de naviguer, filtrer et interagir avec les artistes et les événements stockés dans la base de données backend. Le développement de ce composant frontend vient compléter l'architecture globale du projet, créant ainsi une solution complète de gestion événementielle.<br><br>En tant que couche de présentation d'une architecture microservices, ce projet démontre ma capacité à développer des interfaces modernes qui communiquent efficacement avec des API RESTful.`,
+            details: `L'Event Manager s'articule autour de deux composants principaux :<br>- <strong>Backend API (Symfony)</strong> : Fournit les endpoints RESTful, la logique métier et la persistance des données<br>- <strong>Frontend Client (React/Vite)</strong> : Offre l'interface utilisateur et gère les interactions<br><br>Cette séparation suit les principes d'une architecture orientée services, où chaque composant a une responsabilité unique et bien définie.<br><br><strong>Technologies clés du frontend</strong><ul><li><strong>React 18</strong> : Bibliothèque JavaScript pour construire l'interface utilisateur</li><li><strong>Vite.js</strong> : Outil de build ultra-rapide qui améliore considérablement le temps de développement</li><li><strong>React Router</strong> : Gestion avancée de la navigation entre les différentes pages</li><li><strong>ESLint</strong> : Outil d'analyse statique pour maintenir la qualité et la cohérence du code</li><li><strong>Fetch API</strong> : Utilisée pour communiquer avec l'API Symfony backend</li></ul><br><strong>Organisation du code frontend</strong><ul><li><strong>Components</strong> : Éléments d'interface réutilisables comme ArtistCard, EventCard, Navbar et Footer</li><li><strong>Pages</strong> : Vues principales (Artistes, Détails d'artiste, Événements, Détails d'événement)</li><li><strong>Services</strong> : Couche d'abstraction pour les appels à l'API Symfony</li></ul><br><strong>Fonctionnalités principales implémentées</strong><ol><li>Navigation intuitive entre 4 pages principales via une barre de navigation</li><li>Listing des artistes avec filtrage dynamique par nom et tri alphabétique</li><li>Visualisation détaillée des artistes incluant leurs informations et événements associés</li><li>Listing des événements avec filtrage par nom et options de tri par nom et date</li><li>Affichage des détails d'un événement incluant les participants inscrits</li></ol><br><strong>Communication avec le backend</strong><br><br>L'application consomme les endpoints documentés de l'API Symfony via des services dédiés qui centralisent et encapsulent tous les appels API. Cette approche permet :<ul><li>Une gestion cohérente des erreurs</li><li>Une meilleure testabilité</li><li>Une évolution indépendante des composants frontend et backend</li></ul>`,
+            bonnesPratiques: `<strong>Architecture microservices</strong><ul><li><strong>Séparation des responsabilités</strong> : Le client React se concentre sur la présentation tandis que l'API Symfony gère la logique métier</li><li><strong>Découplage</strong> : Les deux composants peuvent évoluer indépendamment tant que le contrat d'API est respecté</li><li><strong>Scalabilité</strong> : Possibilité de faire évoluer chaque partie séparément selon les besoins</li></ul><br><strong>Organisation du code frontend</strong><ul><li><strong>Architecture modulaire</strong> : Séparation claire des responsabilités entre composants, pages et services</li><li><strong>Composants réutilisables</strong> : Création de composants génériques comme ArtistCard et EventCard</li><li><strong>Isolation des services API</strong> : Centralisation des appels API pour faciliter la maintenance</li></ul><br><strong>Optimisation des performances</strong><ul><li>Utilisation de Vite.js comme bundler pour des temps de compilation réduits</li><li>Implémentation du filtrage côté client pour minimiser les appels réseau inutiles</li><li>Utilisation judicieuse des hooks React pour éviter les rendus superflus</li></ul><br><strong>Expérience utilisateur</strong><ul><li>Interface cohérente avec une navigation intuitive entre les différentes sections</li><li>Fonctionnalités de filtrage et de tri pour permettre aux utilisateurs de trouver rapidement l'information recherchée</li><li>Navigation contextuelle entre les artistes et leurs événements associés</li></ul><br><strong>Développement et maintenabilité</strong><ul><li>Configuration ESLint pour assurer la qualité et l'homogénéité du code</li><li>Structure de projet claire pour faciliter l'onboarding de nouveaux développeurs</li><li>Gestion des appels API isolée pour s'adapter facilement aux évolutions du backend</li></ul>`,
+            conclusion: `Le projet Event Manager Client démontre ma capacité à développer la partie frontend d'une architecture complète full-stack. En créant une interface React moderne qui communique efficacement avec une API Symfony, j'ai mis en œuvre une solution complète de gestion d'artistes et d'événements.<br><br>Cette réalisation illustre ma maîtrise des architectures modernes et ma compréhension des interactions entre frontend et backend. Le développement en parallèle des deux composantes m'a permis d'adopter une vision globale du projet tout en respectant les spécificités techniques de chaque technologie.<br><br>Les défis principaux de ce projet, notamment l'implémentation d'une communication fluide entre React et l'API Symfony, ont été surmontés grâce à une architecture bien pensée et une séparation claire des responsabilités. Cette expérience a considérablement renforcé mes compétences en développement d'applications web modernes, en me permettant de maîtriser l'ensemble de la chaîne de développement.`,
+            cahierdescharges: `# Cahier des Charges - Application Front-end React\n\n## 1. Présentation Générale\n- **Objectif** : Développer une interface utilisateur pour la gestion d'artistes et d'événements\n- **Technologie** : React avec ViteJS\n- **Architecture** : Application Single Page avec navigation entre composants\n\n## 2. Structure de l'Application\n- **Navigation** : Système de navigation avec boutons cliquables entre les différentes sections\n- **Pages** :\n  - Listing des artistes\n  - Détails d'un artiste\n  - Listing des événements\n  - Détails d'un événement\n\n## 3. Fonctionnalités Détaillées\n\n### 3.1 Listing des Artistes\n- **Affichage** : Liste complète des artistes disponibles\n- **Filtrage** :\n  - Champ texte pour filtrer dynamiquement les artistes par nom\n  - Filtrage effectué côté client (sans requête serveur supplémentaire)\n- **Tri** :\n  - Bouton pour trier la liste par nom (ordre alphabétique croissant/décroissant)\n- **Navigation** :\n  - Artistes cliquables redirigeant vers la page de détail correspondante\n\n### 3.2 Détails d'un Artiste\n- **Informations** : \n  - Nom de l'artiste\n  - Description\n  - Image/photo\n  - Autres informations pertinentes\n- **Événements** :\n  - Liste des événements auxquels l'artiste participe\n  - Événements cliquables menant à leurs détails respectifs\n- **Navigation** :\n  - Retour au listing des artistes\n\n### 3.3 Listing des Événements\n- **Affichage** : Liste complète des événements\n- **Filtrage** :\n  - Champ texte pour filtrer dynamiquement les événements par nom\n  - Filtrage effectué côté client\n- **Tri** :\n  - Bouton pour trier la liste par nom (ordre alphabétique croissant/décroissant)\n  - Bouton pour trier la liste par date (ordre chronologique croissant/décroissant)\n- **Navigation** :\n  - Événements cliquables redirigeant vers la page de détail correspondante\n\n### 3.4 Détails d'un Événement\n- **Informations** :\n  - Nom de l'événement\n  - Date\n  - Informations sur l'artiste associé\n  - Autres informations pertinentes\n- **Participants** :\n  - Liste des utilisateurs inscrits à l'événement\n- **Navigation** :\n  - Lien cliquable vers les détails de l'artiste associé\n  - Retour au listing des événements\n\n## 4. Exigences Techniques et UX\n\n### 4.1 Intégration avec l'API Backend\n- Consommation des endpoints RESTful documentés\n- Gestion cohérente des réponses et des erreurs\n- Respect du format des données échangées\n\n### 4.2 Interface Utilisateur\n- Interface responsive adaptée à différentes tailles d'écran\n- Design intuitif et cohérent\n- Feedback visuel pour les actions utilisateur principales\n\n### 4.3 Performance\n- Temps de réponse optimisés\n- Chargement efficace des données\n- Structure modulaire facilitant la maintenance\n\n## 5. Livrables Attendus\n- Code source de l'application React/Vite\n- Documentation d'installation et d'utilisation\n- Tests fonctionnels validant les exigences\n\n## 6. Critères d'Acceptation\n- Fonctionnement correct de l'ensemble des fonctionnalités décrites\n- Intégration fluide avec le backend Symfony\n- Interface utilisateur réactive et intuitive\n- Code maintenable et bien structuré`,
+          },
+        };
+
+        // Récupérer les données du projet sélectionné
+        const currentProject = projectsData[projectId] || projectsData[1];
+
+        // Mettre à jour le contenu de la page
+        document.title = currentProject.title + " - Joachim Douillard";
+
+        const projectData = {
+          images: currentProject.images,
+        };
+
+        // Mettre à jour le contenu avec les données du projet sélectionné
+        function updateProjectContent() {
+          // Titre et métadonnées
+          const titleElement = document.querySelector(".section-title");
+          const dateElement = document.querySelector(".project-date");
+          const techElement = document.querySelector(".project-tech");
+          const githubLink = document.querySelector(".project-links a[href]");
+
+          if (titleElement) titleElement.textContent = currentProject.title;
+          if (dateElement)
+            dateElement.innerHTML = "Date : " + currentProject.date;
+          if (techElement)
+            techElement.innerHTML =
+              "Technologies used : " + currentProject.tech;
+          if (githubLink) githubLink.href = currentProject.github;
+
+          // Contenu des sections
+          const introContent = document.querySelector("#intro .content-text");
+          const detailsContent = document.querySelector(
+            "#details .content-text"
+          );
+          const bonnesPratiquesContent = document.querySelector(
+            "#bonnesPratiques .content-text"
+          );
+          const conclusionContent = document.querySelector(
+            "#conclusion .content-text"
+          );
+          const cahierdeschargesContent = document.querySelector(
+            "#cahierdescharges .content-text"
+          );
+
+          if (introContent) introContent.innerHTML = currentProject.intro;
+          if (detailsContent) detailsContent.innerHTML = currentProject.details;
+          if (bonnesPratiquesContent)
+            bonnesPratiquesContent.innerHTML = currentProject.bonnesPratiques;
+          if (conclusionContent)
+            conclusionContent.innerHTML = currentProject.conclusion;
+          if (cahierdeschargesContent) {
+            // Convertir le markdown en HTML pour le cahier des charges
+            if (typeof marked !== "undefined") {
+              cahierdeschargesContent.innerHTML = marked.parse(
+                currentProject.cahierdescharges
+              );
+            } else {
+              cahierdeschargesContent.innerHTML =
+                currentProject.cahierdescharges.replace(/\n/g, "<br>");
+            }
           }
         }
-      }
 
-      // Configure la navigation entre les sections
-      function setupNavigation() {
-        const navButtons = document.querySelectorAll(".nav-btn");
-        
-        navButtons.forEach((btn) => {
-          btn.addEventListener("click", function() {
-            navButtons.forEach(b => b.classList.remove("active"));
-            document.querySelectorAll(".content-section").forEach(s => s.classList.remove("active"));
-            
-            this.classList.add("active");
-            
-            const sectionId = this.getAttribute("data-section");
-            const section = document.getElementById(sectionId);
-            if (section) {
-              section.classList.add("active");
-            }
-            
-            updateMediaDisplay(sectionId);
+        // Configure la navigation entre les sections
+        function setupNavigation() {
+          const navButtons = document.querySelectorAll(".nav-btn");
+
+          navButtons.forEach((btn) => {
+            btn.addEventListener("click", function () {
+              navButtons.forEach((b) => b.classList.remove("active"));
+              document
+                .querySelectorAll(".content-section")
+                .forEach((s) => s.classList.remove("active"));
+
+              this.classList.add("active");
+
+              const sectionId = this.getAttribute("data-section");
+              const section = document.getElementById(sectionId);
+              if (section) {
+                section.classList.add("active");
+              }
+
+              updateMediaDisplay(sectionId);
+            });
           });
-        });
-      }
-
-      // Met à jour l'affichage des médias en fonction de la section active
-      function updateMediaDisplay(sectionId) {
-        const staticImage = document.getElementById('projectImageStatic');
-        const videoElement = document.getElementById('projectVideo');
-        const videoSource = document.getElementById('videoSource');
-        
-        if (!staticImage || !videoElement || !videoSource) return;
-        
-        const mediaPath = projectData.images[sectionId];
-        if (!mediaPath) {
-          staticImage.style.display = 'none';
-          videoElement.style.display = 'none';
-          return;
         }
-        
-        const isVideo = mediaPath.endsWith('.mp4') || mediaPath.endsWith('.webm') || mediaPath.endsWith('.ogg');
-        
-        if (isVideo) {
-          videoSource.src = mediaPath;
-          videoElement.load();
-          staticImage.style.display = 'none';
-          videoElement.style.display = 'block';
-        } else {
-          staticImage.src = mediaPath;
-          staticImage.style.display = 'block';
-          videoElement.style.display = 'none';
-        }
-      }
 
-      // Initialiser le contenu de la page
-      updateProjectContent();
-      setupNavigation();
-      
-      // Initialiser avec la première section
-      updateMediaDisplay('intro');
-    });
+        // Met à jour l'affichage des médias en fonction de la section active
+        function updateMediaDisplay(sectionId) {
+          const staticImage = document.getElementById("projectImageStatic");
+          const videoElement = document.getElementById("projectVideo");
+          const videoSource = document.getElementById("videoSource");
+
+          if (!staticImage || !videoElement || !videoSource) return;
+
+          const mediaPath = projectData.images[sectionId];
+          if (!mediaPath) {
+            staticImage.style.display = "none";
+            videoElement.style.display = "none";
+            return;
+          }
+
+          const isVideo =
+            mediaPath.endsWith(".mp4") ||
+            mediaPath.endsWith(".webm") ||
+            mediaPath.endsWith(".ogg");
+
+          if (isVideo) {
+            videoSource.src = mediaPath;
+            videoElement.load();
+            staticImage.style.display = "none";
+            videoElement.style.display = "block";
+          } else {
+            staticImage.src = mediaPath;
+            staticImage.style.display = "block";
+            videoElement.style.display = "none";
+          }
+        }
+
+        // Initialiser le contenu de la page
+        updateProjectContent();
+        setupNavigation();
+
+        // Initialiser avec la première section
+        updateMediaDisplay("intro");
+      });
     </script>
   </body>
 </html>
