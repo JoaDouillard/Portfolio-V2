@@ -1062,17 +1062,6 @@ h2 {
 
 /* Adaptation pour écrans de grande hauteur (téléphones en portrait) */
 @media (max-height: 800px) and (max-width: 768px) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   header {
     background: transparent;
     backdrop-filter: none;
@@ -1114,17 +1103,6 @@ h2 {
 
 /* Correction spécifique pour l'orientation paysage sur mobiles */
 @media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   header {
     background: transparent;
     backdrop-filter: none;
