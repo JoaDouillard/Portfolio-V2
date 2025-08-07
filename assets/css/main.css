@@ -623,6 +623,15 @@ h2 {
 
 /* Tablette large et petits écrans d'ordinateur */
 @media (max-width: 1200px) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
     width: 0;
@@ -693,6 +702,15 @@ h2 {
 
 /* Tablettes */
 @media (max-width: 900px) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   header {
     background: transparent;
     backdrop-filter: none;
@@ -763,6 +781,15 @@ h2 {
 
 /* Mobiles larges */
 @media (max-width: 768px) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   header {
     background: transparent;
     backdrop-filter: none;
@@ -907,6 +934,15 @@ h2 {
 
 /* Petits mobiles */
 @media (max-width: 480px) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   header {
     background: transparent;
     backdrop-filter: none;
@@ -995,6 +1031,15 @@ h2 {
 
 /* Très petits écrans */
 @media (max-width: 360px) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   header {
     background: transparent;
     backdrop-filter: none;
@@ -1062,6 +1107,15 @@ h2 {
 
 /* Adaptation pour écrans de grande hauteur (téléphones en portrait) */
 @media (max-height: 800px) and (max-width: 768px) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   header {
     background: transparent;
     backdrop-filter: none;
@@ -1103,6 +1157,15 @@ h2 {
 
 /* Correction spécifique pour l'orientation paysage sur mobiles */
 @media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+  body {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    height: calc(100vh - var(--nav-height) - 60px);
+  }
+
   header {
     background: transparent;
     backdrop-filter: none;
