@@ -629,6 +629,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   html::-webkit-scrollbar,
@@ -647,7 +653,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
@@ -706,6 +712,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   header {
@@ -717,7 +729,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
@@ -783,6 +795,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   header {
@@ -794,7 +812,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
@@ -934,6 +952,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   header {
@@ -945,7 +969,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
@@ -1029,6 +1053,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   header {
@@ -1040,7 +1070,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
@@ -1103,6 +1133,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   header {
@@ -1114,7 +1150,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
@@ -1151,6 +1187,12 @@ h2 {
   body {
     overflow-y: auto;
     height: auto;
+    padding-top: var(--nav-height);
+    padding-bottom: 60px;
+  }
+
+  main {
+    z-index: 0;
   }
 
   header {
@@ -1162,7 +1204,7 @@ h2 {
     box-shadow: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   footer {
     background: transparent;
     backdrop-filter: none;
