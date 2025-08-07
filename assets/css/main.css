@@ -623,17 +623,6 @@ h2 {
 
 /* Tablette large et petits écrans d'ordinateur */
 @media (max-width: 1200px) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
     width: 0;
@@ -704,17 +693,6 @@ h2 {
 
 /* Tablettes */
 @media (max-width: 900px) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   header {
     background: transparent;
     backdrop-filter: none;
@@ -785,17 +763,6 @@ h2 {
 
 /* Mobiles larges */
 @media (max-width: 768px) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   header {
     background: transparent;
     backdrop-filter: none;
@@ -940,17 +907,6 @@ h2 {
 
 /* Petits mobiles */
 @media (max-width: 480px) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   header {
     background: transparent;
     backdrop-filter: none;
@@ -1039,17 +995,6 @@ h2 {
 
 /* Très petits écrans */
 @media (max-width: 360px) {
-  /* Désactiver les éventuelles restrictions de défilement */
-  html,
-  body {
-    overflow-y: auto;
-    height: auto;
-  }
-
-  main {
-    z-index: 0;
-  }
-
   header {
     background: transparent;
     backdrop-filter: none;
