@@ -1,203 +1,70 @@
-# Portfolio Jekyll - Joachim Douillard
+# Getting Started with Create React App
 
-Portfolio personnel développé avec Jekyll, reprenant exactement le design et les fonctionnalités du portfolio Node.js original.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## 🚀 Fonctionnalités
+## Available Scripts
 
-- **Design identique** : Thème sombre avec les mêmes couleurs et animations
-- **Layout en grille** : Page d'accueil avec disposition en grille responsive
-- **Pages complètes** : Accueil, À propos, Compétences, Contact, Projets
-- **Animations CSS** : Effets de hover, transitions, animations de progression
-- **JavaScript interactif** : Animations, formulaires, effets visuels
-- **Responsive** : Compatible mobile, tablette, desktop
-- **SEO optimisé** : Meta tags, sitemap, structure sémantique
+In the project directory, you can run:
 
-## 📁 Structure du Projet
+### `npm start`
 
-```
-new-portfolio/
-├── _config.yml              # Configuration Jekyll
-├── _layouts/                 # Templates de page
-│   └── default.html
-├── _includes/               # Composants réutilisables
-│   ├── header.html
-│   └── footer.html
-├── assets/
-│   ├── css/
-│   │   └── main.css        # Styles principaux
-│   ├── js/
-│   │   └── main.js         # Scripts interactifs
-│   └── images/             # Images du portfolio
-├── index.html              # Page d'accueil
-├── about.html              # Page À propos
-├── skills.html             # Page Compétences
-├── contact.html            # Page Contact
-├── projects.html           # Page Projets
-├── project.html            # Détail d'un projet
-├── Gemfile                 # Dépendances Ruby
-└── README.md              # Ce fichier
-```
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## 🛠️ Installation et Déploiement
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Prérequis
+### `npm test`
 
-- Ruby 3.2.0 (spécifié dans `.ruby-version`)
-- Bundler installé
-- Git pour le versioning
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Corrections apportées pour Netlify
+### `npm run build`
 
-- **Jekyll 4.3.0** : Mise à jour depuis 4.2.0 pour compatibilité Ruby 3.4+
-- **Gems ajoutées** : `csv` et `logger` (requises pour Ruby 3.4+)
-- **Ruby 3.2.0** : Version fixée pour éviter les conflits
-- **Configuration Netlify** : `netlify.toml` avec redirections et optimisations
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### Installation locale
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-1. **Cloner le repository**
-```bash
-cd /mnt/c/Users/THE/Desktop/Portfolio/new-portfolio
-```
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-2. **Installer les dépendances**
-```bash
-bundle install
-```
+### `npm run eject`
 
-3. **Lancer le serveur de développement**
-```bash
-bundle exec jekyll serve
-```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-4. **Ouvrir dans le navigateur**
-```
-http://localhost:4000
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Déploiement
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-#### Option 1: GitHub Pages
-1. Créer un repository GitHub
-2. Pousser le code
-3. Activer GitHub Pages dans les paramètres
-4. Le site sera disponible sur `https://username.github.io/repository-name`
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-#### Option 2: Netlify
-1. Connecter le repository GitHub à Netlify
-2. Configuration de build :
-   - Build command: `bundle exec jekyll build`
-   - Publish directory: `_site`
-3. Le site sera automatiquement déployé
+## Learn More
 
-#### Option 3: Serveur personnel
-1. Builder le site : `bundle exec jekyll build`
-2. Uploader le contenu du dossier `_site` sur votre serveur web
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## 🎨 Personnalisation
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Couleurs du thème
+### Code Splitting
 
-Les couleurs sont définies dans `_config.yml` :
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-```yaml
-theme:
-  colors:
-    bg_color: "#0a192f"
-    text_color: "#8892b0" 
-    highlight_color: "#64ffda"
-    red_color: "#ff6b6b"
-    blue_color: "#818cf8"
-```
+### Analyzing the Bundle Size
 
-### Informations personnelles
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-Modifier les informations dans `_config.yml` :
+### Making a Progressive Web App
 
-```yaml
-author:
-  name: "Joachim Douillard"
-  github: "https://github.com/JoaDouillard"
-  linkedin: "https://www.linkedin.com/in/joachim-douillard"
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Projets
+### Advanced Configuration
 
-Ajouter/modifier les projets dans `_config.yml` :
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-```yaml
-projects:
-  - id: 1
-    title: "Nouveau Projet"
-    description: "Description du projet"
-    image: "/assets/images/projects/nouveau-projet.jpg"
-```
+### Deployment
 
-## 🔧 Développement
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### Structure des fichiers CSS
+### `npm run build` fails to minify
 
-- Variables CSS dans `:root` pour la cohérence
-- Sections commentées pour la maintenance
-- Media queries pour le responsive
-- Animations et transitions optimisées
-
-### JavaScript
-
-- Code modulaire avec fonctions séparées
-- Event listeners optimisés
-- Animations CSS couplées au JavaScript
-- Gestion des erreurs et fallbacks
-
-### Bonnes pratiques
-
-- SEO optimisé avec Jekyll SEO Tag
-- Images optimisées et lazy loading
-- Code minifié en production
-- Accessibilité respectée
-
-## 📱 Compatibilité
-
-- **Navigateurs** : Chrome, Firefox, Safari, Edge (versions récentes)
-- **Responsive** : Mobile-first design
-- **Performance** : Optimisé pour les Core Web Vitals
-- **Accessibilité** : Conforme WCAG 2.1
-
-## 🐛 Dépannage
-
-### Erreurs communes
-
-1. **Bundle install échoue**
-   ```bash
-   gem install bundler
-   bundle install
-   ```
-
-2. **Jekyll ne se lance pas**
-   ```bash
-   bundle exec jekyll clean
-   bundle exec jekyll serve --incremental
-   ```
-
-3. **Images ne s'affichent pas**
-   - Vérifier les chemins dans `_config.yml`
-   - S'assurer que les images sont dans `assets/images/`
-
-4. **Styles CSS non appliqués**
-   - Vérifier le chemin dans `_layouts/default.html`
-   - Forcer le rechargement du cache
-
-## 📞 Support
-
-Pour toute question ou problème :
-- Créer une issue sur le repository
-- Contacter Joachim Douillard
-
-## 📄 Licence
-
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
----
-
-**Portfolio Jekyll - Version 1.0.0**  
-*Transition réussie de Node.js vers Jekyll avec conservation totale du design original*
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
