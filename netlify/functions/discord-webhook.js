@@ -74,7 +74,7 @@ exports.handler = async (event, context) => {
     netlifyFormData.append('subject', subject);
     netlifyFormData.append('message', message);
 
-    const netlifyResponse = await fetch('https://your-site.netlify.app/', {
+    const netlifyResponse = await fetch('https://joachimdouillard.netlify.app/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: netlifyFormData.toString(),
