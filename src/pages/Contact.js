@@ -232,9 +232,13 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const form = e.target;
     const formData = new FormData(form);
+    
+    // Ajouter le nom du formulaire pour Netlify
+    formData.append("form-name", "contact");
 
     try {
       const response = await fetch("/", {
@@ -246,14 +250,14 @@ function Contact() {
       if (response.ok) {
         setStatus("success");
         form.reset();
-        setTimeout(() => setStatus(""), 5000);
+        setTimeout(() => setStatus(""), 4000);
       } else {
         setStatus("error");
-        setTimeout(() => setStatus(""), 5000);
+        setTimeout(() => setStatus(""), 4000);
       }
     } catch (error) {
       setStatus("error");
-      setTimeout(() => setStatus(""), 5000);
+      setTimeout(() => setStatus(""), 4000);
     }
   };
 
@@ -291,7 +295,7 @@ function Contact() {
         }}
       ></div>
 
-      {/* Animation CSS pour le background violet */}
+      {/* Animations CSS */}
       <style>{`
         @keyframes pulse-gradient {
           0%, 100% {
@@ -301,6 +305,17 @@ function Contact() {
           50% {
             opacity: 0.8;
             transform: scale(1.05) rotate(1deg);
+          }
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(15px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
       `}</style>
@@ -451,35 +466,6 @@ function Contact() {
             marginTop: isSmallScreen ? "0" : "60px",
           }}
         >
-          {status && (
-            <div
-              style={{
-                position: "fixed",
-                top: "100px",
-                right: "30px",
-                padding: "15px 20px",
-                borderRadius: "8px",
-                backgroundColor:
-                  status === "success"
-                    ? "rgba(76, 175, 80, 0.95)"
-                    : "rgba(244, 67, 54, 0.95)",
-                color: "#fff",
-                border:
-                  status === "success"
-                    ? "1px solid #4CAF50"
-                    : "1px solid #F44336",
-                fontSize: "0.9rem",
-                fontFamily: "Consolas, monospace",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-                zIndex: 2000,
-                backdropFilter: "none",
-              }}
-            >
-              {status === "success"
-                ? "✅ Message envoyé avec succès !"
-                : "❌ Erreur lors de l'envoi du message."}
-            </div>
-          )}
 
           <form
             name="contact"
@@ -705,6 +691,41 @@ function Contact() {
               >
                 envoyer-message
               </button>
+
+              {/* Notification sous le bouton */}
+              {status && (
+                <div
+                  style={{
+                    marginTop: "15px",
+                    padding: "10px 15px",
+                    borderRadius: "6px",
+                    backgroundColor: status === "success"
+                      ? "rgba(76, 175, 80, 0.1)"
+                      : "rgba(244, 67, 54, 0.1)",
+                    border: status === "success"
+                      ? "1px solid rgba(76, 175, 80, 0.3)"
+                      : "1px solid rgba(244, 67, 54, 0.3)",
+                    color: status === "success" ? "#4CAF50" : "#F44336",
+                    fontSize: "0.85rem",
+                    fontFamily: "Consolas, monospace",
+                    textAlign: "center",
+                    animation: "fadeInUp 0.4s ease-out",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px"
+                  }}
+                >
+                  <span style={{ fontSize: "1rem" }}>
+                    {status === "success" ? "✅" : "❌"}
+                  </span>
+                  <span>
+                    {status === "success"
+                      ? "Message envoyé avec succès !"
+                      : "Erreur lors de l'envoi du message."}
+                  </span>
+                </div>
+              )}
             </div>
           </form>
         </div>
