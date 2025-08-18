@@ -229,14 +229,20 @@ function Contact() {
     const form = e.target;
     const formData = new FormData(form);
     
-    // Ajouter le nom du formulaire pour Netlify
-    formData.append("form-name", "contact");
+    // Récupérer les données du formulaire
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
 
     try {
-      const response = await fetch("/", {
+      // Envoyer vers notre fonction Netlify qui gère Discord + Email
+      const response = await fetch("/.netlify/functions/discord-webhook", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
