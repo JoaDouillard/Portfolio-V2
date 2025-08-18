@@ -80,7 +80,7 @@ function Projects() {
           "linear-gradient(15deg, #1a2332 0%,rgb(26, 42, 65) 25%,rgb(37, 55, 94) 50%,rgb(20, 45, 83) 100%)",
         color: "#8892b0",
         fontFamily: "Consolas, monospace",
-        padding: isSmallScreen ? "20px" : "0",
+        padding: "0",
         overflow: isSmallScreen ? "auto" : "hidden",
         position: "relative",
       }}
@@ -107,31 +107,6 @@ function Projects() {
         }}
       ></div>
 
-      {/* Animation CSS pour le cosmos lumineux */}
-      <style>{`
-        @keyframes cosmos-shine {
-          0%, 100% {
-            transform: translateY(0) rotate(0deg) scale(1);
-            opacity: 0.9;
-          }
-          20% {
-            transform: translateY(-20px) rotate(2deg) scale(1.05);
-            opacity: 1;
-          }
-          40% {
-            transform: translateY(15px) rotate(-1deg) scale(0.95);
-            opacity: 0.85;
-          }
-          60% {
-            transform: translateY(-10px) rotate(1.5deg) scale(1.02);
-            opacity: 1;
-          }
-          80% {
-            transform: translateY(8px) rotate(-0.5deg) scale(0.98);
-            opacity: 0.95;
-          }
-        }
-      `}</style>
       {/* Header */}
       <header
         style={{
@@ -190,7 +165,7 @@ function Projects() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          padding: isSmallScreen ? "20px 0" : "70px 50px 0",
+          padding: isSmallScreen ? "20px 20px" : "70px 50px 0",
           maxWidth: "1200px",
           margin: "0 auto",
         }}

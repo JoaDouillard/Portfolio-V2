@@ -420,7 +420,7 @@ function About() {
                 }}
               >
                 <img
-                  src="/assets/images/about/me.jpeg"
+                  src="/assets/images/about/joachimdouillard.jpeg"
                   alt="Joachim Douillard"
                   style={{
                     width: "100%",

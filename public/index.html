@@ -34,6 +34,15 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Formulaire caché pour la détection Netlify Forms -->
+    <form name="contact" netlify hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+    
     <div id="root"></div>
     <!--
       This HTML file is a template.
