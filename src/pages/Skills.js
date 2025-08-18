@@ -663,7 +663,7 @@ function Skills() {
                 </a>
 
                 <a
-                  href="/assets/images/skills/CV.pdf"
+                  href="/assets/images/skills/CV-joachimdouillard.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
