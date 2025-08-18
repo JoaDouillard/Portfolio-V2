@@ -221,14 +221,6 @@ function Contact() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Code pour gérer la soumission du formulaire Netlify
-    const form = document.querySelector('form[name="contact"]');
-    if (form) {
-      form.addEventListener("submit", handleSubmit);
-      return () => form.removeEventListener("submit", handleSubmit);
-    }
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -469,9 +461,7 @@ function Contact() {
 
           <form
             name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-recaptcha="true"
+            onSubmit={handleSubmit}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -659,8 +649,6 @@ function Contact() {
                 alignItems: "center",
               }}
             >
-              <div data-netlify-recaptcha="true"></div>
-
               <button
                 type="submit"
                 style={{
