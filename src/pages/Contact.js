@@ -680,43 +680,49 @@ function Contact() {
                 envoyer-message
               </button>
 
-              {/* Notification sous le bouton */}
-              {status && (
-                <div
-                  style={{
-                    marginTop: "15px",
-                    padding: "10px 15px",
-                    borderRadius: "6px",
-                    backgroundColor: status === "success"
-                      ? "rgba(76, 175, 80, 0.1)"
-                      : "rgba(244, 67, 54, 0.1)",
-                    border: status === "success"
-                      ? "1px solid rgba(76, 175, 80, 0.3)"
-                      : "1px solid rgba(244, 67, 54, 0.3)",
-                    color: status === "success" ? "#4CAF50" : "#F44336",
-                    fontSize: "0.85rem",
-                    fontFamily: "Consolas, monospace",
-                    textAlign: "center",
-                    animation: "fadeInUp 0.4s ease-out",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "8px"
-                  }}
-                >
-                  <span style={{ fontSize: "1rem" }}>
-                    {status === "success" ? "✅" : "❌"}
-                  </span>
-                  <span>
-                    {status === "success"
-                      ? "Message envoyé avec succès !"
-                      : "Erreur lors de l'envoi du message."}
-                  </span>
-                </div>
-              )}
             </div>
           </form>
         </div>
+
+        {/* Notification en dessous du formulaire */}
+        {status && (
+          <div
+            style={{
+              gridColumn: isSmallScreen ? "1" : "2",
+              justifySelf: "center",
+              alignSelf: "start",
+              marginTop: "15px",
+              padding: "12px 20px",
+              borderRadius: "6px",
+              backgroundColor: status === "success"
+                ? "rgba(76, 175, 80, 0.25)"
+                : "rgba(244, 67, 54, 0.25)",
+              border: status === "success"
+                ? "1px solid rgba(76, 175, 80, 0.5)"
+                : "1px solid rgba(244, 67, 54, 0.5)",
+              color: status === "success" ? "#4CAF50" : "#F44336",
+              fontSize: "0.85rem",
+              fontFamily: "Consolas, monospace",
+              textAlign: "center",
+              animation: "fadeInUp 0.4s ease-out",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              backdropFilter: "blur(10px)",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)"
+            }}
+          >
+            <span style={{ fontSize: "1rem" }}>
+              {status === "success" ? "✅" : "❌"}
+            </span>
+            <span>
+              {status === "success"
+                ? "Message envoyé avec succès !"
+                : "Erreur lors de l'envoi du message."}
+            </span>
+          </div>
+        )}
 
         {/* Code Preview - Politique de confidentialité */}
         <div
