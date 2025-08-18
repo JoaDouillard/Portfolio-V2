@@ -223,32 +223,38 @@ function Contact() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     const form = e.target;
     const formData = new FormData(form);
-    
+
     // Récupérer les données du formulaire
     const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      subject: formData.get('subject'),
-      message: formData.get('message')
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
     };
 
     // Validation des limites de caractères (850 max, espaces non comptés)
     const countChars = (text) => (text || "").replace(/\s/g, "").length;
-    
+
     const nameLength = countChars(data.name);
     const emailLength = countChars(data.email);
     const subjectLength = countChars(data.subject);
     const msgLength = countChars(data.message);
 
-    if (nameLength > 850 || emailLength > 850 || subjectLength > 850 || msgLength > 850) {
-      setValidationError("Impossible d'envoyer : trop de caractères dans un des champs (max 850)");
+    if (
+      nameLength > 850 ||
+      emailLength > 850 ||
+      subjectLength > 850 ||
+      msgLength > 850
+    ) {
+      setValidationError(
+        "Impossible d'envoyer : trop de caractères dans un des champs (max 850)"
+      );
       setTimeout(() => setValidationError(""), 5000);
       return;
     }
@@ -490,7 +496,6 @@ function Contact() {
             marginTop: isSmallScreen ? "0" : "60px",
           }}
         >
-
           <form
             name="contact"
             onSubmit={handleSubmit}
@@ -651,9 +656,10 @@ function Contact() {
                     width: "100%",
                     padding: "14px 18px",
                     background: "rgba(2, 12, 27, 0.8)",
-                    border: messageLength > 850 
-                      ? "1px solid #F44336" 
-                      : "1px solid rgba(100, 255, 218, 0.2)",
+                    border:
+                      messageLength > 850
+                        ? "1px solid #F44336"
+                        : "1px solid rgba(100, 255, 218, 0.2)",
                     borderRadius: "4px",
                     color: "#8892b0",
                     fontSize: "0.9rem",
@@ -662,23 +668,26 @@ function Contact() {
                     outline: "none",
                     resize: "vertical",
                     minHeight: "120px",
-                    maxHeight: "300px",
+                    maxHeight: "280px",
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = messageLength > 850 ? "#F44336" : "#64ffda";
-                    e.target.style.boxShadow = messageLength > 850 
-                      ? "0 0 0 2px rgba(244, 67, 54, 0.1)"
-                      : "0 0 0 2px rgba(100, 255, 218, 0.1)";
+                    e.target.style.borderColor =
+                      messageLength > 850 ? "#F44336" : "#64ffda";
+                    e.target.style.boxShadow =
+                      messageLength > 850
+                        ? "0 0 0 2px rgba(244, 67, 54, 0.1)"
+                        : "0 0 0 2px rgba(100, 255, 218, 0.1)";
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = messageLength > 850 
-                      ? "#F44336" 
-                      : "rgba(100, 255, 218, 0.2)";
+                    e.target.style.borderColor =
+                      messageLength > 850
+                        ? "#F44336"
+                        : "rgba(100, 255, 218, 0.2)";
                     e.target.style.boxShadow = "none";
                   }}
                   placeholder="Hey! Écrivez votre message ici..."
                 />
-                
+
                 {/* Compteur de caractères */}
                 <div
                   style={{
@@ -691,7 +700,7 @@ function Contact() {
                     backgroundColor: "rgba(2, 12, 27, 0.9)",
                     padding: "2px 6px",
                     borderRadius: "3px",
-                    pointerEvents: "none"
+                    pointerEvents: "none",
                   }}
                 >
                   {messageLength}/850
@@ -745,12 +754,14 @@ function Contact() {
                     marginTop: "15px",
                     padding: "12px 18px",
                     borderRadius: "6px",
-                    backgroundColor: status === "success"
-                      ? "rgba(76, 175, 80, 0.9)"
-                      : "rgba(244, 67, 54, 0.9)",
-                    border: status === "success"
-                      ? "1px solid #4CAF50"
-                      : "1px solid #F44336",
+                    backgroundColor:
+                      status === "success"
+                        ? "rgba(76, 175, 80, 0.9)"
+                        : "rgba(244, 67, 54, 0.9)",
+                    border:
+                      status === "success"
+                        ? "1px solid #4CAF50"
+                        : "1px solid #F44336",
                     color: status === "success" ? "#ffffff" : "#ffffff",
                     fontSize: "0.85rem",
                     fontFamily: "Consolas, monospace",
@@ -761,7 +772,7 @@ function Contact() {
                     justifyContent: "center",
                     gap: "8px",
                     backdropFilter: "blur(5px)",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)"
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
                   }}
                 >
                   <span style={{ fontSize: "1rem" }}>
@@ -794,18 +805,16 @@ function Contact() {
                     justifyContent: "center",
                     gap: "8px",
                     backdropFilter: "blur(5px)",
-                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)"
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
                   }}
                 >
                   <span style={{ fontSize: "1rem" }}>⚠️</span>
                   <span>{validationError}</span>
                 </div>
               )}
-
             </div>
           </form>
         </div>
-
 
         {/* Code Preview - Politique de confidentialité */}
         <div
