@@ -201,6 +201,8 @@ function Contact() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [status, setStatus] = useState("");
+  const [messageLength, setMessageLength] = useState(0);
+  const [validationError, setValidationError] = useState("");
 
   useEffect(() => {
     const handleResize = () => {
@@ -237,6 +239,22 @@ function Contact() {
       message: formData.get('message')
     };
 
+    // Validation des limites de caractères (850 max, espaces non comptés)
+    const countChars = (text) => (text || "").replace(/\s/g, "").length;
+    
+    const nameLength = countChars(data.name);
+    const emailLength = countChars(data.email);
+    const subjectLength = countChars(data.subject);
+    const msgLength = countChars(data.message);
+
+    if (nameLength > 850 || emailLength > 850 || subjectLength > 850 || msgLength > 850) {
+      setValidationError("Impossible d'envoyer : trop de caractères dans un des champs (max 850)");
+      setTimeout(() => setValidationError(""), 5000);
+      return;
+    }
+
+    setValidationError("");
+
     try {
       // Envoyer vers notre fonction Netlify qui gère Discord + Email
       const response = await fetch("/.netlify/functions/discord-webhook", {
@@ -248,6 +266,7 @@ function Contact() {
       if (response.ok) {
         setStatus("success");
         form.reset();
+        setMessageLength(0);
         setTimeout(() => setStatus(""), 4000);
       } else {
         setStatus("error");
@@ -257,6 +276,13 @@ function Contact() {
       setStatus("error");
       setTimeout(() => setStatus(""), 4000);
     }
+  };
+
+  // Fonction pour compter les caractères du message
+  const handleMessageChange = (e) => {
+    const text = e.target.value;
+    const charCount = text.replace(/\s/g, "").length;
+    setMessageLength(charCount);
   };
 
   return (
@@ -615,36 +641,62 @@ function Contact() {
               >
                 _message:
               </label>
-              <textarea
-                name="message"
-                required
-                rows="8"
-                style={{
-                  width: "100%",
-                  padding: "14px 18px",
-                  background: "rgba(2, 12, 27, 0.8)",
-                  border: "1px solid rgba(100, 255, 218, 0.2)",
-                  borderRadius: "4px",
-                  color: "#8892b0",
-                  fontSize: "0.9rem",
-                  fontFamily: "Consolas, monospace",
-                  transition: "all 0.3s ease",
-                  outline: "none",
-                  resize: "vertical",
-                  minHeight: "120px",
-                  maxHeight: "300px",
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "#64ffda";
-                  e.target.style.boxShadow =
-                    "0 0 0 2px rgba(100, 255, 218, 0.1)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "rgba(100, 255, 218, 0.2)";
-                  e.target.style.boxShadow = "none";
-                }}
-                placeholder="Hey! Écrivez votre message ici..."
-              />
+              <div style={{ position: "relative" }}>
+                <textarea
+                  name="message"
+                  required
+                  rows="8"
+                  onChange={handleMessageChange}
+                  style={{
+                    width: "100%",
+                    padding: "14px 18px",
+                    background: "rgba(2, 12, 27, 0.8)",
+                    border: messageLength > 850 
+                      ? "1px solid #F44336" 
+                      : "1px solid rgba(100, 255, 218, 0.2)",
+                    borderRadius: "4px",
+                    color: "#8892b0",
+                    fontSize: "0.9rem",
+                    fontFamily: "Consolas, monospace",
+                    transition: "all 0.3s ease",
+                    outline: "none",
+                    resize: "vertical",
+                    minHeight: "120px",
+                    maxHeight: "300px",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = messageLength > 850 ? "#F44336" : "#64ffda";
+                    e.target.style.boxShadow = messageLength > 850 
+                      ? "0 0 0 2px rgba(244, 67, 54, 0.1)"
+                      : "0 0 0 2px rgba(100, 255, 218, 0.1)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = messageLength > 850 
+                      ? "#F44336" 
+                      : "rgba(100, 255, 218, 0.2)";
+                    e.target.style.boxShadow = "none";
+                  }}
+                  placeholder="Hey! Écrivez votre message ici..."
+                />
+                
+                {/* Compteur de caractères */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "8px",
+                    right: "15px",
+                    fontSize: "0.75rem",
+                    fontFamily: "Consolas, monospace",
+                    color: messageLength > 850 ? "#F44336" : "#64ffda",
+                    backgroundColor: "rgba(2, 12, 27, 0.9)",
+                    padding: "2px 6px",
+                    borderRadius: "3px",
+                    pointerEvents: "none"
+                  }}
+                >
+                  {messageLength}/850
+                </div>
+              </div>
             </div>
 
             <div
@@ -720,6 +772,33 @@ function Contact() {
                       ? "Message envoyé avec succès !"
                       : "Erreur lors de l'envoi du message."}
                   </span>
+                </div>
+              )}
+
+              {/* Erreur de validation */}
+              {validationError && (
+                <div
+                  style={{
+                    marginTop: "15px",
+                    padding: "12px 18px",
+                    borderRadius: "6px",
+                    backgroundColor: "rgba(255, 152, 0, 0.9)",
+                    border: "1px solid #FF9800",
+                    color: "#ffffff",
+                    fontSize: "0.85rem",
+                    fontFamily: "Consolas, monospace",
+                    textAlign: "center",
+                    animation: "fadeInUp 0.4s ease-out",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
+                    backdropFilter: "blur(5px)",
+                    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)"
+                  }}
+                >
+                  <span style={{ fontSize: "1rem" }}>⚠️</span>
+                  <span>{validationError}</span>
                 </div>
               )}
 
