@@ -276,6 +276,7 @@ function ProjectCard({
 function Home() {
   const [projectBannerHovered, setProjectBannerHovered] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scaleRatio, setScaleRatio] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -286,47 +287,86 @@ function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const calculateScale = () => {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Résolution de référence (votre écran QHD 27")
+      const referenceWidth = 2560;
+      const referenceHeight = 1440;
+
+      // Calculer le ratio de mise à l'échelle
+      if (
+        screenWidth <= 1920 &&
+        screenWidth >= 1500 &&
+        screenHeight <= 1080 &&
+        screenHeight >= 900
+      ) {
+        // Pour 1080p et moins, réduire de 15%
+        setScaleRatio(0.85);
+      } else if (screenWidth <= 2560 && screenHeight <= 1440) {
+        // Pour QHD, garder taille normale
+        setScaleRatio(1);
+      } else {
+        // Pour plus grand que QHD, agrandir légèrement
+        setScaleRatio(1.1);
+      }
+    };
+
+    calculateScale();
+    window.addEventListener("resize", calculateScale);
+    return () => window.removeEventListener("resize", calculateScale);
+  }, []);
+
   return (
     <div
       style={{
         minHeight: "100vh",
-        height:
-          window.innerWidth <= 1000 && window.innerHeight <= 1200
-            ? "auto"
-            : "100vh",
-        background:
-          "linear-gradient(135deg, #0a1a2d 0%,rgb(42, 62, 112) 25%,rgb(19, 48, 72) 50%, #0a192f 100%)",
-        color: "#8892b0",
-        fontFamily:
-          'Consolas, "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace',
-        overflow:
-          window.innerWidth <= 1000 && window.innerHeight <= 1200
-            ? "visible"
-            : "hidden",
+        overflow: "hidden",
         position: "relative",
       }}
     >
-      {/* Background bleu profond assombri avec animation */}
       <div
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: `
+          minHeight: "100vh",
+          height:
+            window.innerWidth <= 1000 && window.innerHeight <= 1200
+              ? "auto"
+              : "100vh",
+          background:
+            "linear-gradient(135deg, #0a1a2d 0%,rgb(42, 62, 112) 25%,rgb(19, 48, 72) 50%, #0a192f 100%)",
+          color: "#8892b0",
+          fontFamily:
+            'Consolas, "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace',
+          overflow:
+            window.innerWidth <= 1000 && window.innerHeight <= 1200
+              ? "visible"
+              : "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Background bleu profond assombri avec animation */}
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `
           radial-gradient(circle at 30% 70%, rgba(49, 151, 195, 0.06) 0%, transparent 50%),
           radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
           radial-gradient(circle at 50% 50%, rgba(100, 255, 218, 0.03) 0%, transparent 60%)
         `,
-          animation: "wave-gradient 12s ease-in-out infinite",
-          pointerEvents: "none",
-          zIndex: -1,
-        }}
-      ></div>
+            animation: "wave-gradient 12s ease-in-out infinite",
+            pointerEvents: "none",
+            zIndex: -1,
+          }}
+        ></div>
 
-      {/* Animation CSS pour le background bleu */}
-      <style>{`
+        {/* Animation CSS pour le background bleu */}
+        <style>{`
         @keyframes wave-gradient {
           0%, 100% {
             transform: translateY(0) rotate(0deg);
@@ -343,776 +383,792 @@ function Home() {
         }
       `}</style>
 
-      {/* Header */}
-      <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "70px",
-          padding: window.innerWidth <= 768 ? "0 20px" : "0 50px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-          backgroundColor:
-            (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
-            scrolled
-              ? "rgba(10, 25, 47, 0.95)"
-              : "transparent",
-          backdropFilter:
-            (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
-            scrolled
-              ? "blur(10px)"
-              : "none",
-          zIndex: 1000,
-        }}
-      >
-        <a
-          href="/"
+        {/* Header */}
+        <header
           style={{
-            color: "#64ffda",
-            fontSize: "1.2rem",
-            textDecoration: "none",
-            fontWeight: "medium",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "70px",
+            padding: window.innerWidth <= 768 ? "0 20px" : "0 50px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            backgroundColor:
+              (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
+              scrolled
+                ? "rgba(10, 25, 47, 0.95)"
+                : "transparent",
+            backdropFilter:
+              (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
+              scrolled
+                ? "blur(10px)"
+                : "none",
+            zIndex: 1000,
           }}
         >
-          Joachim_Douillard_
-        </a>
-        <nav>
           <a
-            href="/contact"
+            href="/"
             style={{
-              color: "#8892b0",
+              color: "#64ffda",
+              fontSize: "1.2rem",
               textDecoration: "none",
-              fontSize: "1rem",
-              transition: "color 0.3s ease",
-              padding: "5px 10px",
+              fontWeight: "medium",
             }}
-            onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
-            onMouseLeave={(e) => (e.target.style.color = "#8892b0")}
           >
-            contact_me_
+            Joachim_Douillard_
           </a>
-        </nav>
-      </header>
+          <nav>
+            <a
+              href="/contact"
+              style={{
+                color: "#8892b0",
+                textDecoration: "none",
+                fontSize: "1rem",
+                transition: "color 0.3s ease",
+                padding: "5px 10px",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
+              onMouseLeave={(e) => (e.target.style.color = "#8892b0")}
+            >
+              contact_me_
+            </a>
+          </nav>
+        </header>
 
-      {/* Main Content */}
-      <main
-        style={{
-          minHeight:
-            window.innerWidth <= 1000 && window.innerHeight <= 1200
-              ? "calc(100vh - 130px)"
-              : "100vh",
-          height:
-            window.innerWidth <= 1000 && window.innerHeight <= 1200
-              ? "auto"
-              : "100vh",
-          flex: 1,
-          padding:
-            window.innerWidth <= 768
-              ? "70px 0 60px 0"
-              : window.innerWidth <= 1000 && window.innerHeight <= 1200
-              ? "70px 0 60px 0"
-              : "0px",
-          display: "flex",
-          alignItems:
-            window.innerWidth <= 1000 && window.innerHeight <= 1200
-              ? "flex-start"
-              : "center",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <div
+        {/* Main Content */}
+        <main
           style={{
-            width:
-              window.innerWidth <= 768
-                ? "95%"
-                : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                ? "90%"
-                : "85%",
+            minHeight:
+              window.innerWidth <= 1000 && window.innerHeight <= 1200
+                ? "calc(100vh - 130px)"
+                : "100vh",
             height:
               window.innerWidth <= 1000 && window.innerHeight <= 1200
                 ? "auto"
-                : "calc(90vh - 70px - 60px)",
+                : "100vh",
+            flex: 1,
             padding:
               window.innerWidth <= 768
-                ? "20px 10px"
+                ? "70px 0 60px 0"
                 : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                ? "20px 15px"
-                : "20px",
-            minHeight: window.innerWidth <= 1200 ? "auto" : "auto",
+                ? "70px 0 60px 0"
+                : "0px",
+            display: "flex",
+            alignItems:
+              window.innerWidth <= 1000 && window.innerHeight <= 1200
+                ? "flex-start"
+                : "center",
+            justifyContent: "center",
+            position: "relative",
+            zIndex: 1,
+            transform: `scale(${scaleRatio})`,
+            transformOrigin: "center center",
           }}
         >
-          {/* Grid Container */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns:
+              width:
                 window.innerWidth <= 768
-                  ? "1fr"
+                  ? "95%"
                   : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                  ? "1fr 1fr"
-                  : "minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.5fr)",
-              gridTemplateRows:
-                window.innerWidth <= 768
-                  ? "auto auto auto auto"
-                  : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                  ? "auto auto auto"
-                  : "1fr 2fr",
-              gap:
-                window.innerWidth <= 768
-                  ? "20px"
-                  : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                  ? "25px"
-                  : "15px",
-              width: "100%",
+                  ? "90%"
+                  : "85%",
               height:
                 window.innerWidth <= 1000 && window.innerHeight <= 1200
                   ? "auto"
-                  : "100%",
-              paddingBottom:
-                window.innerWidth <= 1000 && window.innerHeight <= 1200
-                  ? "20px"
-                  : "0",
+                  : "calc(90vh - 70px - 60px)",
+              padding:
+                window.innerWidth <= 768
+                  ? "20px 10px"
+                  : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                  ? "20px 15px"
+                  : "20px",
+              minHeight: window.innerWidth <= 1200 ? "auto" : "auto",
             }}
           >
-            {/* Section Introduction - Takes 2 rows, 1 column */}
-            <section
+            {/* Grid Container */}
+            <div
               style={{
-                gridRow:
+                display: "grid",
+                gridTemplateColumns:
                   window.innerWidth <= 768
-                    ? "1"
+                    ? "1fr"
                     : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "1"
-                    : "1 / 3",
-                gridColumn:
+                    ? "1fr 1fr"
+                    : "minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.5fr)",
+                gridTemplateRows:
                   window.innerWidth <= 768
-                    ? "1"
+                    ? "auto auto auto auto"
                     : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "1 / 3"
-                    : "1",
-                background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "30px",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
-                transition: "all 0.3s ease",
-                cursor: "pointer",
-                marginRight:
+                    ? "auto auto auto"
+                    : "1fr 2fr",
+                gap:
+                  window.innerWidth <= 768
+                    ? "20px"
+                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                    ? "25px"
+                    : "15px",
+                width: "100%",
+                height:
                   window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "0"
-                    : "10px",
-                position: "relative",
-                overflow: "hidden",
-                minHeight:
-                  window.innerWidth <= 768
-                    ? "300px"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "450px"
-                    : "auto",
-              }}
-              onClick={() => (window.location.href = "/about")}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
-                e.currentTarget.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
+                    ? "auto"
+                    : "100%",
+                paddingBottom:
+                  window.innerWidth <= 1000 && window.innerHeight <= 1200
+                    ? "20px"
+                    : "0",
               }}
             >
-              <div
+              {/* Section Introduction - Takes 2 rows, 1 column */}
+              <section
                 style={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <div>
-                  <p
-                    style={{
-                      fontSize: "1rem",
-                      marginBottom: "15px",
-                      color: "#8892b0",
-                    }}
-                  >
-                    Hi all. I am
-                  </p>
-
-                  <h1
-                    style={{
-                      color: "#fff",
-                      fontSize: "2.5rem",
-                      lineHeight: "1.2",
-                      marginBottom: "30px",
-                      fontWeight: "normal",
-                    }}
-                  >
-                    Joachim
-                    <br />
-                    Douillard
-                  </h1>
-
-                  <div style={{ marginBottom: "30px" }}>
-                    <p
-                      style={{
-                        fontSize: "1.1rem",
-                        margin: "8px 0",
-                        color: "#8892b0",
-                      }}
-                    >
-                      &gt;{" "}
-                      <span style={{ color: "#64ffda" }}>IT technician</span>
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "1.1rem",
-                        margin: "8px 0",
-                        color: "#8892b0",
-                      }}
-                    >
-                      &gt;{" "}
-                      <span style={{ color: "#818cf8" }}>Web developer</span>
-                    </p>
-                    <p
-                      style={{
-                        fontSize: "1.1rem",
-                        margin: "8px 0",
-                        color: "#8892b0",
-                      }}
-                    >
-                      &gt;{" "}
-                      <span style={{ color: "#ff6b6b" }}>
-                        Software developer
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Status Card */}
-                <div
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(22, 28, 41, 0.95) 0%, rgba(18, 24, 38, 0.98) 100%)",
-                    borderRadius: "12px",
-                    padding: "20px",
-                    boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    margin: "15px 0",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: "16px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "10px",
-                        height: "10px",
-                        borderRadius: "50%",
-                        marginRight: "10px",
-                        backgroundColor: "#4ade80",
-                        boxShadow: "0 0 10px rgba(74, 222, 128, 0.5)",
-                        animation: "pulse 2s infinite",
-                      }}
-                    ></div>
-                    <span
-                      style={{
-                        fontWeight: "500",
-                        color: "white",
-                        fontSize: "1.1em",
-                      }}
-                    >
-                      Currently Available
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: "12px",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        color: "#94a3b8",
-                      }}
-                    >
-                      <svg
-                        style={{
-                          color: "#64ffda",
-                          marginRight: "10px",
-                          width: "16px",
-                          height: "16px",
-                        }}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                      </svg>
-                      <span>Quick response time: &lt; 24h</span>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        color: "#94a3b8",
-                      }}
-                    >
-                      <svg
-                        style={{
-                          color: "#64ffda",
-                          marginRight: "10px",
-                          width: "16px",
-                          height: "16px",
-                        }}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                      </svg>
-                      <span>Open to freelance projects</span>
-                    </div>
-                  </div>
-
-                  <a
-                    href="/contact"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "8px",
-                      width: "100%",
-                      backgroundColor: "rgba(100, 255, 218, 0.1)",
-                      border: "1px solid rgba(100, 255, 218, 0.3)",
-                      padding: "10px",
-                      borderRadius: "8px",
-                      color: "#64ffda",
-                      fontWeight: "500",
-                      textDecoration: "none",
-                      transition: "all 0.2s ease",
-                      marginTop: "5px",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor =
-                        "rgba(100, 255, 218, 0.2)";
-                      e.target.style.transform = "translateY(-2px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor =
-                        "rgba(100, 255, 218, 0.1)";
-                      e.target.style.transform = "translateY(0)";
-                    }}
-                  >
-                    <span>Let's Connect</span>
-                    <svg
-                      style={{ width: "16px", height: "16px" }}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M7 17l9.2-9.2M17 17V7H7"></path>
-                    </svg>
-                  </a>
-                </div>
-
-                {/* GitHub Info */}
-                <div style={{ marginTop: "40px" }}>
-                  <p
-                    style={{
-                      color: "#8892b0",
-                      fontSize: window.innerWidth <= 480 ? "0.8rem" : "0.9rem",
-                      margin: "5px 10px",
-                      wordBreak:
-                        window.innerWidth <= 480 ? "break-all" : "normal",
-                      lineHeight: window.innerWidth <= 480 ? "1.4" : "normal",
-                    }}
-                  >
-                    <span style={{ color: "#64ffda" }}>const</span> githubLink =
-                    "
-                    <a
-                      href="https://github.com/JoaDouillard?tab=repositories"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: "#ff6b6b",
-                        textDecoration: "none",
-                        wordBreak:
-                          window.innerWidth <= 480 ? "break-all" : "normal",
-                      }}
-                    >
-                      {window.innerWidth <= 480
-                        ? "github.com/JoaDouillard"
-                        : "https://github.com/JoaDouillard?tab=repositories"}
-                    </a>
-                    "
-                  </p>
-                  <p
-                    style={{
-                      color: "#4a5568",
-                      fontSize: window.innerWidth <= 480 ? "0.8rem" : "0.9rem",
-                      margin: "5px 10px",
-                      lineHeight: window.innerWidth <= 480 ? "1.3" : "normal",
-                    }}
-                  >
-                    // discover my open-source contributions and personal
-                    projects
-                  </p>
-                  <p
-                    style={{
-                      color: "#4a5568",
-                      fontSize: window.innerWidth <= 480 ? "0.8rem" : "0.9rem",
-                      margin: "5px 10px",
-                      lineHeight: window.innerWidth <= 480 ? "1.3" : "normal",
-                    }}
-                  >
-                    // click the GitHub link{" "}
-                    {window.innerWidth <= 480 ? "above" : "below"} to explore my
-                    repositories
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            {/* Skills Section */}
-            <section
-              style={{
-                gridRow:
-                  window.innerWidth <= 768
-                    ? "2"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "2"
-                    : "1",
-                gridColumn:
-                  window.innerWidth <= 768
-                    ? "1"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "2"
-                    : "2",
-                background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "30px",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
-                transition: "all 0.3s ease",
-                cursor: "pointer",
-                position: "relative",
-                minHeight:
-                  window.innerWidth <= 768
-                    ? "200px"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "350px"
-                    : "auto",
-              }}
-              onClick={() => (window.location.href = "/skills")}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
-                e.currentTarget.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              <h2
-                style={{
-                  color: "#fff",
-                  fontSize: "1.8rem",
-                  position: "absolute",
-                  top: "30px",
-                  left: "30px",
-                  margin: 0,
-                }}
-              >
-                My skills
-              </h2>
-
-              <div
-                style={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <div
-                  style={{
-                    textAlign: "center",
-                    marginTop: "30px",
-                  }}
-                >
-                  <TypingText
-                    texts={[
-                      "Click here to see my skills_",
-                      "Découvrez mes compétences techniques_",
-                      "Tech stack & expertise_",
-                      "Languages • Frameworks • Tools_",
-                    ]}
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Contact Section */}
-            <section
-              style={{
-                gridRow:
-                  window.innerWidth <= 768
-                    ? "3"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "2"
-                    : "1",
-                gridColumn:
-                  window.innerWidth <= 768
-                    ? "1"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "1"
-                    : "3",
-                background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "30px",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
-                transition: "all 0.3s ease",
-                cursor: "pointer",
-                position: "relative",
-                minHeight:
-                  window.innerWidth <= 768
-                    ? "200px"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "300px"
-                    : "auto",
-              }}
-              onClick={() => (window.location.href = "/contact")}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
-                e.currentTarget.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              <h2
-                style={{
-                  color: "#fff",
-                  fontSize: window.innerWidth <= 768 ? "1.5rem" : "1.8rem",
-                  position: "absolute",
-                  top: window.innerWidth <= 768 ? "20px" : "30px",
-                  left: window.innerWidth <= 768 ? "20px" : "30px",
-                  margin: 0,
-                }}
-              >
-                Contact
-              </h2>
-
-              <div
-                style={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                <div
-                  style={{
-                    textAlign: "center",
-                    marginTop: window.innerWidth <= 768 ? "20px" : "30px",
-                  }}
-                >
-                  <TypingText
-                    texts={[
-                      "Send me a message_",
-                      "Let's work together_",
-                      "Discutons de vos projets_",
-                      "Available for freelance_",
-                      "Contactez-moi directement_",
-                    ]}
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Projects Section - Takes 1 row, 2 columns */}
-            <section
-              style={{
-                gridRow:
-                  window.innerWidth <= 768
-                    ? "4"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "3"
-                    : "2",
-                gridColumn:
-                  window.innerWidth <= 768
-                    ? "1"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "1 / 3"
-                    : "2 / 4",
-                background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "15px" : "20px",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
-                transition: "all 0.3s ease",
-                display: "flex",
-                flexDirection: "column",
-                gap: window.innerWidth <= 768 ? "15px" : "20px",
-                height: "100%",
-                position: "relative",
-                overflow: "hidden",
-                minHeight:
-                  window.innerWidth <= 768
-                    ? "400px"
-                    : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "600px"
-                    : "auto",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
-                e.currentTarget.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              {/* Main Project Banner */}
-              <MainProjectBanner onHover={setProjectBannerHovered} />
-
-              {/* Projects Grid */}
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: window.innerWidth <= 768 ? "column" : "row",
-                  height:
+                  gridRow:
                     window.innerWidth <= 768
-                      ? "auto"
-                      : projectBannerHovered
-                      ? "50%"
-                      : "70%",
-                  gap: window.innerWidth <= 768 ? "15px" : "20px",
-                  transition: "all 0.6s ease",
-                  flexShrink: 1,
+                      ? "1"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "1"
+                      : "1 / 3",
+                  gridColumn:
+                    window.innerWidth <= 768
+                      ? "1"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "1 / 3"
+                      : "1",
+                  background: "rgba(2, 12, 27, 0.9)",
+                  borderRadius: "12px",
+                  padding: window.innerWidth <= 768 ? "20px" : "30px",
+                  border: "1px solid rgba(100, 255, 218, 0.1)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  marginRight:
+                    window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "0"
+                      : "10px",
+                  position: "relative",
+                  overflow: "hidden",
                   minHeight:
                     window.innerWidth <= 768
                       ? "300px"
                       : window.innerWidth <= 1000 && window.innerHeight <= 1200
-                      ? "400px"
+                      ? "450px"
                       : "auto",
                 }}
+                onClick={() => (window.location.href = "/about")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.3)";
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
               >
-                <ProjectCard
-                  title="Projet Symfony"
-                  description="Symfony est une plateforme permettant aux utilisateurs de consulter, gérer et s'inscrire à des événements musicaux."
-                  link="/project/1"
-                  linkText="Voir mon travail >"
-                  backgroundImage="url('/assets/images/projects/project1/VignetteP1.webp')"
-                  backgroundPosition="top"
-                />
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div>
+                    <p
+                      style={{
+                        fontSize: "1rem",
+                        marginBottom: "15px",
+                        color: "#8892b0",
+                      }}
+                    >
+                      Hi all. I am
+                    </p>
 
-                <ProjectCard
-                  title="QuadTree"
-                  description="Structure de données spatiale en C++ pour optimiser les requêtes spatiales et la recherche de proximité."
-                  link="/project/2"
-                  linkText="Regardez le résultat >"
-                  backgroundImage="url('/assets/images/projects/project2/DetailsP2.svg')"
-                  backgroundPosition="center"
-                />
-              </div>
-            </section>
+                    <h1
+                      style={{
+                        color: "#fff",
+                        fontSize: "2.5rem",
+                        lineHeight: "1.2",
+                        marginBottom: "30px",
+                        fontWeight: "normal",
+                      }}
+                    >
+                      Joachim
+                      <br />
+                      Douillard
+                    </h1>
+
+                    <div style={{ marginBottom: "30px" }}>
+                      <p
+                        style={{
+                          fontSize: "1.1rem",
+                          margin: "8px 0",
+                          color: "#8892b0",
+                        }}
+                      >
+                        &gt;{" "}
+                        <span style={{ color: "#64ffda" }}>IT technician</span>
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "1.1rem",
+                          margin: "8px 0",
+                          color: "#8892b0",
+                        }}
+                      >
+                        &gt;{" "}
+                        <span style={{ color: "#818cf8" }}>Web developer</span>
+                      </p>
+                      <p
+                        style={{
+                          fontSize: "1.1rem",
+                          margin: "8px 0",
+                          color: "#8892b0",
+                        }}
+                      >
+                        &gt;{" "}
+                        <span style={{ color: "#ff6b6b" }}>
+                          Software developer
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Status Card */}
+                  <div
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(22, 28, 41, 0.95) 0%, rgba(18, 24, 38, 0.98) 100%)",
+                      borderRadius: "12px",
+                      padding: "20px",
+                      boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+                      border: "1px solid rgba(255, 255, 255, 0.08)",
+                      margin: "15px 0",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: "16px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "10px",
+                          height: "10px",
+                          borderRadius: "50%",
+                          marginRight: "10px",
+                          backgroundColor: "#4ade80",
+                          boxShadow: "0 0 10px rgba(74, 222, 128, 0.5)",
+                          animation: "pulse 2s infinite",
+                        }}
+                      ></div>
+                      <span
+                        style={{
+                          fontWeight: "500",
+                          color: "white",
+                          fontSize: "1.1em",
+                        }}
+                      >
+                        Currently Available
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "12px",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          color: "#94a3b8",
+                        }}
+                      >
+                        <svg
+                          style={{
+                            color: "#64ffda",
+                            marginRight: "10px",
+                            width: "16px",
+                            height: "16px",
+                          }}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>Quick response time: &lt; 24h</span>
+                      </div>
+
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          color: "#94a3b8",
+                        }}
+                      >
+                        <svg
+                          style={{
+                            color: "#64ffda",
+                            marginRight: "10px",
+                            width: "16px",
+                            height: "16px",
+                          }}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>Open to freelance projects</span>
+                      </div>
+                    </div>
+
+                    <a
+                      href="/contact"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "8px",
+                        width: "100%",
+                        backgroundColor: "rgba(100, 255, 218, 0.1)",
+                        border: "1px solid rgba(100, 255, 218, 0.3)",
+                        padding: "10px",
+                        borderRadius: "8px",
+                        color: "#64ffda",
+                        fontWeight: "500",
+                        textDecoration: "none",
+                        transition: "all 0.2s ease",
+                        marginTop: "5px",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor =
+                          "rgba(100, 255, 218, 0.2)";
+                        e.target.style.transform = "translateY(-2px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor =
+                          "rgba(100, 255, 218, 0.1)";
+                        e.target.style.transform = "translateY(0)";
+                      }}
+                    >
+                      <span>Let's Connect</span>
+                      <svg
+                        style={{ width: "16px", height: "16px" }}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M7 17l9.2-9.2M17 17V7H7"></path>
+                      </svg>
+                    </a>
+                  </div>
+
+                  {/* GitHub Info */}
+                  <div style={{ marginTop: "40px" }}>
+                    <p
+                      style={{
+                        color: "#8892b0",
+                        fontSize:
+                          window.innerWidth <= 480 ? "0.8rem" : "0.9rem",
+                        margin: "5px 10px",
+                        wordBreak:
+                          window.innerWidth <= 480 ? "break-all" : "normal",
+                        lineHeight: window.innerWidth <= 480 ? "1.4" : "normal",
+                      }}
+                    >
+                      <span style={{ color: "#64ffda" }}>const</span> githubLink
+                      = "
+                      <a
+                        href="https://github.com/JoaDouillard?tab=repositories"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: "#ff6b6b",
+                          textDecoration: "none",
+                          wordBreak:
+                            window.innerWidth <= 480 ? "break-all" : "normal",
+                        }}
+                      >
+                        {window.innerWidth <= 480
+                          ? "github.com/JoaDouillard"
+                          : "https://github.com/JoaDouillard?tab=repositories"}
+                      </a>
+                      "
+                    </p>
+                    <p
+                      style={{
+                        color: "#4a5568",
+                        fontSize:
+                          window.innerWidth <= 480 ? "0.8rem" : "0.9rem",
+                        margin: "5px 10px",
+                        lineHeight: window.innerWidth <= 480 ? "1.3" : "normal",
+                      }}
+                    >
+                      // discover my open-source contributions and personal
+                      projects
+                    </p>
+                    <p
+                      style={{
+                        color: "#4a5568",
+                        fontSize:
+                          window.innerWidth <= 480 ? "0.8rem" : "0.9rem",
+                        margin: "5px 10px",
+                        lineHeight: window.innerWidth <= 480 ? "1.3" : "normal",
+                      }}
+                    >
+                      // click the GitHub link{" "}
+                      {window.innerWidth <= 480 ? "above" : "below"} to explore
+                      my repositories
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Skills Section */}
+              <section
+                style={{
+                  gridRow:
+                    window.innerWidth <= 768
+                      ? "2"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "2"
+                      : "1",
+                  gridColumn:
+                    window.innerWidth <= 768
+                      ? "1"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "2"
+                      : "2",
+                  background: "rgba(2, 12, 27, 0.9)",
+                  borderRadius: "12px",
+                  padding: window.innerWidth <= 768 ? "20px" : "30px",
+                  border: "1px solid rgba(100, 255, 218, 0.1)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  position: "relative",
+                  minHeight:
+                    window.innerWidth <= 768
+                      ? "200px"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "350px"
+                      : "auto",
+                }}
+                onClick={() => (window.location.href = "/skills")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.3)";
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <h2
+                  style={{
+                    color: "#fff",
+                    fontSize: "1.8rem",
+                    position: "absolute",
+                    top: "30px",
+                    left: "30px",
+                    margin: 0,
+                  }}
+                >
+                  My skills
+                </h2>
+
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: "30px",
+                    }}
+                  >
+                    <TypingText
+                      texts={[
+                        "Click here to see my skills_",
+                        "Découvrez mes compétences techniques_",
+                        "Tech stack & expertise_",
+                        "Languages • Frameworks • Tools_",
+                      ]}
+                    />
+                  </div>
+                </div>
+              </section>
+
+              {/* Contact Section */}
+              <section
+                style={{
+                  gridRow:
+                    window.innerWidth <= 768
+                      ? "3"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "2"
+                      : "1",
+                  gridColumn:
+                    window.innerWidth <= 768
+                      ? "1"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "1"
+                      : "3",
+                  background: "rgba(2, 12, 27, 0.9)",
+                  borderRadius: "12px",
+                  padding: window.innerWidth <= 768 ? "20px" : "30px",
+                  border: "1px solid rgba(100, 255, 218, 0.1)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  position: "relative",
+                  minHeight:
+                    window.innerWidth <= 768
+                      ? "200px"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "300px"
+                      : "auto",
+                }}
+                onClick={() => (window.location.href = "/contact")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.3)";
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <h2
+                  style={{
+                    color: "#fff",
+                    fontSize: window.innerWidth <= 768 ? "1.5rem" : "1.8rem",
+                    position: "absolute",
+                    top: window.innerWidth <= 768 ? "20px" : "30px",
+                    left: window.innerWidth <= 768 ? "20px" : "30px",
+                    margin: 0,
+                  }}
+                >
+                  Contact
+                </h2>
+
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: window.innerWidth <= 768 ? "20px" : "30px",
+                    }}
+                  >
+                    <TypingText
+                      texts={[
+                        "Send me a message_",
+                        "Let's work together_",
+                        "Discutons de vos projets_",
+                        "Available for freelance_",
+                        "Contactez-moi directement_",
+                      ]}
+                    />
+                  </div>
+                </div>
+              </section>
+
+              {/* Projects Section - Takes 1 row, 2 columns */}
+              <section
+                style={{
+                  gridRow:
+                    window.innerWidth <= 768
+                      ? "4"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "3"
+                      : "2",
+                  gridColumn:
+                    window.innerWidth <= 768
+                      ? "1"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "1 / 3"
+                      : "2 / 4",
+                  background: "rgba(2, 12, 27, 0.9)",
+                  borderRadius: "12px",
+                  padding: window.innerWidth <= 768 ? "15px" : "20px",
+                  border: "1px solid rgba(100, 255, 218, 0.1)",
+                  transition: "all 0.3s ease",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: window.innerWidth <= 768 ? "15px" : "20px",
+                  height: "100%",
+                  position: "relative",
+                  overflow: "hidden",
+                  minHeight:
+                    window.innerWidth <= 768
+                      ? "400px"
+                      : window.innerWidth <= 1000 && window.innerHeight <= 1200
+                      ? "600px"
+                      : "auto",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.3)";
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor =
+                    "rgba(100, 255, 218, 0.1)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                {/* Main Project Banner */}
+                <MainProjectBanner onHover={setProjectBannerHovered} />
+
+                {/* Projects Grid */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: window.innerWidth <= 768 ? "column" : "row",
+                    height:
+                      window.innerWidth <= 768
+                        ? "auto"
+                        : projectBannerHovered
+                        ? "50%"
+                        : "70%",
+                    gap: window.innerWidth <= 768 ? "15px" : "20px",
+                    transition: "all 0.6s ease",
+                    flexShrink: 1,
+                    minHeight:
+                      window.innerWidth <= 768
+                        ? "300px"
+                        : window.innerWidth <= 1000 &&
+                          window.innerHeight <= 1200
+                        ? "400px"
+                        : "auto",
+                  }}
+                >
+                  <ProjectCard
+                    title="Projet Symfony"
+                    description="Symfony est une plateforme permettant aux utilisateurs de consulter, gérer et s'inscrire à des événements musicaux."
+                    link="/project/1"
+                    linkText="Voir mon travail >"
+                    backgroundImage="url('/assets/images/projects/project1/VignetteP1.webp')"
+                    backgroundPosition="top"
+                  />
+
+                  <ProjectCard
+                    title="QuadTree"
+                    description="Structure de données spatiale en C++ pour optimiser les requêtes spatiales et la recherche de proximité."
+                    link="/project/2"
+                    linkText="Regardez le résultat >"
+                    backgroundImage="url('/assets/images/projects/project2/DetailsP2.svg')"
+                    backgroundPosition="center"
+                  />
+                </div>
+              </section>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      {/* Footer */}
-      <footer
-        style={{
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-          padding: window.innerWidth <= 768 ? "15px 20px" : "20px 50px",
-          borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-          backgroundColor:
-            (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
-            scrolled
-              ? "rgba(10, 25, 47, 0.95)"
-              : "transparent",
-          backdropFilter:
-            (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
-            scrolled
-              ? "blur(10px)"
-              : "none",
-          zIndex: 1000,
-        }}
-      >
-        <div
+        {/* Footer */}
+        <footer
           style={{
-            display: "flex",
-            justifyContent: window.innerWidth <= 768 ? "center" : "flex-start",
-            gap: window.innerWidth <= 768 ? "15px" : "20px",
-            flexWrap: "wrap",
+            position: "fixed",
+            bottom: 0,
+            width: "100%",
+            padding: window.innerWidth <= 768 ? "15px 20px" : "20px 50px",
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            backgroundColor:
+              (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
+              scrolled
+                ? "rgba(10, 25, 47, 0.95)"
+                : "transparent",
+            backdropFilter:
+              (window.innerWidth <= 1000 && window.innerHeight <= 1200) ||
+              scrolled
+                ? "blur(10px)"
+                : "none",
+            zIndex: 1000,
           }}
         >
-          <span
+          <div
             style={{
-              fontSize: "0.8rem",
-              marginRight: window.innerWidth <= 768 ? "10px" : "20px",
-              color: "#8892b0",
+              display: "flex",
+              justifyContent:
+                window.innerWidth <= 768 ? "center" : "flex-start",
+              gap: window.innerWidth <= 768 ? "15px" : "20px",
+              flexWrap: "wrap",
             }}
           >
-            find me in:
-          </span>
+            <span
+              style={{
+                fontSize: "0.8rem",
+                marginRight: window.innerWidth <= 768 ? "10px" : "20px",
+                color: "#8892b0",
+              }}
+            >
+              find me in:
+            </span>
 
-          <a
-            href="https://github.com/JoaDouillard?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "#8892b0",
-              textDecoration: "none",
-              fontSize: "0.9rem",
-              transition: "color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
-            onMouseLeave={(e) => (e.target.style.color = "#8892b0")}
-          >
-            GitHub
-          </a>
+            <a
+              href="https://github.com/JoaDouillard?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#8892b0",
+                textDecoration: "none",
+                fontSize: "0.9rem",
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
+              onMouseLeave={(e) => (e.target.style.color = "#8892b0")}
+            >
+              GitHub
+            </a>
 
-          <a
-            href="https://www.linkedin.com/in/joachim-douillard"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: "#8892b0",
-              textDecoration: "none",
-              fontSize: "0.9rem",
-              transition: "color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
-            onMouseLeave={(e) => (e.target.style.color = "#8892b0")}
-          >
-            LinkedIn
-          </a>
-        </div>
-      </footer>
+            <a
+              href="https://www.linkedin.com/in/joachim-douillard"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#8892b0",
+                textDecoration: "none",
+                fontSize: "0.9rem",
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = "#64ffda")}
+              onMouseLeave={(e) => (e.target.style.color = "#8892b0")}
+            >
+              LinkedIn
+            </a>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 }

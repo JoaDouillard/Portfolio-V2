@@ -4,6 +4,11 @@ function Skills() {
   const [animateProgress, setAnimateProgress] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // Détermine si on doit appliquer le downscale (seulement sur grands écrans sans scroll)
+  const shouldDownscale = !(
+    window.innerWidth <= 1000 && window.innerHeight <= 1200
+  );
+
   useEffect(() => {
     // Déclenche l'animation des barres de progression après un court délai
     const timer = setTimeout(() => setAnimateProgress(true), 500);
@@ -170,10 +175,10 @@ function Skills() {
                 : "0",
           }}
         >
-          {/* Partie gauche - CV PDF (65%) */}
+          {/* Partie gauche - CV PDF (55%) */}
           <div
             style={{
-              flex: window.innerWidth <= 768 ? "1 0 auto" : "0 0 65%",
+              flex: window.innerWidth <= 768 ? "1 0 auto" : "0 0 55%",
               borderRadius: "12px",
               overflow: "hidden",
               position: "relative",
@@ -200,13 +205,13 @@ function Skills() {
             />
           </div>
 
-          {/* Partie droite - Compétences et Infos (35%) */}
+          {/* Partie droite - Compétences et Infos (45%) */}
           <div
             style={{
-              flex: window.innerWidth <= 768 ? "1 0 auto" : "0 0 35%",
+              flex: window.innerWidth <= 768 ? "1 0 auto" : "0 0 45%",
               display: "flex",
               flexDirection: "column",
-              gap: window.innerWidth <= 768 ? "15px" : "20px",
+              gap: window.innerWidth <= 768 ? "12px" : "16px",
               justifyContent:
                 window.innerWidth <= 768 ? "flex-start" : "center",
               alignItems: "stretch",
@@ -217,14 +222,19 @@ function Skills() {
             <div
               style={{
                 background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "25px",
+                borderRadius: shouldDownscale ? "9px" : "12px",
+                padding:
+                  window.innerWidth <= 768
+                    ? "20px"
+                    : shouldDownscale
+                    ? "19px"
+                    : "25px",
                 border: "1px solid rgba(100, 255, 218, 0.1)",
                 transition: "all 0.3s ease",
                 width: "100%",
                 minHeight:
                   window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "300px"
+                    ? "240px"
                     : "auto",
               }}
               onMouseEnter={(e) => {
@@ -239,8 +249,18 @@ function Skills() {
               <h3
                 style={{
                   color: "#fff",
-                  fontSize: window.innerWidth <= 480 ? "1.2rem" : "1.3rem",
-                  marginBottom: window.innerWidth <= 768 ? "15px" : "20px",
+                  fontSize:
+                    window.innerWidth <= 480
+                      ? "1rem"
+                      : shouldDownscale
+                      ? "0.83rem"
+                      : "1.1rem",
+                  marginBottom:
+                    window.innerWidth <= 768
+                      ? "12px"
+                      : shouldDownscale
+                      ? "15px"
+                      : "16px",
                 }}
               >
                 Soft Skills
@@ -252,28 +272,41 @@ function Skills() {
                 { name: "Rigoureux", percent: 75 },
                 { name: "Patient", percent: 65 },
               ].map((skill, index) => (
-                <div key={index} style={{ marginBottom: "15px" }}>
+                <div
+                  key={index}
+                  style={{ marginBottom: shouldDownscale ? "9px" : "12px" }}
+                >
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      marginBottom: "5px",
+                      marginBottom: shouldDownscale ? "3px" : "4px",
                     }}
                   >
-                    <span style={{ color: "#8892b0", fontSize: "0.9rem" }}>
+                    <span
+                      style={{
+                        color: "#8892b0",
+                        fontSize: shouldDownscale ? "0.54rem" : "0.8rem",
+                      }}
+                    >
                       {skill.name}
                     </span>
-                    <span style={{ color: "#64ffda", fontSize: "0.8rem" }}>
+                    <span
+                      style={{
+                        color: "#64ffda",
+                        fontSize: shouldDownscale ? "0.48rem" : "0.8rem",
+                      }}
+                    >
                       {skill.percent}%
                     </span>
                   </div>
                   <div
                     style={{
                       width: "100%",
-                      height: "6px",
+                      height: shouldDownscale ? "4px" : "5px",
                       background: "rgba(100, 255, 218, 0.1)",
-                      borderRadius: "3px",
+                      borderRadius: shouldDownscale ? "1px" : "2px",
                       overflow: "hidden",
                     }}
                   >
@@ -282,7 +315,7 @@ function Skills() {
                         width: animateProgress ? `${skill.percent}%` : "0%",
                         height: "100%",
                         background: "linear-gradient(90deg, #64ffda, #4ade80)",
-                        borderRadius: "3px",
+                        borderRadius: shouldDownscale ? "2px" : "3px",
                         transition: "width 2s ease-in-out",
                         transitionDelay: `${index * 0.2}s`,
                       }}
@@ -296,154 +329,13 @@ function Skills() {
             <div
               style={{
                 background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "25px",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
-                transition: "all 0.3s ease",
-                width: "100%",
-                minHeight:
-                  window.innerWidth <= 1000 && window.innerHeight <= 1200
-                    ? "250px"
-                    : "auto",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
-                e.currentTarget.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              <h3
-                style={{
-                  color: "#fff",
-                  fontSize: window.innerWidth <= 480 ? "1.2rem" : "1.3rem",
-                  marginBottom: window.innerWidth <= 768 ? "15px" : "20px",
-                }}
-              >
-                Parcours
-              </h3>
-
-              <div style={{ position: "relative" }}>
-                {/* Timeline line */}
-                <div
-                  style={{
-                    position: "absolute",
-                    left: "10px",
-                    top: "20px",
-                    bottom: "20px",
-                    width: "2px",
-                    background:
-                      "linear-gradient(180deg, #64ffda, rgba(100, 255, 218, 0.3))",
-                  }}
-                ></div>
-
-                {/* Timeline items */}
-                <div
-                  style={{
-                    marginBottom: "25px",
-                    paddingLeft: "35px",
-                    position: "relative",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "6px",
-                      top: "5px",
-                      width: "10px",
-                      height: "10px",
-                      background: "#64ffda",
-                      borderRadius: "50%",
-                      boxShadow: "0 0 10px rgba(100, 255, 218, 0.5)",
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      color: "#64ffda",
-                      fontSize: "0.8rem",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    2023-2026
-                  </div>
-                  <div
-                    style={{
-                      color: "#fff",
-                      fontSize: "1rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    BUT Informatique
-                  </div>
-                  <div style={{ color: "#8892b0", fontSize: "0.9rem" }}>
-                    IUT Clermont Auvergne
-                  </div>
-                  <div
-                    style={{
-                      color: "#8892b0",
-                      fontSize: "0.8rem",
-                      marginTop: "5px",
-                    }}
-                  >
-                    Spécialité en développement d'applications
-                  </div>
-                </div>
-
-                <div style={{ paddingLeft: "35px", position: "relative" }}>
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "6px",
-                      top: "5px",
-                      width: "10px",
-                      height: "10px",
-                      background: "#64ffda",
-                      borderRadius: "50%",
-                      opacity: 1,
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      color: "#64ffda",
-                      fontSize: "0.8rem",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    2022
-                  </div>
-                  <div
-                    style={{
-                      color: "#fff",
-                      fontSize: "1rem",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    BAC STI2D
-                  </div>
-                  <div style={{ color: "#8892b0", fontSize: "0.9rem" }}>
-                    Pôle La Chartreuse Paradies
-                  </div>
-                  <div
-                    style={{
-                      color: "#8892b0",
-                      fontSize: "0.8rem",
-                      marginTop: "5px",
-                    }}
-                  >
-                    Option SIN - Systèmes d'Information et Numérique
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Langues et Certifications */}
-            <div
-              style={{
-                background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "25px",
+                borderRadius: shouldDownscale ? "9px" : "12px",
+                padding:
+                  window.innerWidth <= 768
+                    ? "20px"
+                    : shouldDownscale
+                    ? "19px"
+                    : "25px",
                 border: "1px solid rgba(100, 255, 218, 0.1)",
                 transition: "all 0.3s ease",
                 width: "100%",
@@ -464,24 +356,217 @@ function Skills() {
               <h3
                 style={{
                   color: "#fff",
-                  fontSize: window.innerWidth <= 480 ? "1.2rem" : "1.3rem",
-                  marginBottom: window.innerWidth <= 768 ? "15px" : "20px",
+                  fontSize:
+                    window.innerWidth <= 480
+                      ? "1rem"
+                      : shouldDownscale
+                      ? "0.83rem"
+                      : "1.1rem",
+                  marginBottom:
+                    window.innerWidth <= 768
+                      ? "12px"
+                      : shouldDownscale
+                      ? "15px"
+                      : "16px",
+                }}
+              >
+                Parcours
+              </h3>
+
+              <div style={{ position: "relative" }}>
+                {/* Timeline line */}
+                <div
+                  style={{
+                    position: "absolute",
+                    left: shouldDownscale ? "6px" : "8px",
+                    top: shouldDownscale ? "12px" : "16px",
+                    bottom: shouldDownscale ? "12px" : "16px",
+                    width: shouldDownscale ? "1.5px" : "2px",
+                    background:
+                      "linear-gradient(180deg, #64ffda, rgba(100, 255, 218, 0.3))",
+                  }}
+                ></div>
+
+                {/* Timeline items */}
+                <div
+                  style={{
+                    marginBottom: shouldDownscale ? "15px" : "20px",
+                    paddingLeft: shouldDownscale ? "21px" : "28px",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: shouldDownscale ? "4px" : "6px",
+                      top: shouldDownscale ? "4px" : "5px",
+                      width: shouldDownscale ? "7.5px" : "10px",
+                      height: shouldDownscale ? "7.5px" : "10px",
+                      background: "#64ffda",
+                      borderRadius: "50%",
+                      boxShadow: shouldDownscale
+                        ? "0 0 7px rgba(100, 255, 218, 0.5)"
+                        : "0 0 10px rgba(100, 255, 218, 0.5)",
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      color: "#64ffda",
+                      fontSize: shouldDownscale ? "0.6rem" : "0.8rem",
+                      marginBottom: shouldDownscale ? "4px" : "5px",
+                    }}
+                  >
+                    2023-2026
+                  </div>
+                  <div
+                    style={{
+                      color: "#fff",
+                      fontSize: shouldDownscale ? "0.75rem" : "1rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    BUT Informatique
+                  </div>
+                  <div
+                    style={{
+                      color: "#8892b0",
+                      fontSize: shouldDownscale ? "0.68rem" : "0.9rem",
+                    }}
+                  >
+                    IUT Clermont Auvergne
+                  </div>
+                  <div
+                    style={{
+                      color: "#8892b0",
+                      fontSize: shouldDownscale ? "0.6rem" : "0.8rem",
+                      marginTop: shouldDownscale ? "4px" : "5px",
+                    }}
+                  >
+                    Spécialité en développement d'applications
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    paddingLeft: shouldDownscale ? "21px" : "35px",
+                    position: "relative",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: shouldDownscale ? "4px" : "6px",
+                      top: shouldDownscale ? "4px" : "5px",
+                      width: shouldDownscale ? "7.5px" : "10px",
+                      height: shouldDownscale ? "7.5px" : "10px",
+                      background: "#64ffda",
+                      borderRadius: "50%",
+                      opacity: 1,
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      color: "#64ffda",
+                      fontSize: shouldDownscale ? "0.6rem" : "0.8rem",
+                      marginBottom: shouldDownscale ? "4px" : "5px",
+                    }}
+                  >
+                    2022
+                  </div>
+                  <div
+                    style={{
+                      color: "#fff",
+                      fontSize: shouldDownscale ? "0.75rem" : "1rem",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    BAC STI2D
+                  </div>
+                  <div
+                    style={{
+                      color: "#8892b0",
+                      fontSize: shouldDownscale ? "0.68rem" : "0.9rem",
+                    }}
+                  >
+                    Pôle La Chartreuse Paradies
+                  </div>
+                  <div
+                    style={{
+                      color: "#8892b0",
+                      fontSize: shouldDownscale ? "0.6rem" : "0.8rem",
+                      marginTop: shouldDownscale ? "4px" : "5px",
+                    }}
+                  >
+                    Option SIN - Systèmes d'Information et Numérique
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Langues et Certifications */}
+            <div
+              style={{
+                background: "rgba(2, 12, 27, 0.9)",
+                borderRadius: shouldDownscale ? "9px" : "12px",
+                padding:
+                  window.innerWidth <= 768
+                    ? "20px"
+                    : shouldDownscale
+                    ? "19px"
+                    : "25px",
+                border: "1px solid rgba(100, 255, 218, 0.1)",
+                transition: "all 0.3s ease",
+                width: "100%",
+                minHeight:
+                  window.innerWidth <= 1000 && window.innerHeight <= 1200
+                    ? "160px"
+                    : "auto",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.3)";
+                e.currentTarget.style.transform = "translateY(-5px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(100, 255, 218, 0.1)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <h3
+                style={{
+                  color: "#fff",
+                  fontSize:
+                    window.innerWidth <= 480
+                      ? "1.2rem"
+                      : shouldDownscale
+                      ? "0.78rem"
+                      : "1.3rem",
+                  marginBottom:
+                    window.innerWidth <= 768
+                      ? "15px"
+                      : shouldDownscale
+                      ? "12px"
+                      : "20px",
                 }}
               >
                 Langues & Certifications
               </h3>
 
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: shouldDownscale ? "12px" : "20px" }}>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "10px",
+                    marginBottom: shouldDownscale ? "6px" : "10px",
                   }}
                 >
                   <span style={{ color: "#8892b0" }}>Français</span>
-                  <span style={{ color: "#64ffda", fontSize: "0.8rem" }}>
+                  <span
+                    style={{
+                      color: "#64ffda",
+                      fontSize: shouldDownscale ? "0.48rem" : "0.8rem",
+                    }}
+                  >
                     Natif
                   </span>
                 </div>
@@ -490,25 +575,30 @@ function Skills() {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginBottom: "20px",
+                    marginBottom: shouldDownscale ? "12px" : "20px",
                   }}
                 >
                   <span style={{ color: "#8892b0" }}>Anglais</span>
-                  <span style={{ color: "#64ffda", fontSize: "0.8rem" }}>
+                  <span
+                    style={{
+                      color: "#64ffda",
+                      fontSize: shouldDownscale ? "0.48rem" : "0.8rem",
+                    }}
+                  >
                     B2 - Avancé
                   </span>
                 </div>
 
                 <div
                   style={{
-                    padding: "6px 12px",
+                    padding: shouldDownscale ? "4px 8px" : "6px 12px",
                     background: "rgba(100, 255, 218, 0.1)",
                     border: "1px solid rgba(100, 255, 218, 0.3)",
-                    borderRadius: "4px",
+                    borderRadius: shouldDownscale ? "2px" : "4px",
                     textAlign: "center",
                     cursor: "pointer",
                     transition: "all 0.3s ease",
-                    fontSize: "0.8rem",
+                    fontSize: shouldDownscale ? "0.48rem" : "0.8rem",
                     display: "inline-block",
                   }}
                   onClick={() => window.open("https://pix.fr/", "_blank")}
@@ -534,8 +624,13 @@ function Skills() {
             <div
               style={{
                 background: "rgba(2, 12, 27, 0.9)",
-                borderRadius: "12px",
-                padding: window.innerWidth <= 768 ? "20px" : "25px",
+                borderRadius: shouldDownscale ? "9px" : "12px",
+                padding:
+                  window.innerWidth <= 768
+                    ? "20px"
+                    : shouldDownscale
+                    ? "19px"
+                    : "25px",
                 border: "1px solid rgba(100, 255, 218, 0.1)",
                 transition: "all 0.3s ease",
                 width: "100%",
@@ -554,7 +649,7 @@ function Skills() {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  gap: "8px",
+                  gap: shouldDownscale ? "4px" : "8px",
                   flexWrap: "wrap",
                   justifyContent: "stretch",
                   alignItems: "stretch",
@@ -567,21 +662,34 @@ function Skills() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px",
+                    gap: shouldDownscale ? "4px" : "6px",
                     padding:
-                      window.innerWidth <= 480 ? "10px 15px" : "8px 10px",
+                      window.innerWidth <= 480
+                        ? shouldDownscale
+                          ? "6px 9px"
+                          : "10px 15px"
+                        : shouldDownscale
+                        ? "4px 6px"
+                        : "8px 10px",
                     background: "rgba(100, 255, 218, 0.05)",
                     border: "1px solid rgba(100, 255, 218, 0.2)",
-                    borderRadius: "6px",
+                    borderRadius: shouldDownscale ? "4px" : "6px",
                     color: "#64ffda",
                     textDecoration: "none",
-                    fontSize: window.innerWidth <= 480 ? "0.8rem" : "0.75rem",
+                    fontSize:
+                      window.innerWidth <= 480
+                        ? shouldDownscale
+                          ? "0.48rem"
+                          : "0.8rem"
+                        : shouldDownscale
+                        ? "0.45rem"
+                        : "0.75rem",
                     transition: "all 0.3s ease",
                     flex:
                       window.innerWidth <= 550
                         ? "1 1 100%"
                         : window.innerWidth <= 900
-                        ? "1 1 calc(50% - 4px)"
+                        ? "1 1 calc(50% - 2px)"
                         : "1 1 auto",
                     justifyContent: "center",
                     minWidth: "fit-content",
@@ -617,21 +725,34 @@ function Skills() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px",
+                    gap: shouldDownscale ? "4px" : "6px",
                     padding:
-                      window.innerWidth <= 480 ? "10px 15px" : "8px 10px",
+                      window.innerWidth <= 480
+                        ? shouldDownscale
+                          ? "6px 9px"
+                          : "10px 15px"
+                        : shouldDownscale
+                        ? "4px 6px"
+                        : "8px 10px",
                     background: "rgba(100, 255, 218, 0.05)",
                     border: "1px solid rgba(100, 255, 218, 0.2)",
-                    borderRadius: "6px",
+                    borderRadius: shouldDownscale ? "4px" : "6px",
                     color: "#64ffda",
                     textDecoration: "none",
-                    fontSize: window.innerWidth <= 480 ? "0.8rem" : "0.75rem",
+                    fontSize:
+                      window.innerWidth <= 480
+                        ? shouldDownscale
+                          ? "0.48rem"
+                          : "0.8rem"
+                        : shouldDownscale
+                        ? "0.45rem"
+                        : "0.75rem",
                     transition: "all 0.3s ease",
                     flex:
                       window.innerWidth <= 550
                         ? "1 1 100%"
                         : window.innerWidth <= 900
-                        ? "1 1 calc(50% - 4px)"
+                        ? "1 1 calc(50% - 2px)"
                         : "1 1 auto",
                     minWidth: "fit-content",
                     justifyContent: "center",
@@ -669,15 +790,28 @@ function Skills() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "8px",
+                    gap: shouldDownscale ? "4px" : "8px",
                     padding:
-                      window.innerWidth <= 480 ? "10px 15px" : "8px 15px",
+                      window.innerWidth <= 480
+                        ? shouldDownscale
+                          ? "6px 9px"
+                          : "10px 15px"
+                        : shouldDownscale
+                        ? "4px 9px"
+                        : "8px 15px",
                     background: "rgba(100, 255, 218, 0.05)",
                     border: "1px solid rgba(100, 255, 218, 0.2)",
-                    borderRadius: "6px",
+                    borderRadius: shouldDownscale ? "4px" : "6px",
                     color: "#64ffda",
                     textDecoration: "none",
-                    fontSize: window.innerWidth <= 480 ? "0.8rem" : "0.8rem",
+                    fontSize:
+                      window.innerWidth <= 480
+                        ? shouldDownscale
+                          ? "0.48rem"
+                          : "0.8rem"
+                        : shouldDownscale
+                        ? "0.48rem"
+                        : "0.8rem",
                     transition: "all 0.3s ease",
                     flex:
                       window.innerWidth <= 550

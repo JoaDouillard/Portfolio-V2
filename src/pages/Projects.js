@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function Projects() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scaleRatio, setScaleRatio] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -22,6 +23,34 @@ function Projects() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const calculateScale = () => {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Calculer le ratio de mise à l'échelle
+      if (
+        screenWidth <= 1920 &&
+        screenWidth >= 1500 &&
+        screenHeight <= 1080 &&
+        screenHeight >= 900
+      ) {
+        // Pour 1080p et moins, réduire de 25%
+        setScaleRatio(0.75);
+      } else if (screenWidth <= 2560 && screenHeight <= 1440) {
+        // Pour QHD, garder taille normale
+        setScaleRatio(1);
+      } else {
+        // Pour plus grand que QHD, agrandir légèrement
+        setScaleRatio(1.1);
+      }
+    };
+
+    calculateScale();
+    window.addEventListener("resize", calculateScale);
+    return () => window.removeEventListener("resize", calculateScale);
   }, []);
 
   const projects = [
@@ -168,6 +197,8 @@ function Projects() {
           padding: isSmallScreen ? "20px 20px" : "70px 50px 0",
           maxWidth: "1200px",
           margin: "0 auto",
+          transform: `scale(${scaleRatio})`,
+          transformOrigin: "center center",
         }}
       >
         {/* Page Title */}

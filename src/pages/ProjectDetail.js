@@ -84,6 +84,7 @@ function ProjectDetail() {
   const [activeSection, setActiveSection] = useState("intro");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scaleRatio, setScaleRatio] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -102,6 +103,34 @@ function ProjectDetail() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const calculateScale = () => {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Calculer le ratio de mise à l'échelle
+      if (
+        screenWidth <= 1920 &&
+        screenWidth >= 1500 &&
+        screenHeight <= 1080 &&
+        screenHeight >= 900
+      ) {
+        // Pour 1080p et moins, réduire de 15%
+        setScaleRatio(0.85);
+      } else if (screenWidth <= 2560 && screenHeight <= 1440) {
+        // Pour QHD, garder taille normale
+        setScaleRatio(1);
+      } else {
+        // Pour plus grand que QHD, agrandir légèrement
+        setScaleRatio(1.1);
+      }
+    };
+
+    calculateScale();
+    window.addEventListener("resize", calculateScale);
+    return () => window.removeEventListener("resize", calculateScale);
   }, []);
 
   useEffect(() => {
@@ -352,6 +381,8 @@ function ProjectDetail() {
             : "100px 50px 100px 50px",
           maxWidth: "1800px",
           margin: "0 auto",
+          transform: `scale(${scaleRatio})`,
+          transformOrigin: "center center",
         }}
       >
         <div

@@ -203,6 +203,7 @@ function Contact() {
   const [status, setStatus] = useState("");
   const [messageLength, setMessageLength] = useState(0);
   const [validationError, setValidationError] = useState("");
+  const [scaleRatio, setScaleRatio] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -221,6 +222,34 @@ function Contact() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const calculateScale = () => {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Calculer le ratio de mise à l'échelle
+      if (
+        screenWidth <= 1920 &&
+        screenWidth >= 1500 &&
+        screenHeight <= 1080 &&
+        screenHeight >= 900
+      ) {
+        // Pour 1080p et moins, réduire de 15%
+        setScaleRatio(0.85);
+      } else if (screenWidth <= 2560 && screenHeight <= 1440) {
+        // Pour QHD, garder taille normale
+        setScaleRatio(1);
+      } else {
+        // Pour plus grand que QHD, agrandir légèrement
+        setScaleRatio(1.1);
+      }
+    };
+
+    calculateScale();
+    window.addEventListener("resize", calculateScale);
+    return () => window.removeEventListener("resize", calculateScale);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -408,6 +437,8 @@ function Contact() {
           maxWidth: isSmallScreen ? "100%" : "2000px",
           minHeight: isSmallScreen ? "auto" : "65vh",
           padding: isSmallScreen ? "0 5px" : "0",
+          transform: `scale(${scaleRatio})`,
+          transformOrigin: "center center",
         }}
       >
         {/* Sidebar - Pourquoi me contacter */}
